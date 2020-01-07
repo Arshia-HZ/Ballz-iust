@@ -2,7 +2,28 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 using namespace std ;
-
+class Obj {
+  public :
+  SDL_Rect dest ;
+  SDL_Rect src;
+  SDL_Texture* tex ;
+  void setDest(int x , int y , int w , int h) {
+    dest.x = x ;
+    dest.y = y ;
+    dest.w = w ;
+    dest.h = h ;
+  }
+  void setSource(int x , int y , int w , int h) {
+    src.x = x ;
+    src.y = y ;
+    src.w = w ;
+    src.h = h ;
+  }
+  void setImage(string filename , SDL_Renderer* ren) {
+    SDL_Surface* surf = IMG_Load(filename.c_str());
+    tex = SDL_CreateTextureFromSurface(ren,surf);
+  }
+};
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
   SDL_Renderer* ren ;
@@ -15,25 +36,14 @@ int main(){
   rect.y = 0 ;
   rect.w = 800 ;
   rect.h = 600 ;
-  SDL_Rect dest;
-  dest.x=50;
-  dest.y=50;
-  dest.w=600;
-  dest.h=400;
-  SDL_Rect src;
-  src.x=0;
-  src.y=0;
-  src.w=600;
-  src.h=400;
-  SDL_Texture* tex ;
-  string fn = "Ball.png";
-  SDL_Surface* surf = IMG_Load(fn.c_str());
-  tex = SDL_CreateTextureFromSurface(ren,surf);
-
+  Obj ball ;
+  ball.setDest(50,50,600,400);
+  ball.setSource(0,0,600,400);
+  ball.setImage("Ball.png",ren) ;
   bool r = true ;
   while (r) {
     SDL_RenderFillRect(ren,&rect);
-    SDL_RenderCopyEx(ren,tex,&src,&dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren,ball.tex,&ball.src,&ball.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderPresent(ren);
     SDL_Delay(3000);
     SDL_Quit();
