@@ -3,6 +3,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 using namespace std ;
+bool r = true ;
+int mousex,mousey ;
 class Obj {
   public :
   SDL_Rect dest ;
@@ -46,6 +48,22 @@ void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int
   SDL_RenderCopy(ren,tex,NULL,&rect);
   SDL_DestroyTexture(tex);
 }
+void input() {
+  SDL_Event e ;
+  while (SDL_PollEvent(&e)) {
+    if (e.type == SDL_QUIT) {
+      r = false ;
+      SDL_Quit();
+    }
+    if (e.type == SDL_KEYDOWN) {
+      if(e.key.keysym.sym == SDLK_ESCAPE) {
+        r = false ;
+        SDL_Quit();
+      }
+    }
+    SDL_GetMouseState(&mousex,&mousey) ;
+  }
+}
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
@@ -63,15 +81,27 @@ int main(){
   ball.setDest(50,50,600,400);
   ball.setSource(0,0,600,400);
   ball.setImage("Ball.png",ren) ;
-  bool r = true ;
   while (r) {
+    cout << mousex << " , " << mousey << endl ;
+    int framecount = 0 ;
+    int lastframe = SDL_GetTicks();
+    static int lasttime = 0 ;
+    if (lastframe >= lasttime+1000) {
+      lasttime = lastframe ;
+      framecount = 0 ;
+    }
     SDL_RenderFillRect(ren,&rect);
     SDL_RenderCopyEx(ren,ball.tex,&ball.src,&ball.dest,0,NULL,SDL_FLIP_NONE);
     WriteMessage("Swipe Brick Breaker",160,0,0,200,150,45,ren);
+
+    framecount++ ;
+    int timerFPS = SDL_GetTicks() - lastframe ;
+    if (timerFPS < (1000/15)) {
+      SDL_Delay((1000/15)-timerFPS);
+    }
+
     SDL_RenderPresent(ren);
-    SDL_Delay(3000);
-    SDL_Quit();
-    break ;
+    input();
   }
   return 0 ;
 }
