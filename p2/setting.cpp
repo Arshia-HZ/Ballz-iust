@@ -72,30 +72,30 @@ int main() {
   SDL_Window* w2;
   SDL_CreateWindowAndRenderer(350,600,0,&w2,&r2);
   SDL_SetWindowTitle(w2,"protject");
-
-/* SDL_Surface* surf ;
+  SDL_Rect r4;
+    r4.x = 0 ;
+    r4.y = 0 ;
+    r4.w = 350 ;
+    r4.h = 600 ;
+/*SDL_Surface* surf ;
   SDL_Texture* tex ;
-  TTF_Font* font = TTF_OpenFont("GTA.ttf",size);
+  TTF_Font* font = TTF_OpenFont("GTA.ttf",8);
   SDL_Color color ;
-  color.r = r ;
-  color.g = g ;
-  color.b = b ;
+  color.r = 0 ;
+  color.g = 0 ;
+  color.b = 142 ;
   color.a = 255 ;
   SDL_Rect rect ;
   surf = TTF_RenderText_Solid(font,"project",color);
-  tex = SDL_CreateTextureFromSurface(ren,surf);
-  rect.x=x;
-  rect.y=y;
+  tex = SDL_CreateTextureFromSurface(r2,surf);
+  rect.x=20;
+  rect.y=20;
   rect.w=surf->w;
   rect.h=surf->h;
   SDL_FreeSurface(surf);
-  SDL_RenderCopy(ren,tex,NULL,&rect);
+  SDL_RenderCopy(r2,tex,NULL,&rect);
   SDL_DestroyTexture(tex);*/
-SDL_Rect r4;
-  r4.x = 0 ;
-  r4.y = 0 ;
-  r4.w = 350 ;
-  r4.h = 600 ;
+
 
   back.sizeorigin(30,300,60,60);
   back.sizeobj(0,0,2000,2000);
