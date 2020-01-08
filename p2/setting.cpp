@@ -37,7 +37,6 @@ object back,high,sound;
   {
     SDL_Event ev;
     while (SDL_PollEvent(&ev)) {
-
       SDL_GetMouseState(&x1,&y2);
       if (ev.type == SDL_QUIT) {
         b = false ;
@@ -52,7 +51,7 @@ object back,high,sound;
 }
         if(ev.key.keysym.sym==SDL_MOUSEBUTTONDOWN)
         {
-          if ((x1>=high.origin.x)&&(x1<=high.origin.x+high.origin.w)&&(y2>=high.origin.y)&&(y2=high.origin.y+high.origin.h)) {
+          if ((x1>=high.origin.x)&&(x1<=high.origin.x+high.origin.w)&&(y2>=high.origin.y)&&(y2<=high.origin.y+high.origin.h)) {
             cout << "high Clicked" << endl ;
           }
           if ((x1>=sound.origin.x)&&(x1<=sound.origin.x+sound.origin.w)&&(y2>=sound.origin.y)&&(y2<=sound.origin.y+sound.origin.h)) {
@@ -74,7 +73,24 @@ int main() {
   SDL_CreateWindowAndRenderer(350,600,0,&w2,&r2);
   SDL_SetWindowTitle(w2,"protject");
 
-
+/* SDL_Surface* surf ;
+  SDL_Texture* tex ;
+  TTF_Font* font = TTF_OpenFont("GTA.ttf",size);
+  SDL_Color color ;
+  color.r = r ;
+  color.g = g ;
+  color.b = b ;
+  color.a = 255 ;
+  SDL_Rect rect ;
+  surf = TTF_RenderText_Solid(font,"project",color);
+  tex = SDL_CreateTextureFromSurface(ren,surf);
+  rect.x=x;
+  rect.y=y;
+  rect.w=surf->w;
+  rect.h=surf->h;
+  SDL_FreeSurface(surf);
+  SDL_RenderCopy(ren,tex,NULL,&rect);
+  SDL_DestroyTexture(tex);*/
 SDL_Rect r4;
   r4.x = 0 ;
   r4.y = 0 ;
