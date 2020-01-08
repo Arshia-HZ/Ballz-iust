@@ -49,7 +49,7 @@ object back,high,sound;
           b = false ;
           SDL_Quit();
         }
-
+}
         if(ev.key.keysym.sym==SDL_MOUSEBUTTONDOWN)
         {
           if ((x1>=high.origin.x)&&(x1<=high.origin.x+high.origin.w)&&(y2>=high.origin.y)&&(y2=high.origin.y+high.origin.h)) {
@@ -62,7 +62,7 @@ object back,high,sound;
             cout << "back Clicked" << endl ;
           }
           }
-        }
+
       }
     }
 
@@ -81,17 +81,17 @@ SDL_Rect r4;
   r4.w = 350 ;
   r4.h = 600 ;
 
-  back.sizeorigin(30,120,100,100);
+  back.sizeorigin(30,300,60,60);
   back.sizeobj(0,0,2000,2000);
-  back.creatpic("play.png",r2);
+  back.creatpic("setting.png",r2);
 
-  high.sizeorigin(150,120,100,100);
+  high.sizeorigin(110,160,140,140);
   high.sizeobj(0,0,2000,2000);
-  high.creatpic("play.png",r2);
+  high.creatpic("setting.png",r2);
 
-  sound.sizeorigin(270,120,100,100);
+  sound.sizeorigin(270,300,60,60);
   sound.sizeobj(0,0,2000,2000);
-  sound.creatpic("play.png",r2);
+  sound.creatpic("setting.png",r2);
 
   while (b) {
     int framecount = 0 ;
