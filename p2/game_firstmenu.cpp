@@ -3,8 +3,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 using namespace std ;
-bool r = true ;
-int mousex,mousey ;
+bool r = true;
+int mousex,mousey;
 class Obj {
   public :
   SDL_Rect dest ;
