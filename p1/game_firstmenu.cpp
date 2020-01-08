@@ -1,8 +1,4 @@
-#include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-using namespace std ;
+#include "game.h"
 bool r = true ;
 int mousex,mousey ;
 class Obj {
