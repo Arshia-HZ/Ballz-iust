@@ -166,23 +166,23 @@ int main(){
   rect.w = 350 ;
   rect.h = 600 ;
   // play
-  play.setDest(100,225,150,150);
+  play.setDest(150,100,70,70);
   play.setSource(0,0,1500,1500);
   play.setImage("play.png",ren) ;
   // settings
-  settings.setDest(180,490,70,70);
+  settings.setDest(150,200,70,70);
   settings.setSource(0,0,1500,1500);
   settings.setImage("play.png",ren) ;
   // about
-  about.setDest(20,415,70,70);
+  about.setDest(150,300,70,70);
   about.setSource(0,0,1500,1500);
   about.setImage("play.png",ren) ;
   // high
-  high.setDest(260,415,70,70);
+  high.setDest(150,400,70,70);
   high.setSource(0,0,1500,1500);
   high.setImage("play.png",ren) ;
   // ball
-  ball.setDest(100,490,70,70);
+  ball.setDest(150,500,70,70);
   ball.setSource(0,0,1500,1500);
   ball.setImage("play.png",ren) ;
 
@@ -229,7 +229,9 @@ int main(){
         hei -= sh ;
       }
     }
-    PrintEvent(SDL_WINDOWEVENT_ENTER);
+    SDL_Event event;
+    SDL_PollEvent(&event);
+    PrintEvent(&event);
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
     if (timerFPS < (1000/15)) {
