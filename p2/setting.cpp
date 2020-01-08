@@ -37,6 +37,7 @@ object back,high,sound;
   {
     SDL_Event ev;
     while (SDL_PollEvent(&ev)) {
+
       SDL_GetMouseState(&x1,&y2);
       if (ev.type == SDL_QUIT) {
         b = false ;
@@ -53,15 +54,12 @@ object back,high,sound;
         {
           if ((x1>=high.origin.x)&&(x1<=high.origin.x+high.origin.w)&&(y2>=high.origin.y)&&(y2=high.origin.y+high.origin.h)) {
             cout << "high Clicked" << endl ;
-            // Open The Game Page
           }
           if ((x1>=sound.origin.x)&&(x1<=sound.origin.x+sound.origin.w)&&(y2>=sound.origin.y)&&(y2<=sound.origin.y+sound.origin.h)) {
             cout << "sound Clicked" << endl ;
-            // Open The settings Page
           }
           if ((x1>=back.origin.x)&&(x1<=back.origin.x+back.origin.w)&&(y2>=back.origin.y)&&(y2<=back.origin.y+back.origin.h)) {
             cout << "back Clicked" << endl ;
-            // Open The aboutUs Page
           }
           }
         }
@@ -82,17 +80,16 @@ SDL_Rect r4;
   r4.y = 0 ;
   r4.w = 350 ;
   r4.h = 600 ;
-  return 0;
 
-  back.sizeorigin(80,120,200,200);
+  back.sizeorigin(30,120,100,100);
   back.sizeobj(0,0,2000,2000);
   back.creatpic("play.png",r2);
 
-  high.sizeorigin(140,150,200,200);
+  high.sizeorigin(150,120,100,100);
   high.sizeobj(0,0,2000,2000);
   high.creatpic("play.png",r2);
 
-  sound.sizeorigin(200,180,200,200);
+  sound.sizeorigin(270,120,100,100);
   sound.sizeobj(0,0,2000,2000);
   sound.creatpic("play.png",r2);
 
@@ -105,18 +102,19 @@ SDL_Rect r4;
       framecount = 0 ;
     }
     double i=0;
-    SDL_SetRenderDrawColor(r2,255-(i/2.7),148-(i/2.7),194-(i/2.7),255);
+    SDL_SetRenderDrawColor(r2,255-(i/2.7),210-(i/2.7),240-(i/2.7),150);
     SDL_RenderFillRect(r2,&r4);
     SDL_RenderCopyEx(r2,back.tx,&back.obj,&back.origin,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(r2,sound.tx,&sound.obj,&sound.origin,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(r2,high.tx,&high.obj,&high.origin,0,NULL,SDL_FLIP_NONE);
 
     framecount++ ;
-    int timerFPS = SDL_GetTicks() - lastframe ;
+    static int timerFPS = SDL_GetTicks() - lastframe ;
     if (timerFPS < (1000/15)) {
       SDL_Delay((1000/15)-timerFPS);
     }
     SDL_RenderPresent(r2);
     in2();
   }
+  return 0;
 }
