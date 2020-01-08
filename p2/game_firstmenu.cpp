@@ -1,4 +1,8 @@
-#include "menu.h"
+#include <iostream>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+using namespace std ;
 bool r = true ;
 int mousex,mousey ;
 class Obj {
