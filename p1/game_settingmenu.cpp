@@ -234,8 +234,8 @@ int main(){
     PrintEvent(&event);
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
-    if (timerFPS < (1000/15)) {
-      SDL_Delay((1000/15)-timerFPS);
+    if (timerFPS < (1000/10)) {
+      SDL_Delay((1000/10)-timerFPS);
     }
 
     SDL_RenderPresent(ren);
