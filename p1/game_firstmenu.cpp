@@ -64,7 +64,7 @@ void input() {
         // Open The Game Page
       }
       if ((mousex>=settings.dest.x)&&(mousex<=settings.dest.x+settings.dest.w)&&(mousey>=settings.dest.y)&&(mousey<=settings.dest.y+settings.dest.h)) {
-        cout << "settings Clicked" << endl ;
+        cout << "Settings Clicked" << endl ;
         // Open The settings Page
       }
       if ((mousex>=about.dest.x)&&(mousex<=about.dest.x+about.dest.w)&&(mousey>=about.dest.y)&&(mousey<=about.dest.y+about.dest.h)) {
@@ -76,7 +76,7 @@ void input() {
         // Open The Balls Page
       }
       if ((mousex>=high.dest.x)&&(mousex<=high.dest.x+high.dest.w)&&(mousey>=high.dest.y)&&(mousey<=high.dest.y+high.dest.h)) {
-        cout << "high Clicked" << endl ;
+        cout << "HIghscore Clicked" << endl ;
         // Open The highscoe Page
       }
     }

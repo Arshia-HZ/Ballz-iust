@@ -131,19 +131,19 @@ void input() {
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
       if ((mousex>=play.dest.x)&&(mousex<=play.dest.x+play.dest.w)&&(mousey>=play.dest.y)&&(mousey<=play.dest.y+play.dest.h)) {
-        cout << "Play Clicked" << endl ;
+        cout << "Audio Clicked" << endl ;
         // Open The Game Page
       }
       if ((mousex>=settings.dest.x)&&(mousex<=settings.dest.x+settings.dest.w)&&(mousey>=settings.dest.y)&&(mousey<=settings.dest.y+settings.dest.h)) {
-        cout << "settings Clicked" << endl ;
+        cout << "Ball Clicked" << endl ;
         // Open The settings Page
       }
       if ((mousex>=about.dest.x)&&(mousex<=about.dest.x+about.dest.w)&&(mousey>=about.dest.y)&&(mousey<=about.dest.y+about.dest.h)) {
-        cout << "about Clicked" << endl ;
+        cout << "Clear Highscore Clicked" << endl ;
         // Open The aboutUs Page
       }
       if ((mousex>=ball.dest.x)&&(mousex<=ball.dest.x+ball.dest.w)&&(mousey>=ball.dest.y)&&(mousey<=ball.dest.y+ball.dest.h)) {
-        cout << "ball Clicked" << endl ;
+        cout << "back Clicked" << endl ;
         // Open The Balls Page
       }
       if ((mousex>=high.dest.x)&&(mousex<=high.dest.x+high.dest.w)&&(mousey>=high.dest.y)&&(mousey<=high.dest.y+high.dest.h)) {
