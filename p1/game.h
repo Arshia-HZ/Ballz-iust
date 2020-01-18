@@ -5,10 +5,11 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 using namespace std ;
-#include "object.h"
+#include "obj.h"
 
 class Game {
 public:
+  /*
   Game();
   ~Game();
   void loop();
@@ -16,13 +17,16 @@ public:
   void input() {}
   void render();
   void draw(Object o);
+  */
 private:
+  /*
   SDL_Renderer* ren;
   SDL_Window* win;
   bool running;
   int count;
   int frameCount, timerFPS, lastFrame;
   Object star;
+  */
 };
 
 #endif //GAME_H

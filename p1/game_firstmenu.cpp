@@ -102,7 +102,7 @@ int main(){
   ball.setDest(100,490,70,70);
   ball.setSource(0,0,1500,1500);
   ball.setImage("play.png",ren) ;
-  
+
   float hei = 0 ;
   bool down = true ;
   float sh = 2.2 ;
