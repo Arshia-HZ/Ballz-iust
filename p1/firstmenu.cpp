@@ -15,7 +15,7 @@ int mousex,mousey ;
 bool r = true ;
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
   SDL_Surface* surf_fm ;
-  SDL_Texture* tex_fm ;
+  SDL_Texture* tex ;
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color_fm ;
   color_fm.r = r ;
@@ -24,14 +24,14 @@ void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int
   color_fm.a = 255 ;
   SDL_Rect rect_fm ;
   surf_fm = TTF_RenderText_Solid(font,msg,color_fm);
-  tex_fm = SDL_CreateTextureFromSurface(ren_fm,surf_fm);
+  tex = SDL_CreateTextureFromSurface(ren_fm,surf_fm);
   rect_fm.x=x;
   rect_fm.y=y;
   rect_fm.w=surf_fm->w;
   rect_fm.h=surf_fm->h;
   SDL_FreeSurface(surf_fm);
-  SDL_RenderCopy(ren_fm,tex_fm,NULL,&rect_fm);
-  SDL_DestroyTexture(tex_fm);
+  SDL_RenderCopy(ren_fm,tex,NULL,&rect_fm);
+  SDL_DestroyTexture(tex);
 }
 void input() {
   SDL_Event e ;
@@ -71,7 +71,7 @@ void input() {
     }
   }
 }
-int main(){
+void firstmenu(){
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
   SDL_Renderer* ren_fm ;
@@ -118,13 +118,13 @@ int main(){
       framecount = 0 ;
     }
     SDL_SetRenderDrawColor(ren_fm,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
-    SDL_RenderFillRect(ren_fm,&rect_fm_fm);
+    SDL_RenderFillRect(ren_fm,&rect_fm);
 
-    SDL_RenderCopyEx(ren_fm,play.tex_fm,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,settings.tex_fm,&settings.src,&settings.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,about.tex_fm,&about.src,&about.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,high.tex_fm,&high.src,&high.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,ball.tex_fm,&ball.src,&ball.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,play.tex,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,settings.tex,&settings.src,&settings.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,about.tex,&about.src,&about.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,high.tex,&high.src,&high.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,ball.tex,&ball.src,&ball.dest,0+rot,NULL,SDL_FLIP_NONE);
 
     rot += 2 ;
     if (down) {
@@ -157,5 +157,4 @@ int main(){
     SDL_RenderPresent(ren_fm);
     input();
   }
-  return 0 ;
 }
