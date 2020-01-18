@@ -12,7 +12,7 @@ Obj ball ;
 Obj settings ;
 int mousex,mousey ;
 bool r = true ;
-void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren) {
+void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
   SDL_Surface* surf ;
   SDL_Texture* tex ;
   TTF_Font* font = TTF_OpenFont("GTA.ttf",size);
@@ -23,13 +23,13 @@ void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int
   color.a = 255 ;
   SDL_Rect rect ;
   surf = TTF_RenderText_Solid(font,msg,color);
-  tex = SDL_CreateTextureFromSurface(ren,surf);
+  tex = SDL_CreateTextureFromSurface(ren_fm,surf);
   rect.x=x;
   rect.y=y;
   rect.w=surf->w;
   rect.h=surf->h;
   SDL_FreeSurface(surf);
-  SDL_RenderCopy(ren,tex,NULL,&rect);
+  SDL_RenderCopy(ren_fm,tex,NULL,&rect);
   SDL_DestroyTexture(tex);
 }
 void input() {
@@ -73,9 +73,9 @@ void input() {
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
-  SDL_Renderer* ren ;
+  SDL_Renderer* ren_fm_fm ;
   SDL_Window* win ;
-  SDL_CreateWindowAndRenderer(350,600,0,&win,&ren);
+  SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm_fm);
   SDL_SetWindowTitle(win,"Swipe Brick Breaker");
   SDL_Rect rect ;
   rect.x = 0 ;
@@ -85,23 +85,23 @@ int main(){
   // play
   play.setDest(100,225,150,150);
   play.setSource(0,0,1500,1500);
-  play.setImage("play.png",ren) ;
+  play.setImage("play.png",ren_fm_fm) ;
   // settings
   settings.setDest(180,490,70,70);
   settings.setSource(0,0,1500,1500);
-  settings.setImage("play.png",ren) ;
+  settings.setImage("play.png",ren_fm) ;
   // about
   about.setDest(20,415,70,70);
   about.setSource(0,0,1500,1500);
-  about.setImage("play.png",ren) ;
+  about.setImage("play.png",ren_fm) ;
   // high
   high.setDest(260,415,70,70);
   high.setSource(0,0,1500,1500);
-  high.setImage("play.png",ren) ;
+  high.setImage("play.png",ren_fm) ;
   // ball
   ball.setDest(100,490,70,70);
   ball.setSource(0,0,1500,1500);
-  ball.setImage("play.png",ren) ;
+  ball.setImage("play.png",ren_fm) ;
 
   float hei = 0 ;
   bool down = true ;
@@ -116,20 +116,20 @@ int main(){
       lasttime = lastframe ;
       framecount = 0 ;
     }
-    SDL_SetRenderDrawColor(ren,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
-    SDL_RenderFillRect(ren,&rect);
+    SDL_SetRenderDrawColor(ren_fm,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
+    SDL_RenderFillRect(ren_fm,&rect);
 
-    SDL_RenderCopyEx(ren,play.tex,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren,settings.tex,&settings.src,&settings.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren,about.tex,&about.src,&about.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren,high.tex,&high.src,&high.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren,ball.tex,&ball.src,&ball.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,play.tex,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,settings.tex,&settings.src,&settings.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,about.tex,&about.src,&about.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,high.tex,&high.src,&high.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,ball.tex,&ball.src,&ball.dest,0+rot,NULL,SDL_FLIP_NONE);
 
     rot += 2 ;
     if (down) {
-      WriteMessage("Swipe Brick Breaker",18,10+hei,155,0,0,35,ren);
+      WriteMessage("Swipe Brick Breaker",18,10+hei,155,0,0,35,ren_fm);
     } else {
-      WriteMessage("Swipe Brick Breaker",18,10+hei,142,0,56,35,ren);
+      WriteMessage("Swipe Brick Breaker",18,10+hei,142,0,56,35,ren_fm);
     }
     pos = 10 + hei ;
     if (down) {
@@ -153,7 +153,7 @@ int main(){
       SDL_Delay((1000/10)-timerFPS);
     }
 
-    SDL_RenderPresent(ren);
+    SDL_RenderPresent(ren_fm);
     input();
   }
   return 0 ;
