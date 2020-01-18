@@ -1,4 +1,5 @@
-#include "Game.h"
+#include "headers/Game.h"
+#include "headers/Object.h"
 bool r = true ;
 int mousex,mousey ;
 void PrintEvent(const SDL_Event * event)

@@ -1,9 +1,9 @@
-#include "Game.h"
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include "Object.h"
+#include "headers/Object.h"
+#include "headers/Game.h"
 using namespace std ;
 
 Obj play ;
@@ -74,9 +74,9 @@ void input() {
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
-  SDL_Renderer* ren_fm_fm ;
+  SDL_Renderer* ren_fm ;
   SDL_Window* win ;
-  SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm_fm);
+  SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm);
   SDL_SetWindowTitle(win,"Swipe Brick Breaker");
   SDL_Rect rect ;
   rect.x = 0 ;
@@ -86,7 +86,7 @@ int main(){
   // play
   play.setDest(100,225,150,150);
   play.setSource(0,0,1500,1500);
-  play.setImage("data/play.png",ren_fm_fm) ;
+  play.setImage("data/play.png",ren_fm) ;
   // settings
   settings.setDest(180,490,70,70);
   settings.setSource(0,0,1500,1500);
