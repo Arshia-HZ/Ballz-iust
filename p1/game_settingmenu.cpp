@@ -1,4 +1,4 @@
-#include "game.h"
+#include "Game.h"
 bool r = true ;
 int mousex,mousey ;
 void PrintEvent(const SDL_Event * event)
@@ -98,7 +98,7 @@ Obj play,settings,high,about,ball ;
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren) {
   SDL_Surface* surf ;
   SDL_Texture* tex ;
-  TTF_Font* font = TTF_OpenFont("GTA.ttf",size);
+  TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color ;
   color.r = r ;
   color.g = g ;
@@ -168,23 +168,23 @@ int main(){
   // play
   play.setDest(150,100,70,70);
   play.setSource(0,0,1500,1500);
-  play.setImage("play.png",ren) ;
+  play.setImage("data/play.png",ren) ;
   // settings
   settings.setDest(150,200,70,70);
   settings.setSource(0,0,1500,1500);
-  settings.setImage("play.png",ren) ;
+  settings.setImage("data/play.png",ren) ;
   // about
   about.setDest(150,300,70,70);
   about.setSource(0,0,1500,1500);
-  about.setImage("play.png",ren) ;
+  about.setImage("data/play.png",ren) ;
   // high
   high.setDest(150,400,70,70);
   high.setSource(0,0,1500,1500);
-  high.setImage("play.png",ren) ;
+  high.setImage("data/play.png",ren) ;
   // ball
   ball.setDest(150,500,70,70);
   ball.setSource(0,0,1500,1500);
-  ball.setImage("play.png",ren) ;
+  ball.setImage("data/play.png",ren) ;
 
   float hei = 0 ;
   bool down = true ;

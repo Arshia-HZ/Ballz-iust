@@ -5,7 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 using namespace std ;
-#include "obj.h"
+#include "Object.h"
 
 class Game {
 public:

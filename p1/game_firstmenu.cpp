@@ -1,10 +1,11 @@
-#include "game.h"
+#include "Game.h"
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include "Object.h"
 using namespace std ;
-#include "obj.h"
+
 Obj play ;
 Obj high ;
 Obj about ;
@@ -15,7 +16,7 @@ bool r = true ;
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
   SDL_Surface* surf ;
   SDL_Texture* tex ;
-  TTF_Font* font = TTF_OpenFont("GTA.ttf",size);
+  TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color ;
   color.r = r ;
   color.g = g ;
@@ -85,23 +86,23 @@ int main(){
   // play
   play.setDest(100,225,150,150);
   play.setSource(0,0,1500,1500);
-  play.setImage("play.png",ren_fm_fm) ;
+  play.setImage("data/play.png",ren_fm_fm) ;
   // settings
   settings.setDest(180,490,70,70);
   settings.setSource(0,0,1500,1500);
-  settings.setImage("play.png",ren_fm) ;
+  settings.setImage("data/play.png",ren_fm) ;
   // about
   about.setDest(20,415,70,70);
   about.setSource(0,0,1500,1500);
-  about.setImage("play.png",ren_fm) ;
+  about.setImage("data/play.png",ren_fm) ;
   // high
   high.setDest(260,415,70,70);
   high.setSource(0,0,1500,1500);
-  high.setImage("play.png",ren_fm) ;
+  high.setImage("data/play.png",ren_fm) ;
   // ball
   ball.setDest(100,490,70,70);
   ball.setSource(0,0,1500,1500);
-  ball.setImage("play.png",ren_fm) ;
+  ball.setImage("data/play.png",ren_fm) ;
 
   float hei = 0 ;
   bool down = true ;
