@@ -5,7 +5,9 @@
 #include "headers/Object.h"
 #include "headers/Game.h"
 using namespace std ;
-
+SDL_Renderer* ren_fm;
+SDL_Surface* surf_fm ;
+SDL_Texture* tex ;
 Obj play ;
 Obj high ;
 Obj about ;
@@ -14,8 +16,7 @@ Obj settings ;
 int mousex,mousey ;
 bool r = true ;
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
-  SDL_Surface* surf_fm ;
-  SDL_Texture* tex ;
+
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color_fm ;
   color_fm.r = r ;
@@ -53,7 +54,9 @@ void input() {
         // Open The Game Page
       }
       if ((mousex>=settings.dest.x)&&(mousex<=settings.dest.x+settings.dest.w)&&(mousey>=settings.dest.y)&&(mousey<=settings.dest.y+settings.dest.h)) {
-        cout << "settings Clicked" << endl ;
+        SDL_DestroyTexture(tex);
+        SDL_DestroyRenderer(ren_fm);
+      //  SDL_DestroySurface(surf_fm);
         // Open The settings Page
       }
       if ((mousex>=about.dest.x)&&(mousex<=about.dest.x+about.dest.w)&&(mousey>=about.dest.y)&&(mousey<=about.dest.y+about.dest.h)) {
@@ -74,7 +77,7 @@ void input() {
 void firstmenu(){
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
-  SDL_Renderer* ren_fm ;
+
   SDL_Window* win ;
   SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm);
   SDL_SetWindowTitle(win,"Ballz");
