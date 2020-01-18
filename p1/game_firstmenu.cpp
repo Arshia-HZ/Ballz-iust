@@ -1,29 +1,17 @@
 #include "game.h"
-bool r = true ;
+#include <iostream>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+using namespace std ;
+#include "obj.h"
+Obj play ;
+Obj high ;
+Obj about ;
+Obj ball ;
+Obj settings ;
 int mousex,mousey ;
-class Obj {
-  public :
-  SDL_Rect dest ;
-  SDL_Rect src;
-  SDL_Texture* tex ;
-  void setDest(int x , int y , int w , int h) {
-    dest.x = x ;
-    dest.y = y ;
-    dest.w = w ;
-    dest.h = h ;
-  }
-  void setSource(int x , int y , int w , int h) {
-    src.x = x ;
-    src.y = y ;
-    src.w = w ;
-    src.h = h ;
-  }
-  void setImage(string filename , SDL_Renderer* ren) {
-    SDL_Surface* surf = IMG_Load(filename.c_str());
-    tex = SDL_CreateTextureFromSurface(ren,surf);
-  }
-};
-Obj play,settings,high,about,ball ;
+bool r = true ;
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren) {
   SDL_Surface* surf ;
   SDL_Texture* tex ;
@@ -64,7 +52,7 @@ void input() {
         // Open The Game Page
       }
       if ((mousex>=settings.dest.x)&&(mousex<=settings.dest.x+settings.dest.w)&&(mousey>=settings.dest.y)&&(mousey<=settings.dest.y+settings.dest.h)) {
-        cout << "Settings Clicked" << endl ;
+        cout << "settings Clicked" << endl ;
         // Open The settings Page
       }
       if ((mousex>=about.dest.x)&&(mousex<=about.dest.x+about.dest.w)&&(mousey>=about.dest.y)&&(mousey<=about.dest.y+about.dest.h)) {
@@ -76,7 +64,7 @@ void input() {
         // Open The Balls Page
       }
       if ((mousex>=high.dest.x)&&(mousex<=high.dest.x+high.dest.w)&&(mousey>=high.dest.y)&&(mousey<=high.dest.y+high.dest.h)) {
-        cout << "HIghscore Clicked" << endl ;
+        cout << "high Clicked" << endl ;
         // Open The highscoe Page
       }
     }
@@ -136,6 +124,7 @@ int main(){
     SDL_RenderCopyEx(ren,about.tex,&about.src,&about.dest,0+rot,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren,high.tex,&high.src,&high.dest,0+rot,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren,ball.tex,&ball.src,&ball.dest,0+rot,NULL,SDL_FLIP_NONE);
+
     rot += 2 ;
     if (down) {
       WriteMessage("Swipe Brick Breaker",18,10+hei,155,0,0,35,ren);
