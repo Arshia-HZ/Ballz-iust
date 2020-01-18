@@ -14,23 +14,23 @@ Obj settings ;
 int mousex,mousey ;
 bool r = true ;
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
-  SDL_Surface* surf ;
+  SDL_Surface* surf_fm ;
   SDL_Texture* tex ;
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
-  SDL_Color color ;
-  color.r = r ;
-  color.g = g ;
-  color.b = b ;
-  color.a = 255 ;
-  SDL_Rect rect ;
-  surf = TTF_RenderText_Solid(font,msg,color);
-  tex = SDL_CreateTextureFromSurface(ren_fm,surf);
-  rect.x=x;
-  rect.y=y;
-  rect.w=surf->w;
-  rect.h=surf->h;
-  SDL_FreeSurface(surf);
-  SDL_RenderCopy(ren_fm,tex,NULL,&rect);
+  SDL_Color color_fm ;
+  color_fm.r = r ;
+  color_fm.g = g ;
+  color_fm.b = b ;
+  color_fm.a = 255 ;
+  SDL_Rect rect_fm ;
+  surf_fm = TTF_RenderText_Solid(font,msg,color_fm);
+  tex = SDL_CreateTextureFromSurface(ren_fm,surf_fm);
+  rect_fm.x=x;
+  rect_fm.y=y;
+  rect_fm.w=surf_fm->w;
+  rect_fm.h=surf_fm->h;
+  SDL_FreeSurface(surf_fm);
+  SDL_RenderCopy(ren_fm,tex,NULL,&rect_fm);
   SDL_DestroyTexture(tex);
 }
 void input() {
@@ -71,18 +71,18 @@ void input() {
     }
   }
 }
-int main(){
+void firstmenu(){
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
   SDL_Renderer* ren_fm ;
   SDL_Window* win ;
   SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm);
-  SDL_SetWindowTitle(win,"Swipe Brick Breaker");
-  SDL_Rect rect ;
-  rect.x = 0 ;
-  rect.y = 0 ;
-  rect.w = 350 ;
-  rect.h = 600 ;
+  SDL_SetWindowTitle(win,"Ballz");
+  SDL_Rect rect_fm ;
+  rect_fm.x = 0 ;
+  rect_fm.y = 0 ;
+  rect_fm.w = 350 ;
+  rect_fm.h = 600 ;
   // play
   play.setDest(100,225,150,150);
   play.setSource(0,0,1500,1500);
@@ -118,7 +118,7 @@ int main(){
       framecount = 0 ;
     }
     SDL_SetRenderDrawColor(ren_fm,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
-    SDL_RenderFillRect(ren_fm,&rect);
+    SDL_RenderFillRect(ren_fm,&rect_fm);
 
     SDL_RenderCopyEx(ren_fm,play.tex,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_fm,settings.tex,&settings.src,&settings.dest,0+rot,NULL,SDL_FLIP_NONE);
@@ -157,5 +157,4 @@ int main(){
     SDL_RenderPresent(ren_fm);
     input();
   }
-  return 0 ;
 }
