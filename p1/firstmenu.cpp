@@ -26,8 +26,7 @@ void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int
   SDL_RenderCopy(ren_fm,tex,NULL,&rect_fm);
   SDL_DestroyTexture(tex);
 }
-void input() {
-  SDL_Event e ;
+void input_fm() {
   while (SDL_PollEvent(&e)) {
     SDL_GetMouseState(&mousex,&mousey) ;
     if (e.type == SDL_QUIT) {
@@ -162,6 +161,6 @@ void firstmenu(){
     }
 
     SDL_RenderPresent(ren_fm);
-    input();
+    input_fm();
   }
 }

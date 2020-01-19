@@ -119,6 +119,6 @@ void game() {
     }
 
     SDL_RenderPresent(ren_game);
-    input();
+    input_game();
   }
 }

@@ -75,7 +75,6 @@ Obj settings_sm ;
 int mousex_sm,mousey_sm ;
 bool smenu = true ;
 void input_sm() {
-  SDL_Event e ;
   while (SDL_PollEvent(&e)) {
     SDL_GetMouseState(&mousex_sm,&mousey_sm) ;
     if (e.type == SDL_QUIT) {
@@ -106,8 +105,12 @@ void input_sm() {
         // Open The about_smUs Page
       }
       if ((mousex_sm>=ball_sm.dest.x)&&(mousex_sm<=ball_sm.dest.x+ball_sm.dest.w)&&(mousey_sm>=ball_sm.dest.y)&&(mousey_sm<=ball_sm.dest.y+ball_sm.dest.h)) {
-        cout << "back Clicked" << endl ;
-        // Open The Balls Page
+        SDL_DestroyTexture(tex);
+        SDL_DestroyRenderer(ren_fm);
+        smenu = false;
+        status = 0;
+        return;
+
       }
       if ((mousex_sm>=high_sm.dest.x)&&(mousex_sm<=high_sm.dest.x+high_sm.dest.w)&&(mousey_sm>=high_sm.dest.y)&&(mousey_sm<=high_sm.dest.y+high_sm.dest.h)) {
         cout << "high_sm Clicked" << endl ;
