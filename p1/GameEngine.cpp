@@ -3,12 +3,14 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL.h>
+using namespace std;
 SDL_Window* win ;
 SDL_Texture* tex ;
 int status = 0;
-using namespace std;
 #include "firstmenu.cpp"
 #include "settingsmenu.cpp"
+#include "ingamemenu.cpp"
+#include "lastmenu.cpp"
 
 int main(int argc, char const *argv[]) {
   bool windowloop = true;
