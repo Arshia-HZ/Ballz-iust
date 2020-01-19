@@ -5,9 +5,7 @@
 #include "headers/Object.h"
 #include "headers/Game.h"
 using namespace std ;
-SDL_Renderer* ren_fm;
-SDL_Surface* surf_fm ;
-SDL_Texture* tex ;
+
 Obj play ;
 Obj high ;
 Obj about ;
@@ -45,7 +43,8 @@ void input() {
     if (e.type == SDL_KEYDOWN) {
       if(e.key.keysym.sym == SDLK_ESCAPE) {
         r = false ;
-        SDL_Quit();
+        //SDL_Quit();
+
       }
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
@@ -54,8 +53,11 @@ void input() {
         // Open The Game Page
       }
       if ((mousex>=settings.dest.x)&&(mousex<=settings.dest.x+settings.dest.w)&&(mousey>=settings.dest.y)&&(mousey<=settings.dest.y+settings.dest.h)) {
+        status = 1;
         SDL_DestroyTexture(tex);
         SDL_DestroyRenderer(ren_fm);
+        r = false;
+        return;
       //  SDL_DestroySurface(surf_fm);
         // Open The settings Page
       }
@@ -78,7 +80,7 @@ void firstmenu(){
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
 
-  SDL_Window* win ;
+  //SDL_Window* win ;
   SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm);
   SDL_SetWindowTitle(win,"Ballz");
   SDL_Rect rect_fm ;
