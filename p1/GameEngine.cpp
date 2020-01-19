@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <fstream>
 #include <string>
+#include <stdio.h>
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -12,6 +13,7 @@ using namespace std;
 SDL_Window* win ;
 SDL_Texture* tex ;
 int status = 0;
+Mix_Music *music;
 SDL_Event e ;
 bool windowloop = true;
 #include "database.cpp"
@@ -26,7 +28,9 @@ int main(int argc, char const *argv[]) {
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
   File_Init();
+  Music_Init();
   win = SDL_CreateWindow("Ballz", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,350,600,0);
+  startaudio();
   while(windowloop){
   switch(status){
     case 0: firstmenu();  break;

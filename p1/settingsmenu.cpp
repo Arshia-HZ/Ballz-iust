@@ -22,6 +22,12 @@ void input_sm() {
     if (e.type == SDL_MOUSEBUTTONDOWN) {
       if ((mousex_sm>=play.dest.x)&&(mousex_sm<=play.dest.x+play.dest.w)&&(mousey_sm>=play.dest.y)&&(mousey_sm<=play.dest.y+play.dest.h)) {
         cout << "Audio Clicked" << endl ;
+        bool musicstatus = checkaudio();
+        if(musicstatus){
+          stopaudio();
+        }else{
+          startaudio();
+        }
         // Open The Game Page
       }
       if ((mousex_sm>=settings_sm.dest.x)&&(mousex_sm<=settings_sm.dest.x+settings_sm.dest.w)&&(mousey_sm>=settings_sm.dest.y)&&(mousey_sm<=settings_sm.dest.y+settings_sm.dest.h)) {
