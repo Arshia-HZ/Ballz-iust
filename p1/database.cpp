@@ -1,9 +1,5 @@
-#include <fstream>
-#include <iostream>
-#include <string>
-using namespace std;
 fstream savefile;
-//Openning file
+//Opening file
 bool openfile(bool clean = false){
   if(clean){
       savefile.open("data/highscore.txt",ofstream::out | ofstream::trunc);

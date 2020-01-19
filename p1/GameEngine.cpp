@@ -1,6 +1,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL.h>
+#include <fstream>
+#include <string>
 #include <iostream>
 using namespace std;
 #include "headers/Game.h"
