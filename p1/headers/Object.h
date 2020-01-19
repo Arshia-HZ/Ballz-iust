@@ -1,12 +1,6 @@
 #ifndef OBJ_H
 #define OBJ_H
 
-#include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-using namespace std ;
-
 class Obj {
   public :
   SDL_Rect dest ;

@@ -1,9 +1,10 @@
-#include "headers/Game.h"
-#include "headers/Object.h"
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL.h>
+#include <iostream>
 using namespace std;
+#include "headers/Game.h"
+#include "headers/Object.h"
 SDL_Window* win ;
 SDL_Texture* tex ;
 int status = 0;
