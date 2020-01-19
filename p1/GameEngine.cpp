@@ -1,5 +1,6 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL.h>
 #include <fstream>
 #include <string>
@@ -13,8 +14,9 @@ SDL_Texture* tex ;
 int status = 0;
 SDL_Event e ;
 bool windowloop = true;
-#include "firstmenu.cpp"
 #include "database.cpp"
+#include "audiomanager.cpp"
+#include "firstmenu.cpp"
 #include "settingsmenu.cpp"
 #include "game.cpp"
 #include "ingamemenu.cpp"
