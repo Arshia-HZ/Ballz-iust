@@ -118,9 +118,9 @@ void settingsmenu(){
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
   SDL_Renderer* ren ;
-  SDL_Window* win ;
-  SDL_CreateWindowAndRenderer(350,600,0,&win,&ren);
-  SDL_SetWindowTitle(win,"Swipe Brick Breaker");
+  ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+  SDL_RenderPresent(ren);
+  //SDL_SetWindowTitle(win,"Swipe Brick Breaker");
   SDL_Rect rect ;
   rect.x = 0 ;
   rect.y = 0 ;
