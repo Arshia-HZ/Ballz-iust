@@ -2,6 +2,7 @@ Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount;
 vector <Obj> blGame ;
 vector <Obj> brick ;
 vector <Obj> Addball ;
+int tedad = 1 ;
 int mousex_game,mousey_game ;
 bool running_game = true ;
 SDL_Renderer* ren_game;
@@ -45,7 +46,10 @@ void input_game() {
       }
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
-      // nothing
+      if ((mousey_game>125) && (mousey_game<475)) {
+        dn = true ;
+        double shib = ()/()
+      }
     }
   }
 }
@@ -53,6 +57,7 @@ void input_game() {
 void game() {
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
+  bool dn = false ;
   running_game = true ;
   ren_game = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
   SDL_Rect rect_game ;
@@ -60,9 +65,12 @@ void game() {
   rect_game.y = 0 ;
   rect_game.w = 350 ;
   rect_game.h = 600 ;
-
+  blGame.push_back(Obj());
+  blGame[0].setDest(165,455,20,20);
+  blGame[0].setSource(0,0,715,715);
+  blGame[0].setImage("data/BlueBall.png",ren_game) ;
   // Pause
-  Pause.setDest(126,11,98,98);
+  Pause.setDest(140,25,70,70);
   Pause.setSource(0,0,980,980);
   Pause.setImage("data/Pause.png",ren_game) ;
   // Speed
@@ -110,6 +118,9 @@ void game() {
     SDL_RenderCopyEx(ren_game,ballcount.tex,&ballcount.src,&ballcount.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,UpBar.tex,&UpBar.src,&UpBar.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,BtBar.tex,&BtBar.src,&BtBar.dest,0,NULL,SDL_FLIP_NONE);
+    for (int i = 0 ; i < tedad ; i++) {
+      SDL_RenderCopyEx(ren_game,blGame[i].tex,&blGame[i].src,&blGame[i].dest,0,NULL,SDL_FLIP_NONE);
+    }
 
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
