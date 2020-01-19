@@ -4,9 +4,9 @@ Obj about ;
 Obj ball ;
 Obj settings ;
 int mousex,mousey ;
-bool running_fm = true ;
 SDL_Renderer* ren_fm;
 SDL_Surface* surf_fm ;
+bool running_fm = true ;
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
 
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
@@ -47,7 +47,7 @@ void input_fm() {
       if ((mousex>=play.dest.x)&&(mousex<=play.dest.x+play.dest.w)&&(mousey>=play.dest.y)&&(mousey<=play.dest.y+play.dest.h)) {
         //cout << "Play Clicked" << endl ;
         status = 2;
-        SDL_DestroyTexture(tex);
+      //  SDL_DestroyTexture(tex);
         SDL_DestroyRenderer(ren_fm);
         running_fm = false;
         return;
@@ -55,7 +55,7 @@ void input_fm() {
       }
       if ((mousex>=settings.dest.x)&&(mousex<=settings.dest.x+settings.dest.w)&&(mousey>=settings.dest.y)&&(mousey<=settings.dest.y+settings.dest.h)) {
         status = 1;
-        SDL_DestroyTexture(tex);
+      //  SDL_DestroyTexture(tex);
         SDL_DestroyRenderer(ren_fm);
         running_fm = false;
         return;
@@ -78,12 +78,10 @@ void input_fm() {
   }
 }
 void firstmenu(){
-  SDL_Init(SDL_INIT_EVERYTHING);
-  TTF_Init();
   running_fm = true ;
   //SDL_Window* win ;
-  SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm);
-  SDL_SetWindowTitle(win,"Ballz");
+  ren_fm = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+  //SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm);
   SDL_Rect rect_fm ;
   rect_fm.x = 0 ;
   rect_fm.y = 0 ;

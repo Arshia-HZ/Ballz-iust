@@ -73,6 +73,7 @@ Obj about_sm ;
 Obj ball_sm ;
 Obj settings_sm ;
 int mousex_sm,mousey_sm ;
+SDL_Renderer* ren_sm ;
 bool smenu = true ;
 void input_sm() {
   while (SDL_PollEvent(&e)) {
@@ -87,7 +88,7 @@ void input_sm() {
       if(e.key.keysym.sym == SDLK_ESCAPE) {
         smenu = false ;
         windowloop = false;
-        SDL_Quit();
+       SDL_Quit();
         return;
       }
     }
@@ -105,8 +106,8 @@ void input_sm() {
         // Open The about_smUs Page
       }
       if ((mousex_sm>=ball_sm.dest.x)&&(mousex_sm<=ball_sm.dest.x+ball_sm.dest.w)&&(mousey_sm>=ball_sm.dest.y)&&(mousey_sm<=ball_sm.dest.y+ball_sm.dest.h)) {
-        SDL_DestroyTexture(tex);
-        SDL_DestroyRenderer(ren_fm);
+      //  SDL_DestroyTexture(tex);
+        SDL_DestroyRenderer(ren_sm);
         smenu = false;
         status = 0;
         return;
@@ -120,12 +121,8 @@ void input_sm() {
   }
 }
 void settingsmenu(){
-  SDL_Init(SDL_INIT_EVERYTHING);
-  TTF_Init();
   smenu = true ;
-  SDL_Renderer* ren_sm ;
   ren_sm = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
-  //SDL_SetWindowTitle(win,"Swipe Brick Breaker");
   SDL_Rect rect ;
   rect.x = 0 ;
   rect.y = 0 ;

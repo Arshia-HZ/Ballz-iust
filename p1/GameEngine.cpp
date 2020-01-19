@@ -20,6 +20,9 @@ bool windowloop = true;
 #include "database.cpp"
 
 int main(int argc, char const *argv[]) {
+  SDL_Init(SDL_INIT_EVERYTHING);
+  TTF_Init();
+  win = SDL_CreateWindow("Ballz", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,350,600,0);
   while(windowloop){
   switch(status){
     case 0: firstmenu();  break;
@@ -30,6 +33,5 @@ int main(int argc, char const *argv[]) {
     default: SDL_Quit();
   }
 }
-//SDL_CreateWindowAndRenderer(350,600,0,&win,&ren_fm);
   return 0;
 }
