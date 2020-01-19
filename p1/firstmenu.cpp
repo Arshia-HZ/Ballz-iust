@@ -1,8 +1,4 @@
-Obj play ;
-Obj high ;
-Obj about ;
-Obj ball ;
-Obj settings ;
+Obj play,high,about,ball, settings ;
 int mousex,mousey ;
 SDL_Renderer* ren_fm;
 SDL_Surface* surf_fm ;

@@ -1,7 +1,4 @@
-Obj high_sm ;
-Obj about_sm ;
-Obj ball_sm ;
-Obj settings_sm ;
+Obj high_sm,about_sm, ball_sm, settings_sm ;
 int mousex_sm,mousey_sm ;
 SDL_Renderer* ren_sm ;
 bool smenu = true ;
@@ -32,7 +29,9 @@ void input_sm() {
         // Open The settings_sm Page
       }
       if ((mousex_sm>=about_sm.dest.x)&&(mousex_sm<=about_sm.dest.x+about_sm.dest.w)&&(mousey_sm>=about_sm.dest.y)&&(mousey_sm<=about_sm.dest.y+about_sm.dest.h)) {
-        cout << "Clear Highscore Clicked" << endl ;
+        //cout << "Clear Highscore Clicked" << endl ;
+        savescore(-1);
+        cout<<"High score cleared"<<endl;
         // Open The about_smUs Page
       }
       if ((mousex_sm>=ball_sm.dest.x)&&(mousex_sm<=ball_sm.dest.x+ball_sm.dest.w)&&(mousey_sm>=ball_sm.dest.y)&&(mousey_sm<=ball_sm.dest.y+ball_sm.dest.h)) {
@@ -122,9 +121,6 @@ void settingsmenu(){
         hei -= sh ;
       }
     }
-    SDL_Event event;
-    SDL_PollEvent(&event);
-    PrintEvent(&event);
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
     if (timerFPS < (1000/15)) {

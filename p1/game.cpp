@@ -1,4 +1,3 @@
-#include <vector>
 Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount;
 vector <Obj> blGame ;
 vector <Obj> brick ;

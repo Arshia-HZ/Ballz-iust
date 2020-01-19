@@ -29,10 +29,20 @@ bool savescore(int highscore){
   if(openfile(true)){
     savefile << highscore <<endl;
   }else{
-    cout<<"ERROR  OPENIN FILE FOR SAVING DATA";
+    cout<<"ERROR OPENIN FILE FOR SAVING DATA";
     savefile.close();
     return false;
   }
   savefile.close();
   return true;
+}
+void File_Init(){
+  int score_init = returnscore();
+  if(score_init == -1){
+    openfile(true);
+    savefile << 0 << endl;
+    cout<<"Init tamam";
+    savefile.close();
+  }
+  return;
 }
