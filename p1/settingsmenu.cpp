@@ -1,5 +1,3 @@
-#include "headers/Game.h"
-#include "headers/Object.h"
 void PrintEvent(const SDL_Event * event)
 {
     if (event->type == SDL_WINDOWEVENT) {

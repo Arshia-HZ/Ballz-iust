@@ -1,18 +1,12 @@
-#include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include "headers/Object.h"
-#include "headers/Game.h"
-using namespace std ;
-
 Obj play ;
 Obj high ;
 Obj about ;
 Obj ball ;
 Obj settings ;
 int mousex,mousey ;
-bool r = true ;
+bool running_fm = true ;
+SDL_Renderer* ren_fm;
+SDL_Surface* surf_fm ;
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
 
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
@@ -37,12 +31,12 @@ void input() {
   while (SDL_PollEvent(&e)) {
     SDL_GetMouseState(&mousex,&mousey) ;
     if (e.type == SDL_QUIT) {
-      r = false ;
+      running_fm = false ;
       SDL_Quit();
     }
     if (e.type == SDL_KEYDOWN) {
       if(e.key.keysym.sym == SDLK_ESCAPE) {
-        r = false ;
+        running_fm = false ;
         //SDL_Quit();
 
       }
@@ -56,7 +50,7 @@ void input() {
         status = 1;
         SDL_DestroyTexture(tex);
         SDL_DestroyRenderer(ren_fm);
-        r = false;
+        running_fm = false;
         return;
       //  SDL_DestroySurface(surf_fm);
         // Open The settings Page
@@ -114,7 +108,7 @@ void firstmenu(){
   float sh = 2.2 ;
   float pos = 0 ;
   float rot = 0 ;
-  while (r) {
+  while (running_fm) {
     int framecount = 0 ;
     int lastframe = SDL_GetTicks();
     static int lasttime = 0 ;

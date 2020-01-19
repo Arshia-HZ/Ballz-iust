@@ -4,17 +4,11 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL.h>
 SDL_Window* win ;
-SDL_Renderer* ren_fm;
-SDL_Surface* surf_fm ;
 SDL_Texture* tex ;
 int status = 0;
+using namespace std;
 #include "firstmenu.cpp"
 #include "settingsmenu.cpp"
-
-
-
-using namespace std;
-
 
 int main(int argc, char const *argv[]) {
   bool windowloop = true;
