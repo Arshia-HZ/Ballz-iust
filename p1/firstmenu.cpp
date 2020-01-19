@@ -32,13 +32,15 @@ void input() {
     SDL_GetMouseState(&mousex,&mousey) ;
     if (e.type == SDL_QUIT) {
       running_fm = false ;
+      windowloop = false;
       SDL_Quit();
     }
     if (e.type == SDL_KEYDOWN) {
       if(e.key.keysym.sym == SDLK_ESCAPE) {
-        running_fm = false ;
-        //SDL_Quit();
-
+        running_fm = false;
+        windowloop = false;
+        SDL_Quit();
+        return;
       }
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {

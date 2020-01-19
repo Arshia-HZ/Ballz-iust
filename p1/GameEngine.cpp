@@ -8,13 +8,13 @@ using namespace std;
 SDL_Window* win ;
 SDL_Texture* tex ;
 int status = 0;
+bool windowloop = true;
 #include "firstmenu.cpp"
 #include "settingsmenu.cpp"
 #include "ingamemenu.cpp"
 #include "lastmenu.cpp"
 
 int main(int argc, char const *argv[]) {
-  bool windowloop = true;
   while(windowloop){
   Loop:switch(status){
     case 0: firstmenu();  break;
