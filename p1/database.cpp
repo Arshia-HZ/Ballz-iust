@@ -41,7 +41,7 @@ void File_Init(){
   if(score_init == -1){
     openfile(true);
     savefile << 0 << endl;
-    cout<<"Init tamam";
+    cout<<"Init Done";
     savefile.close();
   }
   return;
