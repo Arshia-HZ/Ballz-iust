@@ -18,9 +18,11 @@ SDL_Event e ;
 bool windowloop = true;
 #include "database.cpp"
 #include "audiomanager.cpp"
+#include "about.cpp"
 #include "firstmenu.cpp"
 #include "settingsmenu.cpp"
 #include "game.cpp"
+#include "highscore.cpp"
 #include "ingamemenu.cpp"
 #include "lastmenu.cpp"
 
