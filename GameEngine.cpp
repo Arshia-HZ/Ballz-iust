@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 #include "headers/Object.h"
 SDL_Window* win ;

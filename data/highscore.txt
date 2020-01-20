@@ -6,5 +6,5 @@
 69 al;md
 65 alkda;SDL_MOUSEBUTTONDOWN
 65 adlad
-58 al;dma;dm
-54 kkk
+65 al;dma;dm
+58 ali
