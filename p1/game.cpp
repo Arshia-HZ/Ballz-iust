@@ -2,6 +2,7 @@ Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount;
 vector <Obj> blGame ;
 vector <Obj> brick ;
 vector <Obj> Addball ;
+bool dwn = false ;
 int tedad = 1 ;
 int mousex_game,mousey_game ;
 bool running_game = true ;
@@ -47,8 +48,10 @@ void input_game() {
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
       if ((mousey_game>125) && (mousey_game<475)) {
+        /*
         dn = true ;
         double shib = ()/()
+        */
       }
     }
   }
@@ -57,7 +60,6 @@ void input_game() {
 void game() {
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
-  bool dn = false ;
   running_game = true ;
   ren_game = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
   SDL_Rect rect_game ;
