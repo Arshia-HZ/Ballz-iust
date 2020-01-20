@@ -1,10 +1,12 @@
-Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount;
+Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 vector <Obj> blGame ;
 vector <Obj> brick ;
+double shib ;
+bool Unzir = false;
 vector <Obj> Addball ;
-bool dwn = false ;
+bool dwn = false , amoud = false , shot = false ;
 int tedad = 1 ;
-int mousex_game,mousey_game ;
+int mousex_game,mousey_game,mx,my ;
 bool running_game = true ;
 SDL_Renderer* ren_game;
 SDL_Surface* surf_game ;
@@ -47,11 +49,14 @@ void input_game() {
       }
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
-      if ((mousey_game>125) && (mousey_game<475)) {
-        /*
-        dn = true ;
-        double shib = ()/()
-        */
+        if ((mousey_game>125) && (mousey_game<475)) {
+          dwn = true ;
+        }
+    }
+    if (e.type == SDL_MOUSEBUTTONUP) {
+      if (dwn == true) {
+        dwn = false;
+        shot = true ;
       }
     }
   }
@@ -99,10 +104,15 @@ void game() {
   ballcount.setDest(10,490,46,46);
   ballcount.setSource(0,0,512,512);
   ballcount.setImage("data/BallCount.png",ren_game) ;
-
+  // arrow
+  arrow.setDest((blGame[0].dest.x)+((blGame[0].dest.w)/2)-30,(blGame[0].dest.y)+((blGame[0].dest.h)/2)-30,60,60);
+  arrow.setSource(0,0,512,512);
+  arrow.setImage("data/BlueFlash.png",ren_game) ;
+  const SDL_Point anchor = {175,410} ;
   // running part
   float hei = 0 ;
   while (running_game) {
+    SDL_GetMouseState(&mousex_game,&mousey_game) ;
     int framecount = 0 ;
     int lastframe = SDL_GetTicks();
     static int lasttime = 0 ;
@@ -123,7 +133,48 @@ void game() {
     for (int i = 0 ; i < tedad ; i++) {
       SDL_RenderCopyEx(ren_game,blGame[i].tex,&blGame[i].src,&blGame[i].dest,0,NULL,SDL_FLIP_NONE);
     }
-
+    if (shot) {
+      static double hh = 0 ;
+      if (hh == 0) {
+        mx = mousex_game ;
+        my = mousey_game ;
+      }
+      blGame[0].setDest((double)(165 + ((mx-175)*hh)),(double)(455 + ((my-465)*hh)),20,20);
+      hh += 0.04 ;
+    }
+    if (dwn == true) {
+      if (mousex_game==175) {
+        amoud = true ;
+      } else {
+        amoud = false ;
+        shib = (double)(mousey_game-465)/(mousex_game-175);
+      }
+      if (mousey_game>465) {
+        Unzir = true ;
+      } else {
+        Unzir = false ;
+        shib = (double)(mousey_game-465)/(mousex_game-175);
+      }
+      if (Unzir == false) {
+        if (amoud == true) {
+          SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,-90,NULL,SDL_FLIP_NONE);
+        } else {
+          double adad = (double)atan(shib)*180/3.14 ;
+          cout << shib << " " << adad << endl ;
+          if (adad > 0) {
+            SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,180+adad,NULL,SDL_FLIP_NONE);
+          } else if (adad == 0) {
+            if (mousex_game<175) {
+              SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,180,NULL,SDL_FLIP_NONE);
+            } else {
+              SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,0,NULL,SDL_FLIP_NONE);
+            }
+          } else {
+            SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,adad,NULL,SDL_FLIP_NONE);
+          }
+        }
+    }
+    }
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
     if (timerFPS < (1000/10)) {
