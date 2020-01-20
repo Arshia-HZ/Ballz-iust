@@ -8,13 +8,15 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#include "headers/Game.h"
 #include "headers/Object.h"
 SDL_Window* win ;
 SDL_Texture* tex ;
 int status = 0;
 Mix_Music *music;
 SDL_Event e ;
+string playername;
+int highscore;
+string savedscore[10];
 bool windowloop = true;
 #include "database.cpp"
 #include "audiomanager.cpp"

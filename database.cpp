@@ -13,21 +13,27 @@ bool openfile(bool clean = false){
   }
 }
 // Reading score from file
-int returnscore(){
-  string saved_highscore;
+string returnscore(){
   if(openfile()){
-    getline(savefile,saved_highscore);
+
+    for(int i = 0;i<10;i++){
+      GoToLine(savefile,i);
+      getline(savefile,saved_score);
+    }
   }else{
     cout<<"ERROR OPENING FILE TO READ DATA";
     return -1;
   }
   savefile.close();
-  return stoi(saved_highscore);
+  //return stoi(saved_highscore);
+  return saved_highscore;
 }
+//seperate highscore and playername
+
 //Saving score to file
-bool savescore(int highscore){
+bool scoresave(int score = highscore,string name = playername){
   if(openfile(true)){
-    savefile << highscore <<endl;
+    savefile << playername << " " << to_string(highscore) <<endl;
   }else{
     cout<<"ERROR OPENIN FILE FOR SAVING DATA";
     savefile.close();
@@ -45,4 +51,12 @@ void File_Init(){
     savefile.close();
   }
   return;
+}
+void scoreboard(){
+  if(openfile()){
+
+  }else{
+    cout<<"ERROR SHOWING SCOREBOARD";
+    return;
+  }
 }
