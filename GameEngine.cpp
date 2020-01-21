@@ -8,6 +8,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <fstream>
+#include <bits/stdc++.h>
 using namespace std;
 #include "headers/Object.h"
 SDL_Window* win ;
@@ -16,14 +18,14 @@ int status = 0;
 Mix_Music *music;
 SDL_Event e ;
 string *playername;
-//int highscore;
+int *highscore;
 bool windowloop = true;
 #include "audiomanager.cpp"
 #include "about.cpp"
 #include "firstmenu.cpp"
 #include "settingsmenu.cpp"
 #include "game.cpp"
-//#include "highscore.cpp"
+#include "highscore.cpp"
 #include "ingamemenu.cpp"
 #include "lastmenu.cpp"
 
