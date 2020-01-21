@@ -1,7 +1,9 @@
 Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 vector <Obj> blGame ;
-bool brick_hit_y=false;
-bool brick_hit_x=false;
+double adad ;
+bool hity,hitx;
+double lasty,lastx ;
+double xnew = 165 ,ynew = 455 ;
 int counter_brick=1;
 vector <Obj> brick ;
 std::vector<int> brick_number;
@@ -20,6 +22,13 @@ bool running_game = true ;
 SDL_Renderer* ren_game;
 SDL_Surface* surf_game ;
 
+bool hit(SDL_Rect r1 , SDL_Rect r2) {
+  if (r1.x > r2.x+r2.w) return false ;
+  if (r1.x + r1.w < r2.x) return false ;
+  if (r1.y > r2.y+r2.h) return false ;
+  if (r1.y + r1.h < r2.y) return false ;
+  return true ;
+}
 
 void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
 
@@ -85,6 +94,12 @@ void game() {
   rect_game.w = 350 ;
   rect_game.h = 600 ;
   blGame.push_back(Obj());
+  /*
+  brick_hit_x.push_back(bool());
+  brick_hit_x[0]=false;
+  brick_hit_y.push_back(bool());
+  brick_hit_y[0]=false;
+  */
   blGame[0].setDest(165,455,20,20);
   blGame[0].setSource(0,0,715,715);
   blGame[0].setImage("data/BlueBall.png",ren_game) ;
@@ -157,28 +172,47 @@ void game() {
 
       static double xx = 0 ;
       static double yy = 0;
-      static  double cox=0.05;
-      static  double coy=0.05;
+      static  double cox=3;
+      static  double coy=3;
       if (run_first) {
         mx = mousex_game ;
         my = mousey_game ;
         run_first=false;
-        xx = 0 ;
-        yy = 0 ;
-        cox=0.05;
-        coy=0.05;
+        cox=3;
+        coy=3;
       }
     //  std::cout << leftx<<" "<<topy << '\n';
-      double xnew=(double)(leftx + ((mx-((centerx))))*xx);
-      double ynew=(double)(topy + ((my-((centery))))*yy);
+    if (hitx){
+      hitx=false;
+    } else {
+      lastx = xnew ;
+    }
+    if (hity){
+      hity=false;
+    } else {
+      lasty = ynew ;
+    }
+        if (amoud) {
+          ynew= (double)(ynew + coy) ;
+        } else {
+          cout << (shib*-1) << " " << atan((shib*-1)) << " " << cos(atan((shib*-1))) << " " << sin(atan((shib*-1))) << endl ;
+          if ((shib*-1) > 0) {
+            xnew =(double)(xnew + (cox*cos(atan((shib*-1)))) ) ;
+            ynew =(double)(ynew + (coy*(-1)*(sin(atan((shib*-1))))) ) ;
+          } else {
+            xnew =(double)(xnew + (cox*(-1)*(cos(atan((shib*-1))))) ) ;
+            ynew =(double)(ynew + (coy*sin(atan((shib*-1)))) ) ;
+          }
+
+        }
       std::cout << xnew << " " << ynew << endl ;
-      for(int i=0;i<brick.size();i++)
-      {
+
+        /*
         if((ynew>=brick[i].dest.y-4 && ynew<=(brick[i].dest.y+brick[i].dest.h+4))&&((xnew>brick[i].dest.x-5 && xnew<brick[i].dest.x+2) || (xnew>brick[i].dest.x+brick[i].dest.w-5 && xnew<brick[i].dest.x+brick[i].dest.w+6)))
           brick_hit_x=true;
           if((xnew>=brick[i].dest.x-4&& xnew<=(brick[i].dest.x+brick[i].dest.w+4)) && ((ynew>brick[i].dest.y && ynew<brick[i].dest.y+6) || (ynew>brick[i].dest.y+brick[i].dest.h && ynew<brick[i].dest.y+brick[i].dest.h+6)))
           brick_hit_y=true;
-}
+        */
       if(ynew>455)
       {
       shot=false;
@@ -196,17 +230,22 @@ void game() {
         coy*=-1;
         //ynew = 125 ;
       }
-      if(brick_hit_y)
-      {
-        brick_hit_y=false;
-        coy*=-1;
-}
-         if(brick_hit_x)
-          {
-            brick_hit_x=false;
-            cox*=-1;
-          }
-
+      /*
+      for (int i = 0 ; i<brick_hit_y.size() ; i++) {
+        if(brick_hit_y[i]==true)
+        {
+          brick_hit_y[i]=false;
+          coy*=-1;
+  }
+      }
+      for (int i = 0 ; i<brick_hit_x.size() ; i++) {
+        if(brick_hit_x[i]==true)
+        {
+          brick_hit_x[i]=false;
+          cox*=-1;
+  }
+      }
+*/
       if (ynew > 455) {
         coy*=-1;
         ynew = 455 ;
@@ -218,6 +257,18 @@ void game() {
       coy*=-1;
       */
         if (shot) {
+          blGame[0].setDest(xnew,lasty,20,20);
+          if(hit(brick[0].dest,blGame[0].dest)) {
+            cout<<"hit x"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
+            hitx = true ;
+            cox *= (-1) ;
+          }
+          blGame[0].setDest(lastx,ynew,20,20);
+          if(hit(brick[0].dest,blGame[0].dest)) {
+            cout<<"hit y"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
+            hity=true ;
+            coy *= (-1) ;
+          }
           blGame[0].setDest(xnew,ynew,20,20);
         } else if (!shot) {
           leftx = xnew;
@@ -229,18 +280,27 @@ void game() {
           std::cout << "safe" << xnew << " " << ynew << endl ;
           arrow.setDest(centerx-30,centery-30,60,60);
           int brick_new=rand()%6+1;
+<<<<<<< HEAD
+          for(int j=blGame.size();j<blGame.size()+brick_new;j++)
+          {
+          // blGame.push_back(Obj());
+        }
+=======
           //for(int j=blGame.size();j<blGame.size()+brick_new;j++)
         //  {
         //  blGame.push_back(obj());
       //    blGame[j].setDest()
       //  }
+>>>>>>> d9f95d4cbbf54cb0dce910ee6cf7314621f60079
 
 
       }
+      /*
       if (shot) {
         xx += cox ;
         yy += coy;
       }
+      */
     }
     if (dwn == true) {
       if (mousex_game==centerx) {
@@ -258,7 +318,7 @@ void game() {
         if (amoud == true) {
           SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,-90,NULL,SDL_FLIP_NONE);
         } else {
-          double adad = (double)atan(shib)*180/3.14 ;
+          adad = (double)atan(shib)*180/3.14 ;
           //cout << shib << " " << adad << endl ;
           if (adad > 0) {
             SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,180+adad,NULL,SDL_FLIP_NONE);
@@ -276,8 +336,8 @@ void game() {
     }
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
-    if (timerFPS < (1000/10)) {
-      SDL_Delay((1000/10)-timerFPS);
+    if (timerFPS < (1000/90)) {
+      SDL_Delay((1000/90)-timerFPS);
     }
 
     SDL_RenderPresent(ren_game);
