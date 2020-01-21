@@ -2,9 +2,14 @@ Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 vector <Obj> blGame ;
 vector <Obj> brick ;
 double shib ;
+bool run_ball=false;
+double leftx = 165 ;
+double centerx = 175 ;
+double topy = 455 ;
+double centery = 465 ;
 bool Unzir = false;
 vector <Obj> Addball ;
-bool dwn = false , amoud = false , shot = false ;
+bool dwn = false , amoud = false , shot = false ; bool run_first=true;
 int tedad = 1 ;
 int mousex_game,mousey_game,mx,my ;
 bool running_game = true ;
@@ -57,6 +62,7 @@ void input_game() {
       if (dwn == true) {
         dwn = false;
         shot = true ;
+        run_first = true ;
       }
     }
   }
@@ -108,7 +114,6 @@ void game() {
   arrow.setDest((blGame[0].dest.x)+((blGame[0].dest.w)/2)-30,(blGame[0].dest.y)+((blGame[0].dest.h)/2)-30,60,60);
   arrow.setSource(0,0,512,512);
   arrow.setImage("data/BlueFlash.png",ren_game) ;
-  const SDL_Point anchor = {175,410} ;
   // running part
   float hei = 0 ;
   while (running_game) {
@@ -134,37 +139,91 @@ void game() {
       SDL_RenderCopyEx(ren_game,blGame[i].tex,&blGame[i].src,&blGame[i].dest,0,NULL,SDL_FLIP_NONE);
     }
     if (shot) {
-      static double hh = 0 ;
-      if (hh == 0) {
+
+      static double xx = 0 ;
+      static double yy = 0;
+      static  double cox=0.09;
+      static  double coy=0.09;
+      if (run_first) {
         mx = mousex_game ;
         my = mousey_game ;
+        run_first=false;
+        xx = 0 ;
+        yy = 0 ;
+        cox=0.09;
+        coy=0.09;
       }
-      blGame[0].setDest((double)(165 + ((mx-175)*hh)),(double)(455 + ((my-465)*hh)),20,20);
-      hh += 0.04 ;
+    //  std::cout << leftx<<" "<<topy << '\n';
+      double xnew=(double)(leftx + ((mx-((centerx))))*xx);
+      double ynew=(double)(topy + ((my-((centery))))*yy);
+      std::cout << xnew << " " << ynew << endl ;
+      if(ynew>456)
+      {
+      shot=false;
+
+    }
+
+      if (xnew < 0) {
+        cox*=-1;
+        xnew = 0 ;
+      }
+      if (xnew > 330) {
+        cox*=-1;
+        xnew = 330 ;
+      }
+      if (ynew < 125) {
+        coy*=-1;
+        ynew = 125 ;
+      }
+      if (ynew > 455) {
+        coy*=-1;
+        ynew = 455 ;
+      }
+      /*
+      if(xnew < 0 || xnew > 335 )
+      cox*=-1;
+      if(ynew < 120 || ynew > 456 )
+      coy*=-1;
+      */
+        if (shot) {
+          blGame[0].setDest(xnew,ynew,20,20);
+        } else if (!shot) {
+          leftx = xnew;
+          centerx = xnew+10 ;
+          topy = 455;
+          centery = 455+10;
+          ynew = 455 ;
+          blGame[0].setDest(xnew,455,20,20);
+          std::cout << "safe" << xnew << " " << ynew << endl ;
+          arrow.setDest(centerx-30,centery-30,60,60);
+      }
+      if (shot) {
+        xx += cox ;
+        yy += coy;
+      }
     }
     if (dwn == true) {
-      if (mousex_game==175) {
+      if (mousex_game==centerx) {
         amoud = true ;
       } else {
         amoud = false ;
-        shib = (double)(mousey_game-465)/(mousex_game-175);
+        shib = (double)(mousey_game-centery)/(mousex_game-centerx);
       }
-      if (mousey_game>465) {
+      if (mousey_game>centery) {
         Unzir = true ;
       } else {
         Unzir = false ;
-        shib = (double)(mousey_game-465)/(mousex_game-175);
       }
       if (Unzir == false) {
         if (amoud == true) {
           SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,-90,NULL,SDL_FLIP_NONE);
         } else {
           double adad = (double)atan(shib)*180/3.14 ;
-          cout << shib << " " << adad << endl ;
+          //cout << shib << " " << adad << endl ;
           if (adad > 0) {
             SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,180+adad,NULL,SDL_FLIP_NONE);
           } else if (adad == 0) {
-            if (mousex_game<175) {
+            if (mousex_game<centerx) {
               SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,180,NULL,SDL_FLIP_NONE);
             } else {
               SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,0,NULL,SDL_FLIP_NONE);
