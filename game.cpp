@@ -89,7 +89,7 @@ void game() {
   blGame[0].setSource(0,0,715,715);
   blGame[0].setImage("data/BlueBall.png",ren_game) ;
   brick.push_back(Obj());
-  brick[0].setDest(130,320,55,35);
+  brick[0].setDest(0,165,55,35);
   brick[0].setSource(0,0,600,600);
   brick[0].setImage("data/brick.png",ren_game);
   // Pause
@@ -229,11 +229,11 @@ void game() {
           std::cout << "safe" << xnew << " " << ynew << endl ;
           arrow.setDest(centerx-30,centery-30,60,60);
           int brick_new=rand()%6+1;
-          for(int j=blGame.size();j<blGame.size()+brick_new;j++)
-          {
-          blGame.push_back(obj());
-          blGame[j].setDest
-        }
+          //for(int j=blGame.size();j<blGame.size()+brick_new;j++)
+        //  {
+        //  blGame.push_back(obj());
+      //    blGame[j].setDest()
+      //  }
 
 
       }
