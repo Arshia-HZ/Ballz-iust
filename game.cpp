@@ -5,8 +5,6 @@ bool hity,hitx;
 double lasty,lastx ;
 double xnew = 165 ,ynew = 455 ;
 int counter_brick=1;
-vector <Obj> brick ;
-std::vector<int> brick_number;
 double shib ;
 bool run_ball=false;
 double leftx = 165 ;
@@ -14,14 +12,28 @@ double centerx = 175 ;
 double topy = 455 ;
 double centery = 465 ;
 bool Unzir = false;
+bool brick_add=false;
+bool downward=false;
+int downnumber=0;
 vector <Obj> Addball ;
 bool dwn = false , amoud = false , shot = false ; bool run_first=true;
 int tedad = 1 ;
 int mousex_game,mousey_game,mx,my ;
 bool running_game = true ;
+int count_marhale=1;
 SDL_Renderer* ren_game;
 SDL_Surface* surf_game ;
-
+class brick_class{
+public:
+  int number_brick;
+  Obj brick_Obj;
+  double xbrick;
+  double ybrick;
+};
+std::vector <brick_class> brick;
+#include <cstdlib>
+#include <ctime>
+//#include "brick.cpp"
 bool hit(SDL_Rect r1 , SDL_Rect r2) {
   if (r1.x > r2.x+r2.w) return false ;
   if (r1.x + r1.w < r2.x) return false ;
@@ -29,9 +41,17 @@ bool hit(SDL_Rect r1 , SDL_Rect r2) {
   if (r1.y + r1.h < r2.y) return false ;
   return true ;
 }
-
+bool occuy(double x,double y,int n){
+  for(int i=0;i<brick.size();i++)
+  {
+    if(brick[i].xbrick==x && brick[i].ybrick==y && i!=n)
+    {
+      return false;
+    }
+  }
+  return true;
+}
 void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
-
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color_fm ;
   color_fm.r = r ;
@@ -49,7 +69,6 @@ void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b 
   SDL_RenderCopy(ren_fm,tex,NULL,&rect_fm);
   SDL_DestroyTexture(tex);
 }
-
 void input_game() {
   SDL_Event e ;
   while (SDL_PollEvent(&e)) {
@@ -82,8 +101,8 @@ void input_game() {
     }
   }
 }
-
 void game() {
+  srand(time(NULL));
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
   running_game = true ;
@@ -103,10 +122,15 @@ void game() {
   blGame[0].setDest(165,455,20,20);
   blGame[0].setSource(0,0,715,715);
   blGame[0].setImage("data/BlueBall.png",ren_game) ;
-  brick.push_back(Obj());
-  brick[0].setDest(0,165,55,35);
-  brick[0].setSource(0,0,600,600);
-  brick[0].setImage("data/brick.png",ren_game);
+  if(count_marhale==1)
+  {
+
+    brick.push_back(brick_class());
+    brick[0].brick_Obj.setDest((rand()%6)*55+5,175,55,35);
+    brick[0].brick_Obj.setSource(0,0,600,600);
+    brick[0].brick_Obj.setImage("data/brick.png",ren_game);
+    brick[0].number_brick=count_marhale;
+  }
   // Pause
   Pause.setDest(140,25,70,70);
   Pause.setSource(0,0,980,980);
@@ -160,8 +184,10 @@ void game() {
     SDL_RenderCopyEx(ren_game,ballcount.tex,&ballcount.src,&ballcount.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,UpBar.tex,&UpBar.src,&UpBar.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,BtBar.tex,&BtBar.src,&BtBar.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_game,brick[0].tex,&brick[0].src,&brick[0].dest,0,NULL,SDL_FLIP_NONE);
-    brick_number.push_back(counter_brick);
+    if(count_marhale==2)
+    {
+    SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+  }
 
 
     for (int i = 0 ; i < tedad ; i++) {
@@ -195,7 +221,6 @@ void game() {
         if (amoud) {
           ynew= (double)(ynew + coy) ;
         } else {
-          cout << (shib*-1) << " " << atan((shib*-1)) << " " << cos(atan((shib*-1))) << " " << sin(atan((shib*-1))) << endl ;
           if ((shib*-1) > 0) {
             xnew =(double)(xnew + (cox*cos(atan((shib*-1)))) ) ;
             ynew =(double)(ynew + (coy*(-1)*(sin(atan((shib*-1))))) ) ;
@@ -205,18 +230,21 @@ void game() {
           }
 
         }
-      std::cout << xnew << " " << ynew << endl ;
 
         /*
         if((ynew>=brick[i].dest.y-4 && ynew<=(brick[i].dest.y+brick[i].dest.h+4))&&((xnew>brick[i].dest.x-5 && xnew<brick[i].dest.x+2) || (xnew>brick[i].dest.x+brick[i].dest.w-5 && xnew<brick[i].dest.x+brick[i].dest.w+6)))
           brick_hit_x=true;
           if((xnew>=brick[i].dest.x-4&& xnew<=(brick[i].dest.x+brick[i].dest.w+4)) && ((ynew>brick[i].dest.y && ynew<brick[i].dest.y+6) || (ynew>brick[i].dest.y+brick[i].dest.h && ynew<brick[i].dest.y+brick[i].dest.h+6)))
-          brick_hit_y=true;
-        */
+              */
+              if(ynew>455 && shot)
+              {
+                brick_add=true;
+              }
       if(ynew>455)
       {
       shot=false;
     }
+
 
       if (xnew < 0) {
         cox*=-1;
@@ -256,19 +284,107 @@ void game() {
       if(ynew < 120 || ynew > 456 )
       coy*=-1;
       */
+      if(brick_add)
+      {
+        int random_brick;
+                  count_marhale++;
+                  if(count_marhale>20)
+                  random_brick=(rand()%6)+1;
+                  else
+                  random_brick=(rand()%2)+1;
+
+                  for(int i=1;i<=random_brick;i++)
+                  {
+                    int xrandom_number;
+                    int yrandom_number;
+                    brick.push_back(brick_class());
+                    brick[brick.size()-1].number_brick=count_marhale;
+                    do {
+                        xrandom_number=rand()%6;
+                        yrandom_number=rand()%6;
+                        brick[brick.size()-1].brick_Obj.setDest((xrandom_number*55)+5,132,52,32);
+                        brick[brick.size()-1].xbrick=(xrandom_number*53)+5 ;
+                        brick[brick.size()-1].ybrick=135 ;
+                        brick[brick.size()-1].brick_Obj.setSource(0,0,600,600);
+                    } while(!occuy((xrandom_number*55)+5 , 135,brick.size()-1));
+
+
+}
+
+                  brick_add=false;
+                  downward=true;
+
+
+
+
+}
+if(downward)
+{
+  while(downnumber<40)
+  {
+    downnumber++;
+    for(int i=0;i<brick.size();i++)
+     {
+       brick[i].brick_Obj.setDest( brick[i].brick_Obj.dest.x, brick[i].brick_Obj.dest.y+1,52,35);
+       brick[i].ybrick= brick[i].brick_Obj.dest.y+40;
+       brick[i].brick_Obj.setImage("data/brick.png",ren_game);
+         SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+
+       if(brick[i].ybrick>=470 )
+         {
+           cout<<"game lose"<<endl;
+           running_game=false;
+           for(int i=0;i<brick.size();i++)
+           {
+                 brick.erase(brick.begin()+i);
+           }
+           WriteMessage("game over ", 100, 350, 255,255,255, 40, ren_game);
+           brick.erase(brick.begin()+i);
+         }
+
+     }
+}
+
+
+
+    downward=false;
+    downnumber=0;
+
+}
+
+
+
+
         if (shot) {
           blGame[0].setDest(xnew,lasty,20,20);
-          if(hit(brick[0].dest,blGame[0].dest)) {
-            cout<<"hit x"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
+          for(int i=0;i<brick.size();i++)
+          {
+          if(hit(brick[i].brick_Obj.dest,blGame[0].dest)) {
+
             hitx = true ;
             cox *= (-1) ;
+            brick[i].number_brick--;
           }
+        }
           blGame[0].setDest(lastx,ynew,20,20);
-          if(hit(brick[0].dest,blGame[0].dest)) {
-            cout<<"hit y"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
+          for(int i=0;i<brick.size();i++)
+          {
+
+          if(hit(brick[i].brick_Obj.dest,blGame[0].dest)) {
             hity=true ;
             coy *= (-1) ;
+            brick[i].number_brick--;
           }
+
+        }
+
+        for(int i=0;i<brick.size();i++)
+        {
+          cout<<brick[i].number_brick<<"  ";
+          if(brick[i].number_brick<=0)
+              brick.erase(brick.begin()+i);
+        }
+        cout<<endl;
           blGame[0].setDest(xnew,ynew,20,20);
         } else if (!shot) {
           leftx = xnew;
@@ -277,13 +393,9 @@ void game() {
           centery = 455+10;
           ynew = 455 ;
           blGame[0].setDest(xnew,455,20,20);
-          std::cout << "safe" << xnew << " " << ynew << endl ;
+
           arrow.setDest(centerx-30,centery-30,60,60);
-          int brick_new=rand()%6+1;
-          for(int j=blGame.size();j<blGame.size()+brick_new;j++)
-          {
-          // blGame.push_back(Obj());
-        }
+}
           //for(int j=blGame.size();j<blGame.size()+brick_new;j++)
         //  {
         //  blGame.push_back(obj());
@@ -291,7 +403,7 @@ void game() {
       //  }
 
 
-      }
+
       /*
       if (shot) {
         xx += cox ;
@@ -299,6 +411,10 @@ void game() {
       }
       */
     }
+    for(int j=0;j<brick.size();j++)
+    {
+      SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+}
     if (dwn == true) {
       if (mousex_game==centerx) {
         amoud = true ;
