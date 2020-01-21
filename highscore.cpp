@@ -1,22 +1,17 @@
-#include <fstream>
-#include <string>
-#include <stdio.h>
-#include <iostream>
-#include <algorithm>
-using namespace std;
-string playername;
-int highscore;
-string playernames[10];
-int highscores[10];
-fstream savefile;
+fstream hs_file;
+typedef struct player{
+  string name;
+  int score;
+}data;
+data player[10];
 //Opening file
-bool openfile(bool clean = false){
-  if(clean){
-      savefile.open("data/highscore.txt",ofstream::out | ofstream::trunc);
+bool openfile(bool resetscore = false){
+  if(resetscore){
+      hs_file.open("data/highscore",ofstream::out | ofstream::trunc);
   }else{
-      savefile.open("data/highscore.txt");
+      hs_file.open("data/highscore");
   }
-  if(savefile.is_open()){
+  if(hs_file.is_open()){
     return true;
   }else{
     return false;
@@ -26,83 +21,78 @@ bool openfile(bool clean = false){
 bool returnscore(bool just_highscore = false){
   if(openfile()){
     if(just_highscore){
-      savefile >> highscore >> playername;
+      hs_file >> player[0].score >> player[0].name;
     }else{
         for(int i = 0;i<10;i++){
-          savefile >> highscores[i] >> playernames[i];
+          hs_file >> player[i].score >> player[i].name;
       }
     }
   }else{
     cout<<"ERROR OPENING FILE TO READ DATA";
     return false;
   }
-  savefile.close();
+  hs_file.close();
   return true;
 }
 //initializing scores
 void File_Init(){
   returnscore(true);
-  int score_init = highscore;
-  if(score_init == -1){
+  int score_init = player[0].score;
+  if(score_init == -1 || score_init == NULL){
     openfile(true);
-    savefile << 0 << endl;
-    cout<<"Init Done";
-    savefile.close();
+    hs_file.close();
   }
   return;
 }
+//Check struct for sorting
+bool sortchecker(data a,data b){
+  if(a.score >= b.score)
+		return 1;
+	else
+		return 0;
+}
 //Sort scores decending
 void sortscores(){
-  int temp_highscores[10];
-  string temp_playernames[10];
-  for(register int i = 0; i<10;i++){
-    temp_highscores[i] = highscores[i];
-    temp_playernames[i] = playernames[i];
-  }
-  sort(highscores,highscores+10,greater<int>());
-  int sort_count=0;
-    int i = 0;
-    for(i;i<10;i++){
-      if(highscores[i] == temp_highscores[i]){
-        playernames[i] = "";
-        playernames[i] = temp_playernames[i];
-    }
-    cout<<temp_playernames[i]<<" == "<<playernames[i]<<endl;
-  }
+  sort(player,player+10,sortchecker);
 }
+//Print game scoreboard
 void scoreboard(){
   if(openfile()){
     returnscore();
     for(int i = 0; i<10;i++){
-      cout<< i<< ". "<<playernames[i]<<"  "<<highscores[i];
+      cout<< i+1 << ". "<<player[i].score<<" "<<player[i].name<<endl;
     }
   }else{
     cout<<"ERROR SHOWING SCOREBOARD";
     return;
   }
 }
-bool savescore(int highscore,string playername){
+//Save scores on file decending order
+bool savescore(int score , string name){
   returnscore();
-  highscores[9] = highscore;
-  cout<<playernames[9];
-  playernames[9] = playername;
-    cout<< " "<< playernames[9];
+  player[9].score = score;
+  cout<<player[9].score;
+  player[9].name = name;
+    cout<< " "<< player[9].name;
   sortscores();
-  if(openfile(true)){e
+  if(openfile(true)){
     for(register int i = 0;i<10;i++){
-      savefile << highscores[i]<<" "<<playernames[i]<<endl;
+      hs_file << player[i].score<<" "<<player[i].name<<endl;
     }
   }else{
     cout<<"ERROR OPENIN FILE FOR SAVING DATA";
-    savefile.close();
+    hs_file.close();
     return false;
   }
-  savefile.close();
+  hs_file.close();
   return true;
 }
-int main(int argc, char const *argv[]) {
+//For testing this file
+/*int main() {
   returnscore();
-  cin>>playername>>highscore;
+  cin>>highscore>>playername;
+  savescore(highscore,playername);
+  returnscore();
   scoreboard();
    return 0;
-}
+}*/
