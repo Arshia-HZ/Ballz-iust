@@ -280,18 +280,15 @@ void game() {
           std::cout << "safe" << xnew << " " << ynew << endl ;
           arrow.setDest(centerx-30,centery-30,60,60);
           int brick_new=rand()%6+1;
-<<<<<<< HEAD
           for(int j=blGame.size();j<blGame.size()+brick_new;j++)
           {
           // blGame.push_back(Obj());
         }
-=======
           //for(int j=blGame.size();j<blGame.size()+brick_new;j++)
         //  {
         //  blGame.push_back(obj());
       //    blGame[j].setDest()
       //  }
->>>>>>> d9f95d4cbbf54cb0dce910ee6cf7314621f60079
 
 
       }
