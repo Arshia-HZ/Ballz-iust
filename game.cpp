@@ -228,6 +228,14 @@ void game() {
           blGame[0].setDest(xnew,455,20,20);
           std::cout << "safe" << xnew << " " << ynew << endl ;
           arrow.setDest(centerx-30,centery-30,60,60);
+          int brick_new=rand()%6+1;
+          for(int j=blGame.size();j<blGame.size()+brick_new;j++)
+          {
+          blGame.push_back(obj());
+          blGame[j].setDest
+        }
+
+
       }
       if (shot) {
         xx += cox ;
