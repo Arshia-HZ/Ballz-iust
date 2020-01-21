@@ -87,6 +87,16 @@ bool savescore(int score , string name){
   hs_file.close();
   return true;
 }
+//To check player score while playing
+bool checkscore(){
+  returnscore();
+  sortscores();
+  if(*playerscore > player[9].score){
+    return true;
+  }else{
+    return false;
+  }
+}
 //For testing this file
 /*int main() {
   returnscore();

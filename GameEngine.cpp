@@ -3,8 +3,8 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL.h>
 #include <fstream>
-#include<cstdlib>
-#include<ctime>
+#include <cstdlib>
+#include <ctime>
 #include <string>
 #include <stdio.h>
 #include <iostream>
@@ -20,7 +20,7 @@ int status = 0;
 Mix_Music *music;
 SDL_Event e ;
 string *playername;
-int *highscore;
+int *playerscore;
 bool windowloop = true;
 #include "audiomanager.cpp"
 #include "about.cpp"
