@@ -5,6 +5,7 @@ bool hity,hitx;
 double lasty,lastx ;
 double xnew = 165 ,ynew = 455 ;
 int counter_brick=1;
+int aa = 0 ;
 vector <Obj> brick ;
 std::vector<int> brick_number;
 double shib ;
@@ -172,18 +173,25 @@ void game() {
 
       static double xx = 0 ;
       static double yy = 0;
-      static  double cox=3;
-      static  double coy=3;
+      static  double cox=5;
+      static  double coy=5;
       if (run_first) {
         mx = mousex_game ;
         my = mousey_game ;
         run_first=false;
-        cox=3;
-        coy=3;
+        cox=5;
+        coy=5;
+      }
+      if (aa==1) {
+        aa--;
+        cox/=2;
+        coy/=2;
+      } else if (aa>1) {
+        aa-- ;
       }
     //  std::cout << leftx<<" "<<topy << '\n';
     if (hitx){
-      hitx=false;
+      hitx = false ;
     } else {
       lastx = xnew ;
     }
@@ -193,19 +201,20 @@ void game() {
       lasty = ynew ;
     }
         if (amoud) {
-          ynew= (double)(ynew + coy) ;
+          ynew = (double)(ynew + coy) ;
         } else {
-          cout << (shib*-1) << " " << atan((shib*-1)) << " " << cos(atan((shib*-1))) << " " << sin(atan((shib*-1))) << endl ;
+        //  cout << (shib*-1) << " " << atan((shib*-1)) << " " << cos(atan((shib*-1))) << " " << sin(atan((shib*-1))) << endl ;
           if ((shib*-1) > 0) {
-            xnew =(double)(xnew + (cox*cos(atan((shib*-1)))) ) ;
-            ynew =(double)(ynew + (coy*(-1)*(sin(atan((shib*-1))))) ) ;
+              xnew =(double)(xnew + (cox*cos(atan((shib*-1)))) ) ;
+              ynew =(double)(ynew + (coy*(-1)*(sin(atan((shib*-1))))) ) ;
+
           } else {
-            xnew =(double)(xnew + (cox*(-1)*(cos(atan((shib*-1))))) ) ;
-            ynew =(double)(ynew + (coy*sin(atan((shib*-1)))) ) ;
+              xnew =(double)(xnew + (cox*(-1)*(cos(atan((shib*-1))))) ) ;
+              ynew =(double)(ynew + (coy*sin(atan((shib*-1)))) ) ;
           }
 
         }
-      std::cout << xnew << " " << ynew << endl ;
+    //  std::cout << xnew << " " << ynew << endl ;
 
         /*
         if((ynew>=brick[i].dest.y-4 && ynew<=(brick[i].dest.y+brick[i].dest.h+4))&&((xnew>brick[i].dest.x-5 && xnew<brick[i].dest.x+2) || (xnew>brick[i].dest.x+brick[i].dest.w-5 && xnew<brick[i].dest.x+brick[i].dest.w+6)))
@@ -259,17 +268,22 @@ void game() {
         if (shot) {
           blGame[0].setDest(xnew,lasty,20,20);
           if(hit(brick[0].dest,blGame[0].dest)) {
-            cout<<"hit x"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
-            hitx = true ;
-            cox *= (-1) ;
-          }
-          blGame[0].setDest(lastx,ynew,20,20);
-          if(hit(brick[0].dest,blGame[0].dest)) {
-            cout<<"hit y"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
-            hity=true ;
-            coy *= (-1) ;
-          }
-          blGame[0].setDest(xnew,ynew,20,20);
+              cout<<"hit x"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
+              hitx = true ;
+              cox *= (-1) ;
+            }
+              blGame[0].setDest(lastx,ynew,20,20);
+              if(hit(brick[0].dest,blGame[0].dest)) {
+                  cout<<"hit y"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
+                  hity=true ;
+                  coy *= (-1) ;
+                }
+              blGame[0].setDest(xnew,ynew,20,20);
+              if ((hitx)&&(hity)) {
+                cox *= 2 ;
+                coy *= 2 ;
+                aa = 4 ;
+              }
         } else if (!shot) {
           leftx = xnew;
           centerx = xnew+10 ;
