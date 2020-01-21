@@ -1,6 +1,10 @@
 Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 vector <Obj> blGame ;
+bool brick_hit_y=false;
+bool brick_hit_x=false;
+int counter_brick=1;
 vector <Obj> brick ;
+std::vector<int> brick_number;
 double shib ;
 bool run_ball=false;
 double leftx = 165 ;
@@ -15,6 +19,8 @@ int mousex_game,mousey_game,mx,my ;
 bool running_game = true ;
 SDL_Renderer* ren_game;
 SDL_Surface* surf_game ;
+
+
 void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
 
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
@@ -54,7 +60,7 @@ void input_game() {
       }
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
-        if ((mousey_game>125) && (mousey_game<475)) {
+        if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
           dwn = true ;
         }
     }
@@ -82,6 +88,10 @@ void game() {
   blGame[0].setDest(165,455,20,20);
   blGame[0].setSource(0,0,715,715);
   blGame[0].setImage("data/BlueBall.png",ren_game) ;
+  brick.push_back(Obj());
+  brick[0].setDest(130,320,55,35);
+  brick[0].setSource(0,0,600,600);
+  brick[0].setImage("data/brick.png",ren_game);
   // Pause
   Pause.setDest(140,25,70,70);
   Pause.setSource(0,0,980,980);
@@ -135,46 +145,68 @@ void game() {
     SDL_RenderCopyEx(ren_game,ballcount.tex,&ballcount.src,&ballcount.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,UpBar.tex,&UpBar.src,&UpBar.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,BtBar.tex,&BtBar.src,&BtBar.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_game,brick[0].tex,&brick[0].src,&brick[0].dest,0,NULL,SDL_FLIP_NONE);
+    brick_number.push_back(counter_brick);
+
+
     for (int i = 0 ; i < tedad ; i++) {
       SDL_RenderCopyEx(ren_game,blGame[i].tex,&blGame[i].src,&blGame[i].dest,0,NULL,SDL_FLIP_NONE);
     }
+
     if (shot) {
 
       static double xx = 0 ;
       static double yy = 0;
-      static  double cox=0.09;
-      static  double coy=0.09;
+      static  double cox=0.05;
+      static  double coy=0.05;
       if (run_first) {
         mx = mousex_game ;
         my = mousey_game ;
         run_first=false;
         xx = 0 ;
         yy = 0 ;
-        cox=0.09;
-        coy=0.09;
+        cox=0.05;
+        coy=0.05;
       }
     //  std::cout << leftx<<" "<<topy << '\n';
       double xnew=(double)(leftx + ((mx-((centerx))))*xx);
       double ynew=(double)(topy + ((my-((centery))))*yy);
       std::cout << xnew << " " << ynew << endl ;
-      if(ynew>456)
+      for(int i=0;i<brick.size();i++)
+      {
+        if((ynew>=brick[i].dest.y-4 && ynew<=(brick[i].dest.y+brick[i].dest.h+4))&&((xnew>brick[i].dest.x-5 && xnew<brick[i].dest.x+2) || (xnew>brick[i].dest.x+brick[i].dest.w-5 && xnew<brick[i].dest.x+brick[i].dest.w+6)))
+          brick_hit_x=true;
+          if((xnew>=brick[i].dest.x-4&& xnew<=(brick[i].dest.x+brick[i].dest.w+4)) && ((ynew>brick[i].dest.y && ynew<brick[i].dest.y+6) || (ynew>brick[i].dest.y+brick[i].dest.h && ynew<brick[i].dest.y+brick[i].dest.h+6)))
+          brick_hit_y=true;
+}
+      if(ynew>455)
       {
       shot=false;
-
     }
 
       if (xnew < 0) {
         cox*=-1;
-        xnew = 0 ;
+        //xnew = 0 ;
       }
       if (xnew > 330) {
         cox*=-1;
-        xnew = 330 ;
+        //xnew = 330 ;
       }
       if (ynew < 125) {
         coy*=-1;
-        ynew = 125 ;
+        //ynew = 125 ;
       }
+      if(brick_hit_y)
+      {
+        brick_hit_y=false;
+        coy*=-1;
+}
+         if(brick_hit_x)
+          {
+            brick_hit_x=false;
+            cox*=-1;
+          }
+
       if (ynew > 455) {
         coy*=-1;
         ynew = 455 ;
