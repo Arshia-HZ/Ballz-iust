@@ -35,8 +35,8 @@ void input_sm() {
         // Open The settings_sm Page
       }
       if ((mousex_sm>=about_sm.dest.x)&&(mousex_sm<=about_sm.dest.x+about_sm.dest.w)&&(mousey_sm>=about_sm.dest.y)&&(mousey_sm<=about_sm.dest.y+about_sm.dest.h)) {
-        //cout << "Clear Highscore Clicked" << endl ;
-        //savetofile(-1);
+        cout << "Clear Highscore Clicked" << endl ;
+        openfile(true);
         cout<<"High score cleared"<<endl;
         // Open The about_smUs Page
       }

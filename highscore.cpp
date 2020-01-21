@@ -5,8 +5,8 @@ typedef struct player{
 }data;
 data player[10];
 //Opening file
-bool openfile(bool clean = false){
-  if(clean){
+bool openfile(bool resetscore = false){
+  if(resetscore){
       hs_file.open("data/highscore",ofstream::out | ofstream::trunc);
   }else{
       hs_file.open("data/highscore");
@@ -37,11 +37,9 @@ bool returnscore(bool just_highscore = false){
 //initializing scores
 void File_Init(){
   returnscore(true);
-  int score_init = highscore;
-  if(score_init == -1){
+  int score_init = player[0].score;
+  if(score_init == -1 || score_init == NULL){
     openfile(true);
-    hs_file << 0 << endl;
-    cout<<"Init Done";
     hs_file.close();
   }
   return;
