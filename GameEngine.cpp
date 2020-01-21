@@ -32,6 +32,7 @@ bool windowloop = true;
 #include "lastmenu.cpp"
 
 int main(int argc, char const *argv[]) {
+  srand(time(NULL));
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
   File_Init();
