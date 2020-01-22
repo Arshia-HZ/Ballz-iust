@@ -128,9 +128,9 @@ void firstmenu(){
   // settings
   settings.setDest(180,490,70,70);
   settings.setSource(0,0,1500,1500);
-  settings.setImage("data/setting.png",ren_fm) ;
+  settings.setImage("data/setting3.png",ren_fm) ;
   // about
-  about.setDest(20,415,70,70);
+  about.setDest(20,415,100,70);
   about.setSource(0,0,1500,1500);
   about.setImage("data/about.png",ren_fm) ;
   // high
@@ -163,13 +163,13 @@ void firstmenu(){
     SDL_RenderCopyEx(ren_fm,settings.tex,&settings.src,&settings.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_fm,about.tex,&about.src,&about.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_fm,high.tex,&high.src,&high.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,ball.tex,&ball.src,&ball.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,ball.tex,&ball.src,&ball.dest,0+rot,NULL,SDL_FLIP_NONE);
 
     rot += 2 ;
     if (down) {
-      WriteMessage("Swipe Brick Breaker",40,10+hei,155,0,0,35,ren_fm);
+      WriteMessage("Swipe Brick Breaker",50,10+hei,155,0,0,35,ren_fm);
     } else {
-      WriteMessage("Swipe Brick Breaker",40,10+hei,142,0,56,35,ren_fm);
+      WriteMessage("Swipe Brick Breaker",50,10+hei,142,0,56,35,ren_fm);
     }
     pos = 10 + hei ;
     if (down) {
