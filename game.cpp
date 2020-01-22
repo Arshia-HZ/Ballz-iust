@@ -453,7 +453,7 @@ while(downnumber<40)
    for(int i=0;i<Addball.size();i++)
     {
       Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+1,20,20);
-      if( Addball[i].dest.y+1>475)
+      if( Addball[i].dest.y+40>475)
       {
         Addball.erase(Addball.begin()+i);
       }
