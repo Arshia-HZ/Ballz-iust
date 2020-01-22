@@ -161,8 +161,8 @@ void game() {
   */
   for (int i = 0 ; i<balla.size() ; i++) {
     balla[i].blGame.setDest(165,455,20,20);
-    balla[i].blGame.setSource(0,0,715,715);
-    balla[i].blGame.setImage("data/BlueBall.png",ren_game) ;
+    balla[i].blGame.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+    balla[i].blGame.setImage(ball_image[ball_image_number].ball_image_path,ren_game) ;
   }
   if(first_ste)
   {
@@ -555,7 +555,8 @@ if(downward)
               balla[s].ynew = 455 ;
               balla[s].xnew = cex-10;
               balla[s].blGame.setDest(balla[i].xnew,455,20,20);
-              balla[s].blGame.setImage("data/BlueBall.png",ren_game) ;
+              balla[s].blGame.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+              balla[s].blGame.setImage(ball_image[ball_image_number].ball_image_path,ren_game) ;
             }
           }
           //std::cout << "safe" << xnew << " " << ynew << endl ;
