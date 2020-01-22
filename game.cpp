@@ -517,7 +517,7 @@ if(downward)
           running_game=false;
           playerscore = count_marhale;
           startaudio();
-          break;
+          return ;
           int tedad_br=brick.size();
          for(int i=0;i<tedad_br;i++)
          {
