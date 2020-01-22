@@ -2,6 +2,11 @@ Obj play,high,about,ball, settings ;
 SDL_Renderer* ren_fm;
 SDL_Surface* surf_fm ;
 bool running_fm = true ;
+vector <string> ball_image;
+int ball_image_number=0;
+
+
+
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
 
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
