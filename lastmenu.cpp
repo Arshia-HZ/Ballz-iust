@@ -89,6 +89,7 @@ if ( playername.size() ) {
 SDL_RenderPresent( ren_lm );
 }
 void lastmenu(){
+	bool gamedsaved = false;
 	font = TTF_OpenFont("data/GTA.ttf", 72);
 	if ( !font ) {
 		cout << "Error loading font: " << TTF_GetError() << endl;
@@ -132,14 +133,16 @@ void lastmenu(){
       lasttime = lastframe ;
       framecount = 0 ;
     }
-    SDL_SetRenderDrawColor(ren_lm,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
+    SDL_SetRenderDrawColor(ren_lm,255,255,255,255);
     SDL_RenderFillRect(ren_lm,&rect_fm);
 
     SDL_RenderCopyEx(ren_lm,playagain_lm.tex,&playagain_lm.src,&playagain_lm.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,highscore_lm.tex,&highscore_lm.src,&highscore_lm.dest,0+rot,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,firstmenu_lm.tex,&firstmenu_lm.src,&firstmenu_lm.dest,0+rot,NULL,SDL_FLIP_NONE);
+		if(!gamedsaved){
 		SDL_RenderCopyEx(ren_lm,saveinfo.tex,&saveinfo.src,&saveinfo.dest,0+rot,NULL,SDL_FLIP_NONE);
-
+		gamedsaved = true;
+	}
     rot += 2 ;
 
     framecount++ ;

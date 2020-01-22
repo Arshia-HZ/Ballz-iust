@@ -29,6 +29,8 @@ TTF_Init();
   rect_fm.y=y;
   rect_fm.w=surf_fm->w;
   rect_fm.h=surf_fm->h;
+  TTF_CloseFont(font);
+  TTF_Quit();
   SDL_FreeSurface(surf_fm);
   SDL_RenderCopy(ren_fm,tex,NULL,&rect_fm);
   SDL_DestroyTexture(tex);
@@ -139,7 +141,8 @@ void firstmenu(){
   ball.setDest(100,490,70,70);
   ball.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
   ball.setImage(ball_image[ball_image_number].ball_image_path,ren_fm);
-
+  TTF_CloseFont(font);
+  TTF_Quit();
   float hei = 0 ;
   bool down = true ;
   float sh = 2.2 ;
@@ -153,7 +156,7 @@ void firstmenu(){
       lasttime = lastframe ;
       framecount = 0 ;
     }
-    SDL_SetRenderDrawColor(ren_fm,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
+    SDL_SetRenderDrawColor(ren_fm,255,255,255,255);
     SDL_RenderFillRect(ren_fm,&rect_fm);
 
     SDL_RenderCopyEx(ren_fm,play.tex,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);

@@ -45,6 +45,8 @@ int main(int argc, char const *argv[]) {
   startaudio();
   //cin>>status;
   //cin>>playerscore;
+  TTF_CloseFont(font);
+  TTF_Quit();
   while(windowloop){
   switch(status){
     case 0: firstmenu();  break;
