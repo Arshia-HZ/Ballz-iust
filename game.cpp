@@ -383,7 +383,7 @@ void game() {
       int random_brick;
                 count_marhale++;
                 if(count_marhale>20)
-                random_brick=(rand()%6)+1;
+                random_brick=(rand()%5)+1;
                 else
                 random_brick=(rand()%2)+1;
                 Addball.push_back(Obj());
@@ -504,10 +504,10 @@ if(downward)
                 if(brick[j].number_brick<=0)
                 {
                     brick.erase(brick.begin()+j);
-                    for(int d=0;d<brick.size();d++)
-                    {
-                      SDL_RenderCopyEx(ren_game,brick[d].brick_Obj.tex,&brick[d].brick_Obj.src,&brick[d].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-                  }
+                  //   for(int d=0;d<brick.size();d++)
+                  //   {
+                  //     SDL_RenderCopyEx(ren_game,brick[d].brick_Obj.tex,&brick[d].brick_Obj.src,&brick[d].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+                  // }
                   }
                     cout<<"ta inja ok vastesh"<<endl;
             }
@@ -537,8 +537,8 @@ if(downward)
           balla[i].ynew = 455 ;
           balla[i].xnew = cex-10;
           balla[i].blGame.setDest(balla[i].xnew,455,20,20);
-          if (i == tedad - 1) {
-            for (int s = tedad ; s < balla.size() ; s++) {
+          if (i == avaliye - 1) {
+            for (int s = avaliye ; s < balla.size() ; s++) {
               balla[s].centerx = cex ;
             //  balla[i].topy = 455;
               balla[s].centery = 455+10;
