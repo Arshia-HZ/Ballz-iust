@@ -238,7 +238,7 @@ void game() {
     if(first_ste)
     {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-    WriteMessage(brick[0].number_brick,brick[0].brick_Obj.dest.x+(brick[0].brick_Obj.dest.w)/2,brick[0].brick_Obj.dest.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+  //  WriteMessage(brick[0].number_brick,brick[0].brick_Obj.dest.x+(brick[0].brick_Obj.dest.w)/2,brick[0].brick_Obj.dest.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 
   }
 
@@ -426,17 +426,17 @@ void game() {
 }
 if(downward)
 {
-while(downnumber<40)
-{
+//while(downnumber<40)
+//{
   downnumber++;
   for(int i=0;i<brick.size();i++)
    {
-     brick[i].brick_Obj.setDest( brick[i].brick_Obj.dest.x, brick[i].brick_Obj.dest.y+1,52,35);
+     brick[i].brick_Obj.setDest( brick[i].brick_Obj.dest.x, brick[i].brick_Obj.dest.y+40,52,35);
      brick[i].ybrick= brick[i].brick_Obj.dest.y+40;
      brick[i].brick_Obj.setImage("data/brick.png",ren_game);
 
        SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-       WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+      // WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
      if(brick[i].ybrick>=470 )
        {
          status=3;
@@ -454,7 +454,7 @@ while(downnumber<40)
 
    for(int i=0;i<Addball.size();i++)
     {
-      Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+1,20,20);
+      Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,20,20);
       if( Addball[i].dest.y+40>475)
       {
         Addball.erase(Addball.begin()+i);
@@ -467,7 +467,7 @@ while(downnumber<40)
         SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
 
       }
-}
+//}
 
 
 
@@ -573,7 +573,7 @@ for(int j=0;j<brick.size();j++)
 {
 
   SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-  WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+  //WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 }
 for(int i=0;i<Addball.size();i++)
  {
