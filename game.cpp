@@ -141,9 +141,6 @@ void input_game() {
         if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
           dwn = true ;
         }
-        if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
-          dwn = true ;
-        }
 
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
@@ -251,7 +248,7 @@ void game() {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
     string stt ;
     stt = to_string(brick[0].number_brick);
-    WriteMessage_game(stt.c_str() , brick[0].brick_Obj.dest.x + 25 , brick[0].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[0].brick_Obj.dest);
+  //  WriteMessage_game(stt.c_str() , brick[0].brick_Obj.dest.x + 25 , brick[0].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[0].brick_Obj.dest);
   //  WriteMessage(brick[0].number_brt.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 
   }
@@ -464,7 +461,7 @@ if(downward)
        SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
        string stt ;
        stt = to_string(brick[i].number_brick);
-       WriteMessage_game(stt.c_str() , brick[i].brick_Obj.dest.x + 25 , brick[i].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[i].brick_Obj.dest);
+    //   WriteMessage_game(stt.c_str() , brick[i].brick_Obj.dest.x + 25 , brick[i].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[i].brick_Obj.dest);
       // WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(rick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
      if(brick[i].ybrick>=470 )
        {
@@ -623,7 +620,7 @@ for(int j=0;j<brick.size();j++)
   SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
   string stt ;
   stt = to_string(brick[j].number_brick);
-  WriteMessage_game(stt.c_str() , brick[j].brick_Obj.dest.x + 25 , brick[j].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[j].brick_Obj.dest);
+  //WriteMessage_game(stt.c_str() , brick[j].brick_Obj.dest.x + 25 , brick[j].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[j].brick_Obj.dest);
   //WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Ock[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 }
 for(int i=0;i<Addball.size();i++)
