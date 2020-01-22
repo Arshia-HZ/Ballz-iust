@@ -140,7 +140,7 @@ void input_game() {
 }
 
 void game() {
-
+  stopaudio();
   srand(time(NULL));
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
@@ -437,7 +437,9 @@ if(downward)
        {
          status=3;
          SDL_DestroyRenderer(ren_game);
+         Mix_PlayChannel( -1, gameover, 0 );
           running_game=false;
+          startaudio();
           break;
           int tedad_br=brick.size();
          for(int i=0;i<tedad_br;i++)
@@ -512,6 +514,7 @@ if(downward)
               for (int j = 0 ; j < Addball.size() ; j++) {
                 if(hit(Addball[j].dest,balla[i].blGame.dest)) {
                   int xaddball=Addball[j].dest.x;
+                  Mix_PlayChannel( -1, addball, 0 );
                   Addball.erase(Addball.begin()+j);
                   balla.push_back(Ballb());
                   balla[balla.size()-1].blGame.setDest(xaddball,455,20,20);
