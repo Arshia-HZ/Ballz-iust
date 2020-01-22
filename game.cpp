@@ -1,4 +1,3 @@
-
 Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 bool brick_add=false;
 bool downward=false;
@@ -12,17 +11,24 @@ public:
   double xbrick;
   double ybrick;
 };
+vector<Obj> Addball;
 std::vector <brick_class> brick;
 #include <cstdlib>
 #include <ctime>
 bool occuy(double x,double y,int n){
   for(int i=0;i<brick.size();i++)
   {
-    if(brick[i].xbrick==x && brick[i].ybrick==y && i!=n)
+    if(brick[i].xbrick==x && brick[i].ybrick==y && i!=n )
     {
       return false;
     }
   }
+  for(int j=0;j<Addball.size();j++)
+{
+  if(Addball[j].dest.x==x && Addball[j].dest.y==y && j!=n)
+  {
+    return false;
+  }}
   return true;
 }
 //vector <Obj> blGame ;
@@ -41,8 +47,7 @@ double shib ;
 //double centerx = 175 ;
 //double topy = 455 ;
 //double centery = 465 ;
-bool Unzir = false;
-vector <Obj> Addball ;
+bool Unzir1 = false , Unzir2 = false ;
 bool dwn = false , amoud = false , shot = false ; bool run_first=true;
 // bool shot = false ;
 int tedad = 1 ;
@@ -119,7 +124,7 @@ void input_game() {
         }
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
-      if (dwn == true) {
+      if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false)) {
         dwn = false;
         shot = true ;
         for (int i = 0 ; i<balla.size() ; i++) {
@@ -367,16 +372,22 @@ void game() {
                 random_brick=(rand()%6)+1;
                 else
                 random_brick=(rand()%2)+1;
-
+                Addball.push_back(Obj());
                 for(int i=1;i<=random_brick;i++)
                 {
+
                   int xrandom_number;
                   int yrandom_number;
+                  Addball[Addball.size()-1].setDest((rand()%6*55)+5,132,10,10);
+                  Addball[Addball.size()-1].setSource(0,0,512,512);
+                  Addball[Addball.size()-1].setImage("data/BlueBall.png",ren_game);
+
                   brick.push_back(brick_class());
                   brick[brick.size()-1].number_brick=count_marhale;
                   do {
                       xrandom_number=rand()%6;
                       yrandom_number=rand()%6;
+
                       brick[brick.size()-1].brick_Obj.setDest((xrandom_number*55)+5,132,52,32);
                       brick[brick.size()-1].xbrick=(xrandom_number*53)+5 ;
                       brick[brick.size()-1].ybrick=135 ;
@@ -407,8 +418,8 @@ while(downnumber<40)
 
      if(brick[i].ybrick>=470 )
        {
-         cout<<"game lose"<<endl;
-         running_game=false;
+         status=3;
+          running_game=false;
          for(int i=0;i<brick.size();i++)
          {
                brick.erase(brick.begin()+i);
@@ -418,6 +429,13 @@ while(downnumber<40)
        }
 
    }
+   for(int i=0;i<Addball.size();i++)
+    {
+      Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,10,10);
+      SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
+
+    }
+
 }
 
 
@@ -506,6 +524,11 @@ for(int j=0;j<brick.size();j++)
 {
   SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
 }
+for(int i=0;i<Addball.size();i++)
+ {
+   SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
+
+ }
   //cout << 362 << endl ;
     if (dwn == true) {
       if (mousex_game==cex) {
@@ -515,11 +538,16 @@ for(int j=0;j<brick.size();j++)
         shib = (double)(mousey_game-cey)/(mousex_game-cex);
       }
       if (mousey_game>cey) {
-        Unzir = true ;
+        Unzir1 = true ;
       } else {
-        Unzir = false ;
+        Unzir1 = false ;
       }
-      if (Unzir == false) {
+      if ((((shib*-1) > 0) && ((shib*-1) < 0.3)) || (((shib*-1) < 0) && ((shib*-1) > -0.3))) {
+        Unzir2 = true ;
+      } else {
+        Unzir2 = false ;
+      }
+      if ((Unzir1 == false) && (Unzir2 == false)) {
         if (amoud == true) {
           SDL_RenderCopyEx(ren_game,arrow.tex,&arrow.src,&arrow.dest,-90,NULL,SDL_FLIP_NONE);
         } else {
