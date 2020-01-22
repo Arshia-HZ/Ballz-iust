@@ -16,7 +16,7 @@ int ball_image_number=0;
 
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
 TTF_Init();
-  TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
+  TTF_Font* font = TTF_OpenFont("data/font3.ttf",size);
   SDL_Color color_fm ;
   color_fm.r = r ;
   color_fm.g = g ;
@@ -167,9 +167,9 @@ void firstmenu(){
 
     rot += 2 ;
     if (down) {
-      WriteMessage("Swipe Brick Breaker",18,10+hei,155,0,0,35,ren_fm);
+      WriteMessage("Swipe Brick Breaker",40,10+hei,155,0,0,35,ren_fm);
     } else {
-      WriteMessage("Swipe Brick Breaker",18,10+hei,142,0,56,35,ren_fm);
+      WriteMessage("Swipe Brick Breaker",40,10+hei,142,0,56,35,ren_fm);
     }
     pos = 10 + hei ;
     if (down) {

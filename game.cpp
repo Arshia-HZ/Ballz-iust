@@ -511,7 +511,7 @@ if(downward)
           balla[i].blGame.setDest(balla[i].xnew,balla[i].lasty,20,20);
           if(hit(brick[j].brick_Obj.dest,balla[i].blGame.dest)) {
               //cout<<"hit x"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
-              balla[j].hitx = true ;
+              balla[i].hitx = true ;
               balla[i].cox *= (-1) ;
               brick[j].number_brick--;
             }
@@ -521,7 +521,7 @@ if(downward)
                   balla[i].hity=true ;
                   balla[i].coy *= (-1) ;
                   if(!balla[i].hitx)
-                  brick[j].number_brick--;
+                   brick[j].number_brick--;
                   Mix_PlayChannel( -1, brick_hit, 0 );
               }
                 if(brick[j].number_brick<=0)
@@ -619,7 +619,7 @@ for(int j=0;j<brick.size();j++)
 }
 string stt ;
 stt = to_string(balla.size());
-WriteMessage(stt.c_str() , ballcount.dest.x + 100 ,ballcount.dest.y , 0 , 0 , 0 ,35, ren_game);
+WriteMessage(stt.c_str() , ballcount.dest.x + 65 ,ballcount.dest.y , 0 , 0 , 0 ,35, ren_game);
 stt = to_string(count_marhale);
 WriteMessage(stt.c_str() , Score.dest.x + 70 ,Score.dest.y  , 0 , 0 , 0 ,35, ren_game);
 for(int i=0;i<Addball.size();i++)
