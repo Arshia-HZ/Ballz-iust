@@ -167,7 +167,10 @@ void input_game() {
         // backmenu
         if ( (mousex_game>250) && (mousex_game<280) && (mousey_game>75) && (mousey_game<105) ) {
           reset_game() ;
-          // mehdi inja becod ;
+          status = 0;
+          SDL_DestroyRenderer(ren_game);
+          running_game = false;
+
           return ;
         }
     }
