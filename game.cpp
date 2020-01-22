@@ -94,25 +94,6 @@ bool hit(SDL_Rect r1 , SDL_Rect r2) {
   return true ;
 }
 
-void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
-  TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
-  SDL_Color color_fm ;
-  color_fm.r = r ;
-  color_fm.g = g ;
-  color_fm.b = b ;
-  color_fm.a = 255 ;
-  SDL_Rect rect_fm ;
-  surf_fm = TTF_RenderText_Solid(font,msg,color_fm);
-  tex = SDL_CreateTextureFromSurface(ren_fm,surf_fm);
-  rect_fm.x=x;
-  rect_fm.y=y;
-  rect_fm.w=surf_fm->w;
-  rect_fm.h=surf_fm->h;
-  SDL_FreeSurface(surf_fm);
-  SDL_RenderCopy(ren_fm,tex,NULL,&rect_fm);
-  SDL_DestroyTexture(tex);
-}
-
 void input_game() {
   SDL_Event e ;
   while (SDL_PollEvent(&e)) {
@@ -443,12 +424,13 @@ if(downward)
          status=3;
          SDL_DestroyRenderer(ren_game);
           running_game=false;
+          break;
           int tedad_br=brick.size();
          for(int i=0;i<tedad_br;i++)
          {
                brick.erase(brick.begin()+i);
          }
-         WriteMessage("game over ", 100, 350, 255,255,255, 40, ren_game);
+        // WriteMessage("game over ", 100, 350, 255,255,255, 40, ren_game);
        }
 
    }

@@ -4,13 +4,11 @@ SDL_Surface* surf_lm ;
 SDL_Texture* text;
 SDL_Rect dest;
 SDL_Color foreground = { 0, 0, 0 };
-TTF_Font* font;
 bool running_lm = true ;
 void input_lm() {
 	static const unsigned char* keys = SDL_GetKeyboardState( NULL );
   while (SDL_PollEvent(&e) != 0) {
     SDL_GetMouseState(&mousex,&mousey) ;
-		cout<<" y";
     switch(e.type){
       case SDL_QUIT:
       running_lm = false;
@@ -38,7 +36,11 @@ void input_lm() {
         return;
       }
       if ((mousex>=highscore_lm.dest.x)&&(mousex<=highscore_lm.dest.x+highscore_lm.dest.w)&&(mousey>=highscore_lm.dest.y)&&(mousey<=highscore_lm.dest.y+highscore_lm.dest.h)) {
-      cout<<"Highscore clicked";
+      status = 5;
+			SDL_DestroyRenderer(ren_lm);
+			running_lm = false;
+			SDL_StopTextInput();
+			return;
       }
 			if ((mousex>=saveinfo.dest.x)&&(mousex<=saveinfo.dest.x+saveinfo.dest.w)&&(mousey>=saveinfo.dest.y)&&(mousey<=saveinfo.dest.y+saveinfo.dest.h)) {
 				if(playername.size() == 0){

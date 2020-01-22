@@ -61,7 +61,7 @@ void scoreboard(int lastpage = 0){
   settings.setDest(200,500,70,70);
   settings.setSource(0,0,1500,1500);
   settings.setImage("data/play.png",ren_sb) ;
-
+TTF_Init();
   float hei = 0 ;
   bool down = true ;
   float sh = 2.2 ;
@@ -76,12 +76,10 @@ void scoreboard(int lastpage = 0){
       framecount = 0 ;
     }
     if(showingscore == 0){
-      for(register int i = 0;i<10;i++){
-        playerinfo[i] = to_string(i+1) + ". " + player[i].name + ": " + to_string(player[i].score);
+      for( int i = 0;i<10;i++){
+        playerinfo[i] = to_string(i+1) + "." + player[i].name + ": " + to_string(player[i].score);
         cout<<playerinfo[i]<<endl;
-    //  WriteMessage(playerinfo[i].c_str(),18,10+i*20,155,0,0,35,ren_sb,surf_sb);
   }
-    //scoreinfo();
     showingscore=1;
     }
     SDL_SetRenderDrawColor(ren_sb,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
@@ -97,7 +95,11 @@ void scoreboard(int lastpage = 0){
     if (timerFPS < (1000/10)) {
       SDL_Delay((1000/10)-timerFPS);
     }
-
+    register int i = 0;
+    while(i<10){
+    WriteMessage(playerinfo[i].c_str(),18,10+i*35,155,0,0,35,ren_sb);
+    i++;
+}
     SDL_RenderPresent(ren_sb);
     input_sb();
   }
