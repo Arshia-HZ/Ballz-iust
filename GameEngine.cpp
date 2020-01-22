@@ -15,14 +15,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 #include "headers/Object.h"
-SDL_Window* win ;
-SDL_Texture* tex ;
+SDL_Window* win =NULL;
+SDL_Texture* tex=NULL ;
 int status = 0;
-Mix_Music *music;
+Mix_Music *music=NULL;
 SDL_Event e ;
 int mousex,mousey ;
 string playername;
-TTF_Font* font;
+TTF_Font* font=NULL;
 int playerscore;
 bool windowloop = true;
 #include "audiomanager.cpp"
