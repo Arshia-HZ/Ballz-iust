@@ -21,8 +21,11 @@ void input_sb(int lastpage = 0) {
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
       if ((mousex>=back_sm.dest.x)&&(mousex<=back_sm.dest.x+back_sm.dest.w)&&(mousey>=back_sm.dest.y)&&(mousey<=back_sm.dest.y+back_sm.dest.h)) {
-        //cout << "Play Clicked" << endl ;
+        if(lastpage = 0){
         status = 2;
+      }else{
+        status = 0;
+      }
       //  SDL_DestroyTexture(tex);
         SDL_DestroyRenderer(ren_sb);
         running_sb = false;
@@ -30,13 +33,11 @@ void input_sb(int lastpage = 0) {
         // Open The Game Page
       }
       if ((mousex>=clear_sm.dest.x)&&(mousex<=clear_sm.dest.x+clear_sm.dest.w)&&(mousey>=clear_sm.dest.y)&&(mousey<=clear_sm.dest.y+clear_sm.dest.h)) {
-        status = 1;
-      //  SDL_DestroyTexture(tex);
-        SDL_DestroyRenderer(ren_sb);
-        running_sb = false;
-        return;
-      //  SDL_DestroySurface(surf_sb);
-        // Open The settings Page
+      if(openfile(true)){
+        Mix_PlayChannel( -1, clearscore_sound, 0 );
+      }else{
+        cout<<"ERROR RESETING SCORES";
+      }
       }
     }
   }
@@ -54,13 +55,13 @@ void scoreboard(int lastpage = 0){
   rect_sb.w = 350 ;
   rect_sb.h = 600 ;
   // play
-  play.setDest(100,500,70,70);
-  play.setSource(0,0,1500,1500);
-  play.setImage("data/play.png",ren_sb) ;
+  back_sm.setDest(100,500,85,85);
+  back_sm.setSource(0,0,1500,1500);
+  back_sm.setImage("data/play.png",ren_sb) ;
   // settings
-  settings.setDest(200,500,70,70);
-  settings.setSource(0,0,1500,1500);
-  settings.setImage("data/play.png",ren_sb) ;
+  clear_sm.setDest(200,500,70,70);
+  clear_sm.setSource(0,0,1500,1500);
+  clear_sm.setImage("data/play.png",ren_sb) ;
 TTF_Init();
   float hei = 0 ;
   bool down = true ;
@@ -85,9 +86,8 @@ TTF_Init();
     SDL_SetRenderDrawColor(ren_sb,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
     SDL_RenderFillRect(ren_sb,&rect_sb);
 
-    SDL_RenderCopyEx(ren_sb,play.tex,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_sb,settings.tex,&settings.src,&settings.dest,0+rot,NULL,SDL_FLIP_NONE);
-
+    SDL_RenderCopyEx(ren_sb,back_sm.tex,&back_sm.src,&back_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_sb,clear_sm.tex,&clear_sm.src,&clear_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
 
     rot += 2 ;
     framecount++ ;
@@ -101,6 +101,6 @@ TTF_Init();
     i++;
 }
     SDL_RenderPresent(ren_sb);
-    input_sb();
+    input_sb(lastpage);
   }
 }

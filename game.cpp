@@ -13,8 +13,7 @@ public:
   double ybrick;
 };
 vector<Obj> Addball;
-std::vector <brick_class> brick;
-#include <cstdlib>
+vector <brick_class> brick;
 #include <ctime>
 bool occuy(double x,double y,int n){
   for(int i=0;i<brick.size();i++)
@@ -482,6 +481,7 @@ if(downward)
                   balla[i].coy *= (-1) ;
                   if(!balla[i].hitx)
                   brick[j].number_brick--;
+                  Mix_PlayChannel( -1, brick_hit, 0 );
               }
                 if(brick[j].number_brick<=0)
                 {
@@ -492,6 +492,7 @@ if(downward)
                   // }
                   }
             }
+            //add ball hit
               balla[i].blGame.setDest(balla[i].xnew,balla[i].ynew,20,20);
               for (int j = 0 ; j < Addball.size() ; j++) {
                 if(hit(Addball[j].dest,balla[i].blGame.dest)) {
