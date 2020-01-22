@@ -128,15 +128,15 @@ void firstmenu(){
   // settings
   settings.setDest(180,490,70,70);
   settings.setSource(0,0,1500,1500);
-  settings.setImage("data/play.png",ren_fm) ;
+  settings.setImage("data/setting.png",ren_fm) ;
   // about
   about.setDest(20,415,70,70);
   about.setSource(0,0,1500,1500);
-  about.setImage("data/play.png",ren_fm) ;
+  about.setImage("data/about.png",ren_fm) ;
   // high
   high.setDest(260,415,70,70);
-  high.setSource(0,0,1500,1500);
-  high.setImage("data/play.png",ren_fm) ;
+  high.setSource(0,0,512,512);
+  high.setImage("data/HighScore.png",ren_fm) ;
   // ball
   ball.setDest(100,490,70,70);
   ball.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
@@ -159,11 +159,11 @@ void firstmenu(){
     SDL_SetRenderDrawColor(ren_fm,255,255,255,255);
     SDL_RenderFillRect(ren_fm,&rect_fm);
 
-    SDL_RenderCopyEx(ren_fm,play.tex,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,settings.tex,&settings.src,&settings.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,about.tex,&about.src,&about.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,high.tex,&high.src,&high.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_fm,ball.tex,&ball.src,&ball.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,play.tex,&play.src,&play.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,settings.tex,&settings.src,&settings.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,about.tex,&about.src,&about.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,high.tex,&high.src,&high.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_fm,ball.tex,&ball.src,&ball.dest,0,NULL,SDL_FLIP_NONE);
 
     rot += 2 ;
     if (down) {

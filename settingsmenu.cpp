@@ -1,4 +1,4 @@
-Obj high_sm,about_sm, ball_sm, settings_sm ;
+Obj high_sm,about_sm, ball_sm ;
 int mousex_sm,mousey_sm ;
 SDL_Renderer* ren_sm ;
 bool smenu = true ;
@@ -30,10 +30,7 @@ void input_sm() {
         }
         // Open The Game Page
       }
-      if ((mousex_sm>=settings_sm.dest.x)&&(mousex_sm<=settings_sm.dest.x+settings_sm.dest.w)&&(mousey_sm>=settings_sm.dest.y)&&(mousey_sm<=settings_sm.dest.y+settings_sm.dest.h)) {
-        cout << "Ball Clicked" << endl ;
-        // Open The settings_sm Page
-      }
+
       if ((mousex_sm>=about_sm.dest.x)&&(mousex_sm<=about_sm.dest.x+about_sm.dest.w)&&(mousey_sm>=about_sm.dest.y)&&(mousey_sm<=about_sm.dest.y+about_sm.dest.h)) {
         cout << "Clear Highscore Clicked" << endl ;
         openfile(true);
@@ -48,10 +45,7 @@ void input_sm() {
         return;
 
       }
-      if ((mousex_sm>=high_sm.dest.x)&&(mousex_sm<=high_sm.dest.x+high_sm.dest.w)&&(mousey_sm>=high_sm.dest.y)&&(mousey_sm<=high_sm.dest.y+high_sm.dest.h)) {
-        cout << "high_sm Clicked" << endl ;
-        // Open The high_smscoe Page
-      }
+
     }
   }
 }
@@ -66,23 +60,18 @@ void settingsmenu(){
   // play
   play.setDest(150,100,70,70);
   play.setSource(0,0,1500,1500);
-  play.setImage("data/play.png",ren_sm) ;
+  play.setImage("data/sound.png",ren_sm) ;
   // settings_sm
-  settings_sm.setDest(150,200,70,70);
-  settings_sm.setSource(0,0,1500,1500);
-  settings_sm.setImage("data/play.png",ren_sm) ;
   // about_sm
-  about_sm.setDest(150,300,70,70);
+  about_sm.setDest(150,225,70,70);
   about_sm.setSource(0,0,1500,1500);
-  about_sm.setImage("data/play.png",ren_sm) ;
+  about_sm.setImage("data/highscore_setting.png",ren_sm) ;
   // high_sm
-  high_sm.setDest(150,400,70,70);
-  high_sm.setSource(0,0,1500,1500);
-  high_sm.setImage("data/play.png",ren_sm) ;
+
   // ball_sm
-  ball_sm.setDest(150,500,70,70);
+  ball_sm.setDest(150,475,70,70);
   ball_sm.setSource(0,0,1500,1500);
-  ball_sm.setImage("data/play.png",ren_sm) ;
+  ball_sm.setImage("data/back_icon.png",ren_sm) ;
 
   float hei = 0 ;
   bool down = true ;
@@ -97,20 +86,16 @@ void settingsmenu(){
       lasttime = lastframe ;
       framecount = 0 ;
     }
-    SDL_SetRenderDrawColor(ren_sm,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
+    SDL_SetRenderDrawColor(ren_sm,255,255,255,255);
     SDL_RenderFillRect(ren_sm,&rect);
 
     SDL_RenderCopyEx(ren_sm,play.tex,&play.src,&play.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_sm,settings_sm.tex,&settings_sm.src,&settings_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_sm,about_sm.tex,&about_sm.src,&about_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_sm,high_sm.tex,&high_sm.src,&high_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_sm,ball_sm.tex,&ball_sm.src,&ball_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
+    //SDL_RenderCopyEx(ren_sm,settings_sm.tex,&settings_sm.src,&settings_sm.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_sm,about_sm.tex,&about_sm.src,&about_sm.dest,0,NULL,SDL_FLIP_NONE);
+  //  SDL_RenderCopyEx(ren_sm,high_sm.tex,&high_sm.src,&high_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_sm,ball_sm.tex,&ball_sm.src,&ball_sm.dest,0,NULL,SDL_FLIP_NONE);
     rot += 2 ;
-    if (down) {
-      WriteMessage("Swipe Brick Breaker",18,10+hei,155,0,0,35,ren_sm);
-    } else {
-      WriteMessage("Swipe Brick Breaker",18,10+hei,142,0,56,35,ren_sm);
-    }
+
     pos = 10 + hei ;
     if (down) {
       if (pos >= 170) {
@@ -129,8 +114,8 @@ void settingsmenu(){
     }
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
-    if (timerFPS < (1000/15)) {
-      SDL_Delay((1000/15)-timerFPS);
+    if (timerFPS < (1000/60)) {
+      SDL_Delay((1000/60)-timerFPS);
     }
 
     SDL_RenderPresent(ren_sm);
