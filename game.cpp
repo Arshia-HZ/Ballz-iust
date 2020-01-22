@@ -14,7 +14,7 @@ public:
   double ybrick;
 };
 void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm,SDL_Rect rect) {
-
+  TTF_Init();
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color_fm ;
   color_fm.r = r ;
@@ -27,6 +27,8 @@ void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b 
   rect.y=y;
   rect.w=surf_fm->w;
   rect.h=surf_fm->h;
+  TTF_CloseFont(font);
+  TTF_Quit();
   SDL_FreeSurface(surf_fm);
   SDL_RenderCopy(ren_fm,tex,NULL,&rect);
   SDL_DestroyTexture(tex);
@@ -242,8 +244,7 @@ void game() {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
     string stt ;
     stt = to_string(brick[0].number_brick);
-  //  WriteMessage_game(stt.c_str() , brick[0].brick_Obj.dest.x + 25 , brick[0].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[0].brick_Obj.dest);
-  //  WriteMessage(brick[0].number_brt.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+   WriteMessage(stt.c_str() , brick[0].brick_Obj.dest.x + 25 , brick[0].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game);
 
   }
 
@@ -455,8 +456,7 @@ if(downward)
        SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
        string stt ;
        stt = to_string(brick[i].number_brick);
-    //   WriteMessage_game(stt.c_str() , brick[i].brick_Obj.dest.x + 25 , brick[i].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[i].brick_Obj.dest);
-      // WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(rick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+     WriteMessage(stt.c_str() , brick[i].brick_Obj.dest.x + 25 , brick[i].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game);
      if(brick[i].ybrick>=470 )
        {
          status=3;
@@ -614,8 +614,7 @@ for(int j=0;j<brick.size();j++)
   SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
   string stt ;
   stt = to_string(brick[j].number_brick);
-  //WriteMessage_game(stt.c_str() , brick[j].brick_Obj.dest.x + 25 , brick[j].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[j].brick_Obj.dest);
-  //WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Ock[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+  WriteMessage(stt.c_str() , brick[j].brick_Obj.dest.x + 25 , brick[j].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game);
 }
 for(int i=0;i<Addball.size();i++)
  {

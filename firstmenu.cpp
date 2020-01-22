@@ -29,6 +29,8 @@ TTF_Init();
   rect_fm.y=y;
   rect_fm.w=surf_fm->w;
   rect_fm.h=surf_fm->h;
+  TTF_CloseFont(font);
+  TTF_Quit();
   SDL_FreeSurface(surf_fm);
   SDL_RenderCopy(ren_fm,tex,NULL,&rect_fm);
   SDL_DestroyTexture(tex);
