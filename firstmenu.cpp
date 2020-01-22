@@ -97,6 +97,9 @@ void input_fm() {
   }
 }
 void firstmenu(){
+  if (ifback) {
+    reset_game(false);
+  }
   ball_image.push_back(ball_image_class());
   ball_image.push_back(ball_image_class());
   ball_image.push_back(ball_image_class());

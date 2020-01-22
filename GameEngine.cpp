@@ -14,6 +14,9 @@
 #include <fstream>
 #include <bits/stdc++.h>
 using namespace std;
+void reset_game(bool ifrun);
+bool ifback = false ;
+bool ifend = false ;
 #include "headers/Object.h"
 SDL_Window* win =NULL;
 SDL_Texture* tex=NULL ;
