@@ -3,6 +3,7 @@ bool brick_add=false;
 bool downward=false;
 int downnumber=0;
 int count_marhale=1;
+double avaliye ;
 bool first_ste=true;
 class brick_class{
 public:
@@ -94,7 +95,6 @@ bool hit(SDL_Rect r1 , SDL_Rect r2) {
 }
 
 void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
-
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color_fm ;
   color_fm.r = r ;
@@ -160,9 +160,7 @@ void game() {
   rect_game.y = 0 ;
   rect_game.w = 350 ;
   rect_game.h = 600 ;
-  for (int i = 0 ; i<10 ; i++) {
-    balla.push_back(Ballb());
-  }
+  balla.push_back(Ballb());
   //balla.push_back(Ballb());
   /*
   brick_hit_x.push_back(bool());
@@ -240,6 +238,8 @@ void game() {
     if(first_ste)
     {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+  //  WriteMessage(brick[0].number_brick,brick[0].brick_Obj.dest.x+(brick[0].brick_Obj.dest.w)/2,brick[0].brick_Obj.dest.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+
   }
 
     for (int i = 0 ; i < balla.size() ; i++) {
@@ -255,15 +255,16 @@ void game() {
         mx = mousex_game ;
         my = mousey_game ;
         run_first=false;
+        avaliye = balla.size() ;
         out = 0 ;
         tedad = 1 ;
-        for (int i = 0 ; i < balla.size() ; i++) {
+        for (int i = 0 ; i < avaliye ; i++) {
           balla[i].cox=5;
           balla[i].coy=5;
         }
       }
     //  cout << 204 << endl ;
-      for (int i = 0 ; i < balla.size() ; i++) {
+      for (int i = 0 ; i < avaliye ; i++) {
       if (balla[i].aa==1) {
         (balla[i].aa)--;
         balla[i].cox/=2;
@@ -301,7 +302,7 @@ void game() {
           }
         }
       }
-      if (tedad < balla.size()) {
+      if (tedad < avaliye) {
         if (gh == 0) {
           gh = 3 ;
           tedad +=1 ;
@@ -328,11 +329,11 @@ void game() {
         cey = balla[i].ynew + 10 ;
         omg = i ;
       }
-      if(out ==balla.size() && shot)
+      if(out ==avaliye && shot)
       {
         brick_add=true;
       }
-      if (out == balla.size()) {
+      if (out == avaliye) {
         shot = false ;
       }
     }
@@ -425,16 +426,17 @@ void game() {
 }
 if(downward)
 {
-while(downnumber<40)
-{
+//while(downnumber<40)
+//{
   downnumber++;
   for(int i=0;i<brick.size();i++)
    {
-     brick[i].brick_Obj.setDest( brick[i].brick_Obj.dest.x, brick[i].brick_Obj.dest.y+1,52,35);
+     brick[i].brick_Obj.setDest( brick[i].brick_Obj.dest.x, brick[i].brick_Obj.dest.y+40,52,35);
      brick[i].ybrick= brick[i].brick_Obj.dest.y+40;
      brick[i].brick_Obj.setImage("data/brick.png",ren_game);
-       SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
 
+       SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+      // WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
      if(brick[i].ybrick>=470 )
        {
          status=3;
@@ -452,7 +454,7 @@ while(downnumber<40)
 
    for(int i=0;i<Addball.size();i++)
     {
-      Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+1,20,20);
+      Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,20,20);
       if( Addball[i].dest.y+40>475)
       {
         Addball.erase(Addball.begin()+i);
@@ -465,7 +467,7 @@ while(downnumber<40)
         SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
 
       }
-}
+//}
 
 
 
@@ -488,16 +490,14 @@ while(downnumber<40)
               balla[i].cox *= (-1) ;
               brick[j].number_brick--;
             }
-
               balla[i].blGame.setDest(balla[i].lastx,balla[i].ynew,20,20);
-
               if(hit(brick[j].brick_Obj.dest,balla[i].blGame.dest)) {
                   //cout<<"hit y"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
                   balla[i].hity=true ;
                   balla[i].coy *= (-1) ;
                   if(!balla[i].hitx)
                   brick[j].number_brick--;
-                }
+              }
                 if(brick[j].number_brick<=0)
                 {
                     brick.erase(brick.begin()+j);
@@ -509,6 +509,15 @@ while(downnumber<40)
 
             }
               balla[i].blGame.setDest(balla[i].xnew,balla[i].ynew,20,20);
+              for (int j = 0 ; j < Addball.size() ; j++) {
+                if(hit(Addball[j].dest,balla[i].blGame.dest)) {
+                  Addball.erase(Addball.begin()+j);
+                  balla.push_back(Ballb());
+                  balla[balla.size()-1].blGame.setDest(165,455,20,20);
+                  balla[balla.size()-1].blGame.setSource(0,0,715,715);
+                  balla[balla.size()-1].blGame.setImage("data/BlueBall.png",ren_game) ;
+                }
+              }
               if ((balla[i].hitx)&&(balla[i].hity)) {
                 balla[i].cox *= 2 ;
                 balla[i].coy *= 2 ;
@@ -524,6 +533,16 @@ while(downnumber<40)
           balla[i].ynew = 455 ;
           balla[i].xnew = cex-10;
           balla[i].blGame.setDest(balla[i].xnew,455,20,20);
+          if (i == tedad - 1) {
+            for (int s = tedad ; s < balla.size() ; s++) {
+              balla[s].centerx = cex ;
+            //  balla[i].topy = 455;
+              balla[s].centery = 455+10;
+              balla[s].ynew = 455 ;
+              balla[s].xnew = cex-10;
+              balla[s].blGame.setDest(balla[i].xnew,455,20,20);
+            }
+          }
           //std::cout << "safe" << xnew << " " << ynew << endl ;
           arrow.setDest(cex-30,cey-30,60,60);
           //int brick_new=rand()%6+1;
@@ -552,7 +571,9 @@ while(downnumber<40)
 }
 for(int j=0;j<brick.size();j++)
 {
+
   SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+  //WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 }
 for(int i=0;i<Addball.size();i++)
  {
