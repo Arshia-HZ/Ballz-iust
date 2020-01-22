@@ -36,7 +36,7 @@ bool hit_ball(int x,int y)
 {
   for(int i=0;i<brick.size();i++)
   {
-  if(brick[i].xbrick==x && brick[i].ybrick==y )
+  if(brick[i].xbrick==x && brick[i].ybrick==y)
   {
     return false;
   }
@@ -401,7 +401,7 @@ void game() {
                       yrandom_number=rand()%6;
 
                       brick[brick.size()-1].brick_Obj.setDest((xrandom_number*55)+5,132,52,32);
-                      brick[brick.size()-1].xbrick=(xrandom_number*53)+5 ;
+                      brick[brick.size()-1].xbrick=(xrandom_number*55)+5 ;
                       brick[brick.size()-1].ybrick=135 ;
                       brick[brick.size()-1].brick_Obj.setSource(0,0,600,600);
                   } while(!occuy((xrandom_number*55)+5 , 135,brick.size()-1));
