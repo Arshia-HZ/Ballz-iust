@@ -267,8 +267,8 @@ void game() {
       for (int i = 0 ; i < avaliye ; i++) {
       if (balla[i].aa==1) {
         (balla[i].aa)--;
-        balla[i].cox/=2;
-        balla[i].coy/=2;
+        balla[i].cox-=2;
+        balla[i].coy-=2;
       } else if (balla[i].aa>1) {
         (balla[i].aa)-- ;
       }
@@ -501,10 +501,6 @@ if(downward)
                 if(brick[j].number_brick<=0)
                 {
                     brick.erase(brick.begin()+j);
-                    for(int j=0;j<brick.size();j++)
-                    {
-                      SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-                  }
                   }
 
             }
@@ -519,11 +515,10 @@ if(downward)
                 }
               }
               if ((balla[i].hitx)&&(balla[i].hity)) {
-                balla[i].cox *= 2 ;
-                balla[i].coy *= 2 ;
-                balla[i].aa = 2 ;
+                balla[i].cox *= 3 ;
+                balla[i].coy *= 3 ;
+                balla[i].aa = 3 ;
               }
-
 
         } else if (!balla[i].moving) {
         //  balla[i].leftx = balla[omg].xnew;
