@@ -1,5 +1,6 @@
 #include <string>
-Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
+Obj Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow , reset , backmenu , backgame ;
+bool ifpause = false ;
 bool brick_add=false;
 bool downward=false;
 int downnumber=0;
@@ -135,6 +136,15 @@ void input_game() {
         if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
           dwn = true ;
         }
+        if ( (mousex_game>170) && (mousex_game<240) && (mousey_game>25) && (mousey_game<95) ) {
+          if (!ifpause) {
+            ifpause = true ;
+          } else {
+            ifpause = false ;
+          }
+          // pause the game
+
+        }
 
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
@@ -184,14 +194,22 @@ void game() {
     brick[0].brick_Obj.setImage("data/brick.png",ren_game);
     brick[0].number_brick=count_marhale;
   }
+  //reset
+  reset.setDest(250,15,30,30);
+  reset.setSource(0,0,1500,1500);
+  reset.setImage("data/play.png",ren_game) ;
+  //backmenu
+  backmenu.setDest(250,75,30,30);
+  backmenu.setSource(0,0,1500,1500);
+  backmenu.setImage("data/play.png",ren_game) ;
+  //backgame
+  backgame.setDest(290,45,30,30);
+  backgame.setSource(0,0,1500,1500);
+  backgame.setImage("data/play.png",ren_game) ;
   // Pause
-  Pause.setDest(140,25,70,70);
+  Pause.setDest(170,25,70,70);
   Pause.setSource(0,0,980,980);
   Pause.setImage("data/Pause.png",ren_game) ;
-  // Speed
-  Speed.setDest(289,37,46,46);
-  Speed.setSource(0,0,512,512);
-  Speed.setImage("data/Speed.png",ren_game) ;
   // Score
   Score.setDest(15,10,46,46);
   Score.setSource(0,0,980,980);
@@ -233,10 +251,15 @@ void game() {
     SDL_RenderCopyEx(ren_game,Pause.tex,&Pause.src,&Pause.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,Score.tex,&Score.src,&Score.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,Highscore.tex,&Highscore.src,&Highscore.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_game,Speed.tex,&Speed.src,&Speed.dest,0,NULL,SDL_FLIP_NONE);
+  //  SDL_RenderCopyEx(ren_game,Speed.tex,&Speed.src,&Speed.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,ballcount.tex,&ballcount.src,&ballcount.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,UpBar.tex,&UpBar.src,&UpBar.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,BtBar.tex,&BtBar.src,&BtBar.dest,0,NULL,SDL_FLIP_NONE);
+    if (ifpause) {
+      SDL_RenderCopyEx(ren_game,backgame.tex,&backgame.src,&backgame.dest,0,NULL,SDL_FLIP_NONE);
+      SDL_RenderCopyEx(ren_game,backmenu.tex,&backmenu.src,&backmenu.dest,0,NULL,SDL_FLIP_NONE);
+      SDL_RenderCopyEx(ren_game,reset.tex,&reset.src,&reset.dest,0,NULL,SDL_FLIP_NONE);
+    }
     if(first_ste)
     {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
