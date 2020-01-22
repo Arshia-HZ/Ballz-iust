@@ -616,6 +616,10 @@ for(int j=0;j<brick.size();j++)
   stt = to_string(brick[j].number_brick);
   WriteMessage(stt.c_str() , brick[j].brick_Obj.dest.x + 25 , brick[j].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game);
 }
+string stt ;
+stt = to_string(balla.size());
+WriteMessage(stt.c_str() , ballcount.dest.x + 100 ,ballcount.dest.y + 10 , 0 , 0 , 0 ,15, ren_game);
+
 for(int i=0;i<Addball.size();i++)
  {
    SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
