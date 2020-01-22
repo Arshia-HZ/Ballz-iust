@@ -409,9 +409,9 @@ void game() {
 
                   do {
                     xrandom_number_addball=rand()%6;
-                    Addball[Addball.size()-1].setDest((xrandom_number_addball*55)+20,140,20,20);
-                    Addball[Addball.size()-1].setSource(0,0,512,512);
-                    Addball[Addball.size()-1].setImage("data/GreenCircle.png",ren_game);
+                    Addball[Addball.size()-1].setDest((xrandom_number_addball*55)+20,140,15,15);
+                    Addball[Addball.size()-1].setSource(0,0,715,715);
+                    Addball[Addball.size()-1].setImage("data/BlueBall.png",ren_game);
                   } while(!hit_ball((xrandom_number*55)+5 , 135));
 
 }
@@ -454,10 +454,19 @@ while(downnumber<40)
 }
 for(int i=0;i<Addball.size();i++)
  {
-   Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,20,20);
-   SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
+   Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,15,15);
+   if( Addball[i].dest.y+40>475)
+   {
+     Addball.erase(Addball+i);
+   }
 
  }
+
+ for(int i=0;i<Addball.size();i++)
+  {
+    SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
+
+  }
 
 
   downward=false;
