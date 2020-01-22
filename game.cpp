@@ -1,6 +1,12 @@
 Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 bool brick_add=false;
 bool downward=false;
+
+
+
+
+
+
 int downnumber=0;
 int count_marhale=1;
 double avaliye ;
@@ -115,6 +121,10 @@ void input_game() {
         if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
           dwn = true ;
         }
+        if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
+          dwn = true ;
+        }
+
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
       if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false)) {
@@ -130,6 +140,7 @@ void input_game() {
 }
 
 void game() {
+
   srand(time(NULL));
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
@@ -218,7 +229,7 @@ void game() {
     if(first_ste)
     {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-  //  WriteMessage(brick[0].number_brick,brick[0].brick_Obj.dest.x+(brick[0].brick_Obj.dest.w)/2,brick[0].brick_Obj.dest.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+  //  WriteMessage(brick[0].number_brt.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 
   }
 
@@ -244,15 +255,18 @@ void game() {
         }
       }
     //  cout << 204 << endl ;
+    /*
       for (int i = 0 ; i < avaliye ; i++) {
+
       if (balla[i].aa==1) {
         (balla[i].aa)--;
-        balla[i].cox-=2;
-        balla[i].coy-=2;
+        balla[i].cox /= 2;
+        balla[i].coy /= 2;
       } else if (balla[i].aa>1) {
         (balla[i].aa)-- ;
       }
       }
+      */
     //cout << 214 << endl ;
     //  std::cout << leftx<<" "<<topy << '\n';
     for (int i = 0 ; i<tedad ; i++) {
@@ -417,7 +431,8 @@ if(downward)
      brick[i].brick_Obj.setImage("data/brick.png",ren_game);
 
        SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-      // WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+      // WriteMessage()
+      // WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(rick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
      if(brick[i].ybrick>=470 )
        {
          status=3;
@@ -504,11 +519,13 @@ if(downward)
                   balla[balla.size()-1].blGame.setImage("data/greencircle4.png",ren_game) ;
                 }
               }
+              /*
               if ((balla[i].hitx)&&(balla[i].hity)) {
-                balla[i].cox *= 3 ;
-                balla[i].coy *= 3 ;
-                balla[i].aa = 3 ;
+                balla[i].cox *= 2 ;
+                balla[i].coy *= 2 ;
+                balla[i].aa = 2 ;
               }
+              */
 
         } else if (!balla[i].moving) {
         //  balla[i].leftx = balla[omg].xnew;
@@ -517,6 +534,15 @@ if(downward)
           balla[i].centery = 455+10;
           balla[i].ynew = 455 ;
           balla[i].xnew = cex-10;
+          if (balla[i].xnew < 15) {
+            balla[i].xnew += 20 ;
+            cex += 20 ;
+            balla[i].centerx += 20 ;
+          } else if (balla[i].xnew > 310) {
+            balla[i].xnew -= 20 ;
+            cex -= 20 ;
+            balla[i].centerx -= 20 ;
+          }
           balla[i].blGame.setDest(balla[i].xnew,455,20,20);
           if (i == avaliye - 1) {
             for (int s = avaliye ; s < balla.size() ; s++) {
@@ -560,7 +586,7 @@ for(int j=0;j<brick.size();j++)
 {
 
   SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-  //WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+  //WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Ock[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 }
 for(int i=0;i<Addball.size();i++)
  {
