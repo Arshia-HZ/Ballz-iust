@@ -1,6 +1,7 @@
 #include <string>
 Obj Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow , reset , backmenu , audioing ;
 bool ifpause = false ;
+bool akbar = false ;
 bool brick_add=false;
 bool downward=false;
 int downnumber=0;
@@ -135,22 +136,30 @@ void input_game() {
       }
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
+      if (!ifpause) {
         if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
           dwn = true ;
         }
+      }
         if ( (mousex_game>170) && (mousex_game<240) && (mousey_game>25) && (mousey_game<95) ) {
           if (!ifpause) {
             ifpause = true ;
+            if (shot)
+              akbar = true ;
             shot = false ;
           } else {
-            shot = true ;
+            if (akbar) {
+              shot = true ;
+              akbar = false ;
+            }
             ifpause = false ;
           }
         }
 
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
-      if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false)) {
+      if (!ifpause) {
+      if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false) ) {
         shot = true ;
         for (int i = 0 ; i<balla.size() ; i++) {
           balla[i].moving = true ;
@@ -159,6 +168,7 @@ void input_game() {
       }
       dwn = false;
     }
+  }
   }
 }
 
@@ -646,12 +656,20 @@ stt = to_string(balla.size());
 WriteMessage(stt.c_str() , ballcount.dest.x + 65 ,ballcount.dest.y , 0 , 0 , 0 ,35, ren_game);
 stt = to_string(count_marhale);
 WriteMessage(stt.c_str() , Score.dest.x + 70 ,Score.dest.y  , 0 , 0 , 0 ,35, ren_game);
+returnscore();
+if(count_marhale<player[0].score){
+stt = to_string(player[0].score);
+}else{
+  stt = to_string(count_marhale);
+}
+WriteMessage(stt.c_str() , Highscore.dest.x + 70 ,Highscore.dest.y  , 0 , 0 , 0 ,35, ren_game);
 for(int i=0;i<Addball.size();i++)
  {
    SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
 
  }
   //cout << 362 << endl ;
+  if (!ifpause) {
     if (dwn == true) {
       if (mousex_game==cex) {
         amoud = true ;
@@ -689,6 +707,7 @@ for(int i=0;i<Addball.size();i++)
         }
     }
     }
+  }
     //cout << 395 << endl ;
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
