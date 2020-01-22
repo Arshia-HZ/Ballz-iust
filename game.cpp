@@ -510,7 +510,7 @@ if(downward)
      WriteMessage(stt.c_str() , brick[i].brick_Obj.dest.x + 25 , brick[i].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game);
      if(brick[i].ybrick>=470 )
        {
-         status=0;
+         status=3;
          SDL_DestroyRenderer(ren_game);
          Mix_PlayChannel( -1, gameover, 0 );
           running_game=false;
