@@ -645,6 +645,13 @@ stt = to_string(balla.size());
 WriteMessage(stt.c_str() , ballcount.dest.x + 65 ,ballcount.dest.y , 0 , 0 , 0 ,35, ren_game);
 stt = to_string(count_marhale);
 WriteMessage(stt.c_str() , Score.dest.x + 70 ,Score.dest.y  , 0 , 0 , 0 ,35, ren_game);
+returnscore();
+if(count_marhale<player[0].score){
+stt = to_string(player[0].score);
+}else{
+  stt = to_string(count_marhale);
+}
+WriteMessage(stt.c_str() , Highscore.dest.x + 70 ,Highscore.dest.y  , 0 , 0 , 0 ,35, ren_game);
 for(int i=0;i<Addball.size();i++)
  {
    SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
