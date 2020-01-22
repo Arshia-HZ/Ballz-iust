@@ -31,6 +31,19 @@ bool occuy(double x,double y,int n){
   }}
   return true;
 }
+
+bool hit_ball(int x,int y)
+{
+  for(int i=0;i<brick.size();i++)
+  {
+  if(brick[i].xbrick==x && brick[i].ybrick==y )
+  {
+    return false;
+  }
+}
+return true;
+
+}
 //vector <Obj> blGame ;
 int omg;
 double adad ;
@@ -125,13 +138,13 @@ void input_game() {
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
       if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false)) {
-        dwn = false;
         shot = true ;
         for (int i = 0 ; i<balla.size() ; i++) {
           balla[i].moving = true ;
         }
         run_first = true ;
       }
+      dwn = false;
     }
   }
 }
@@ -378,9 +391,8 @@ void game() {
 
                   int xrandom_number;
                   int yrandom_number;
-                  Addball[Addball.size()-1].setDest((rand()%6*55)+5,132,10,10);
-                  Addball[Addball.size()-1].setSource(0,0,512,512);
-                  Addball[Addball.size()-1].setImage("data/BlueBall.png",ren_game);
+
+
 
                   brick.push_back(brick_class());
                   brick[brick.size()-1].number_brick=count_marhale;
@@ -393,7 +405,14 @@ void game() {
                       brick[brick.size()-1].ybrick=135 ;
                       brick[brick.size()-1].brick_Obj.setSource(0,0,600,600);
                   } while(!occuy((xrandom_number*55)+5 , 135,brick.size()-1));
+                  int xrandom_number_addball;
 
+                  do {
+                    xrandom_number_addball=rand()%6;
+                    Addball[Addball.size()-1].setDest((xrandom_number_addball*55)+20,140,20,20);
+                    Addball[Addball.size()-1].setSource(0,0,512,512);
+                    Addball[Addball.size()-1].setImage("data/GreenCircle.png",ren_game);
+                  } while(!hit_ball((xrandom_number*55)+5 , 135));
 
 }
 
@@ -430,15 +449,15 @@ while(downnumber<40)
        }
 
    }
-   for(int i=0;i<Addball.size();i++)
-    {
-      Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,10,10);
-      SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
 
-    }
 
 }
+for(int i=0;i<Addball.size();i++)
+ {
+   Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,20,20);
+   SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
 
+ }
 
 
   downward=false;
@@ -543,7 +562,7 @@ for(int i=0;i<Addball.size();i++)
       } else {
         Unzir1 = false ;
       }
-      if ((((shib*-1) > 0) && ((shib*-1) < 0.3)) || (((shib*-1) < 0) && ((shib*-1) > -0.3))) {
+      if ((((shib*-1) >= 0) && ((shib*-1) < 0.3)) || (((shib*-1) <= 0) && ((shib*-1) > -0.3))) {
         Unzir2 = true ;
       } else {
         Unzir2 = false ;
