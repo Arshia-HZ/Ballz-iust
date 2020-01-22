@@ -593,7 +593,7 @@ for(int i=0;i<Addball.size();i++)
       } else {
         Unzir1 = false ;
       }
-      if ((((shib*-1) >= 0) && ((shib*-1) < 0.3)) || (((shib*-1) <= 0) && ((shib*-1) > -0.3))) {
+      if ((((shib*-1) >= 0) && ((shib*-1) < 0.15)) || (((shib*-1) <= 0) && ((shib*-1) > -0.15))) {
         Unzir2 = true ;
       } else {
         Unzir2 = false ;
