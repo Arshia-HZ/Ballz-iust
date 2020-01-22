@@ -75,8 +75,11 @@ void input_fm() {
       }
       if ((mousex>=ball.dest.x)&&(mousex<=ball.dest.x+ball.dest.w)&&(mousey>=ball.dest.y)&&(mousey<=ball.dest.y+ball.dest.h)) {
         ball_image_number++;
+
         if(ball_image_number>3)
           ball_image_number=0;
+          ball.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+          ball.setImage(ball_image[ball_image_number].ball_image_path,ren_fm);
           cout<<"ball changed"<<endl;
         // Open The Balls Page
       }
@@ -133,8 +136,8 @@ void firstmenu(){
   high.setImage("data/play.png",ren_fm) ;
   // ball
   ball.setDest(100,490,70,70);
-  ball.setSource(0,0,1500,1500);
-  ball.setImage("data/play.png",ren_fm) ;
+  ball.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+  ball.setImage(ball_image[ball_image_number].ball_image_path,ren_fm);
 
   float hei = 0 ;
   bool down = true ;
