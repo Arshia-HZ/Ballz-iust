@@ -164,7 +164,12 @@ void input_game() {
           reseting = true ;
           return ;
         }
-
+        // backmenu
+        if ( (mousex_game>250) && (mousex_game<280) && (mousey_game>75) && (mousey_game<105) ) {
+          reset_game() ;
+          // mehdi inja becod ;
+          return ;
+        }
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
       if (!ifpause) {
