@@ -2,7 +2,14 @@ Obj play,high,about,ball, settings ;
 SDL_Renderer* ren_fm;
 SDL_Surface* surf_fm ;
 bool running_fm = true ;
-vector <string> ball_image;
+class ball_image_class
+{
+public:
+  string ball_image_path;
+  int source_w;
+  int source_h;
+};
+vector <ball_image_class> ball_image;
 int ball_image_number=0;
 
 
@@ -67,7 +74,13 @@ void input_fm() {
         // Open The aboutUs Page
       }
       if ((mousex>=ball.dest.x)&&(mousex<=ball.dest.x+ball.dest.w)&&(mousey>=ball.dest.y)&&(mousey<=ball.dest.y+ball.dest.h)) {
-        cout << "ball Clicked" << endl ;
+        ball_image_number++;
+
+        if(ball_image_number>3)
+          ball_image_number=0;
+          ball.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+          ball.setImage(ball_image[ball_image_number].ball_image_path,ren_fm);
+          cout<<"ball changed"<<endl;
         // Open The Balls Page
       }
       if ((mousex>=high.dest.x)&&(mousex<=high.dest.x+high.dest.w)&&(mousey>=high.dest.y)&&(mousey<=high.dest.y+high.dest.h)) {
@@ -78,6 +91,24 @@ void input_fm() {
   }
 }
 void firstmenu(){
+  ball_image.push_back(ball_image_class());
+  ball_image.push_back(ball_image_class());
+  ball_image.push_back(ball_image_class());
+  ball_image.push_back(ball_image_class());
+  ball_image[0].ball_image_path="data/BlueBall.png";
+  ball_image[1].ball_image_path="data/ball2.png";
+  ball_image[2].ball_image_path="data/ball3.png";
+  ball_image[3].ball_image_path="data/ball4.png";
+  ball_image[0].source_w=715;
+  ball_image[0].source_h=715;
+  ball_image[1].source_w=2787;
+  ball_image[1].source_h=2713;
+  ball_image[2].source_w=600;
+  ball_image[2].source_h=600;
+  ball_image[3].source_w=1210;
+  ball_image[3].source_h=883;
+
+
   running_fm = true ;
   //SDL_Window* win ;
   ren_fm = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
@@ -105,8 +136,8 @@ void firstmenu(){
   high.setImage("data/play.png",ren_fm) ;
   // ball
   ball.setDest(100,490,70,70);
-  ball.setSource(0,0,1500,1500);
-  ball.setImage("data/play.png",ren_fm) ;
+  ball.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+  ball.setImage(ball_image[ball_image_number].ball_image_path,ren_fm);
 
   float hei = 0 ;
   bool down = true ;

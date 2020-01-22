@@ -38,8 +38,7 @@ void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b 
   SDL_DestroyTexture(tex);
 }
 vector<Obj> Addball;
-std::vector <brick_class> brick;
-#include <cstdlib>
+vector <brick_class> brick;
 #include <ctime>
 bool occuy(double x,double y,int n){
   for(int i=0;i<brick.size();i++)
@@ -160,7 +159,7 @@ void input_game() {
 }
 
 void game() {
-
+  stopaudio();
   srand(time(NULL));
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
@@ -181,8 +180,8 @@ void game() {
   */
   for (int i = 0 ; i<balla.size() ; i++) {
     balla[i].blGame.setDest(165,455,20,20);
-    balla[i].blGame.setSource(0,0,715,715);
-    balla[i].blGame.setImage("data/BlueBall.png",ren_game) ;
+    balla[i].blGame.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+    balla[i].blGame.setImage(ball_image[ball_image_number].ball_image_path,ren_game) ;
   }
   if(first_ste)
   {
@@ -459,7 +458,9 @@ if(downward)
        {
          status=3;
          SDL_DestroyRenderer(ren_game);
+         Mix_PlayChannel( -1, gameover, 0 );
           running_game=false;
+          startaudio();
           break;
           int tedad_br=brick.size();
          for(int i=0;i<tedad_br;i++)
@@ -518,6 +519,7 @@ if(downward)
                   balla[i].coy *= (-1) ;
                   if(!balla[i].hitx)
                   brick[j].number_brick--;
+                  Mix_PlayChannel( -1, brick_hit, 0 );
               }
                 if(brick[j].number_brick<=0)
                 {
@@ -528,10 +530,12 @@ if(downward)
                   // }
                   }
             }
+            //add ball hit
               balla[i].blGame.setDest(balla[i].xnew,balla[i].ynew,20,20);
               for (int j = 0 ; j < Addball.size() ; j++) {
                 if(hit(Addball[j].dest,balla[i].blGame.dest)) {
                   int xaddball=Addball[j].dest.x;
+                  Mix_PlayChannel( -1, addball, 0 );
                   Addball.erase(Addball.begin()+j);
                   balla.push_back(Ballb());
                   balla[balla.size()-1].blGame.setDest(xaddball,455,20,20);
@@ -572,7 +576,8 @@ if(downward)
               balla[s].ynew = 455 ;
               balla[s].xnew = cex-10;
               balla[s].blGame.setDest(balla[i].xnew,455,20,20);
-              balla[s].blGame.setImage("data/BlueBall.png",ren_game) ;
+              balla[s].blGame.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+              balla[s].blGame.setImage(ball_image[ball_image_number].ball_image_path,ren_game) ;
             }
           }
           //std::cout << "safe" << xnew << " " << ynew << endl ;
