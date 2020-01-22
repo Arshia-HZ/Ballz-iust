@@ -38,6 +38,7 @@ void input_lm() {
       }
       if ((mousex>=highscore_lm.dest.x)&&(mousex<=highscore_lm.dest.x+highscore_lm.dest.w)&&(mousey>=highscore_lm.dest.y)&&(mousey<=highscore_lm.dest.y+highscore_lm.dest.h)) {
       status = 5;
+			lastpage = 1;
 			SDL_DestroyRenderer(ren_lm);
 			running_lm = false;
 			SDL_StopTextInput();
@@ -59,6 +60,9 @@ void input_lm() {
 						cout<<"ERROR SAVING NAME AND SCORE OF PLAYER";
 					}
 				}
+				SDL_StopTextInput();
+				TTF_CloseFont(font);
+				TTF_Quit();
       }
       if ((mousex>=firstmenu_lm.dest.x)&&(mousex<=firstmenu_lm.dest.x+firstmenu_lm.dest.w)&&(mousey>=firstmenu_lm.dest.y)&&(mousey<=firstmenu_lm.dest.y+firstmenu_lm.dest.h)) {
         status = 0;
@@ -108,24 +112,24 @@ void lastmenu(){
   rect_fm.w = 350 ;
   rect_fm.h = 600 ;
   // playagain_lm
-  playagain_lm.setDest(250,400,70,70);
-  playagain_lm.setSource(0,0,1500,1500);
-  playagain_lm.setImage("data/regame.png",ren_lm) ;
+  playagain_lm.setDest(0,100,70,70);
+  playagain_lm.setSource(0,0,512,512);
+  playagain_lm.setImage("data/restart.png",ren_lm) ;
 	// gameover_lm
 	playagain_lm.setDest(50,0,250,250);
 	playagain_lm.setSource(0,0,512,512);
 	playagain_lm.setImage("data/gameover.png",ren_lm) ;
 	//savaeinfo
-	saveinfo.setDest(250,450,70,70);
-  saveinfo.setSource(0,0,1500,1500);
+	saveinfo.setDest(100,490,70,70);
+  saveinfo.setSource(0,0,980,980);
   saveinfo.setImage("data/submit.png",ren_lm) ;
   // firstmenu_lm
-  highscore_lm.setDest(250,490,70,70);
+  highscore_lm.setDest(0,490,70,70);
   highscore_lm.setSource(0,0,512,512);
   highscore_lm.setImage("data/home.png",ren_lm) ;
   // highscore_lms
-  firstmenu_lm.setDest(250,410,70,70);
-  firstmenu_lm.setSource(0,0,1500,1500);
+  firstmenu_lm.setDest(200,490,70,70);
+  firstmenu_lm.setSource(0,0,980,980);
   firstmenu_lm.setImage("data/Score.png",ren_lm) ;
 
   float hei = 0 ;
@@ -143,14 +147,13 @@ void lastmenu(){
     }
     SDL_SetRenderDrawColor(ren_lm,255,255,255,255);
     SDL_RenderFillRect(ren_lm,&rect_fm);
-
+		SDL_RenderCopyEx(ren_lm,gameover_lm.tex,&gameover_lm.src,&gameover_lm.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,playagain_lm.tex,&playagain_lm.src,&playagain_lm.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_lm,highscore_lm.tex,&highscore_lm.src,&highscore_lm.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_lm,firstmenu_lm.tex,&firstmenu_lm.src,&firstmenu_lm.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_lm,highscore_lm.tex,&highscore_lm.src,&highscore_lm.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_lm,firstmenu_lm.tex,&firstmenu_lm.src,&firstmenu_lm.dest,0,NULL,SDL_FLIP_NONE);
 		if(gamesaved==false){
-		SDL_RenderCopyEx(ren_lm,saveinfo.tex,&saveinfo.src,&saveinfo.dest,0+rot,NULL,SDL_FLIP_NONE);
+		SDL_RenderCopyEx(ren_lm,saveinfo.tex,&saveinfo.src,&saveinfo.dest,0,NULL,SDL_FLIP_NONE);
 	}
-    rot += 2 ;
 
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;

@@ -1,6 +1,7 @@
 Obj play,high,about,ball, settings ;
 SDL_Renderer* ren_fm;
 SDL_Surface* surf_fm ;
+int lastpage;
 bool running_fm = true ;
 class ball_image_class
 {
@@ -87,8 +88,12 @@ void input_fm() {
         // Open The Balls Page
       }
       if ((mousex>=high.dest.x)&&(mousex<=high.dest.x+high.dest.w)&&(mousey>=high.dest.y)&&(mousey<=high.dest.y+high.dest.h)) {
-        cout << "high Clicked" << endl ;
-        // Open The highscoe Page
+        status = 5;
+        lastpage = 0;
+      //  SDL_DestroyTexture(tex);
+        SDL_DestroyRenderer(ren_fm);
+        running_fm = false;
+        return;
       }
     }
   }
