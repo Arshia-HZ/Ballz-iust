@@ -125,13 +125,13 @@ void input_game() {
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
       if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false)) {
-        dwn = false;
         shot = true ;
         for (int i = 0 ; i<balla.size() ; i++) {
           balla[i].moving = true ;
         }
         run_first = true ;
       }
+      dwn = false;
     }
   }
 }
@@ -429,15 +429,15 @@ while(downnumber<40)
        }
 
    }
-   for(int i=0;i<Addball.size();i++)
-    {
-      Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,10,10);
-      SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
 
-    }
 
 }
+for(int i=0;i<Addball.size();i++)
+ {
+   Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,10,10);
+   SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
 
+ }
 
 
   downward=false;
