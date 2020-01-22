@@ -1,7 +1,7 @@
 Obj playagain_lm,highscore_lm,firstmenu_lm, saveinfo,gameover_lm ;
-SDL_Renderer* ren_lm;
-SDL_Surface* surf_lm ;
-SDL_Texture* text;
+SDL_Renderer* ren_lm=NULL;
+SDL_Surface* surf_lm=NULL ;
+SDL_Texture* text=NULL;
 SDL_Rect dest;
 SDL_Color foreground = { 0, 100, 200};
 bool running_lm = true ;
@@ -31,6 +31,7 @@ void input_lm() {
     case SDL_MOUSEBUTTONDOWN:
       if ((mousex>=playagain_lm.dest.x)&&(mousex<=playagain_lm.dest.x+playagain_lm.dest.w)&&(mousey>=playagain_lm.dest.y)&&(mousey<=playagain_lm.dest.y+playagain_lm.dest.h)) {
         status = 2;
+				reset_game();
         SDL_DestroyRenderer(ren_lm);
         running_lm = false;
         SDL_StopTextInput();
@@ -74,7 +75,6 @@ void input_lm() {
   break;
   case SDL_TEXTINPUT:
   playername+=e.text.text;
-	cout<<"x1";
   break;
 }
 }
@@ -124,13 +124,13 @@ void lastmenu(){
   saveinfo.setSource(0,0,980,980);
   saveinfo.setImage("data/submit.png",ren_lm) ;
   // firstmenu_lm
-  highscore_lm.setDest(0,490,70,70);
-  highscore_lm.setSource(0,0,512,512);
-  highscore_lm.setImage("data/home.png",ren_lm) ;
+  highscore_lm.setDest(200,490,70,70);
+  highscore_lm.setSource(0,0,980,980);
+  highscore_lm.setImage("data/Score.png",ren_lm) ;
   // highscore_lms
-  firstmenu_lm.setDest(200,490,70,70);
-  firstmenu_lm.setSource(0,0,980,980);
-  firstmenu_lm.setImage("data/Score.png",ren_lm) ;
+  firstmenu_lm.setDest(0,490,70,70);
+  firstmenu_lm.setSource(0,0,512,512);
+  firstmenu_lm.setImage("data/home.png",ren_lm) ;
 
   float hei = 0 ;
   bool down = true ;
