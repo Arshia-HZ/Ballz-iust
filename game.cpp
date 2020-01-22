@@ -1,5 +1,8 @@
 #include <string>
 Obj Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow , reset , backmenu , audioing ;
+SDL_Rect rect_game ;
+bool reseting = false ;
+bool reply = false ;
 bool ifpause = false ;
 bool akbar = false ;
 bool brick_add=false;
@@ -8,6 +11,7 @@ int downnumber=0;
 int count_marhale=1;
 double avaliye ;
 bool first_ste=true;
+void reset_game();
 class brick_class{
 public:
   int number_brick;
@@ -77,7 +81,7 @@ double cey = 465 ;
 //double xnew = 165 ,ynew = 455 ;
 int gh = 3 ;
 //int aa = 0 ;
-std::vector<int> brick_number;
+//std::vector<int> brick_number;
 double shib = -1 ;
 //double leftx = 165 ;
 //double centerx = 175 ;
@@ -155,6 +159,11 @@ void input_game() {
             ifpause = false ;
           }
         }
+        // reset
+        if ( (mousex_game>250) && (mousex_game<280) && (mousey_game>15) && (mousey_game<45) ) {
+          reseting = true ;
+          return ;
+        }
 
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
@@ -173,17 +182,18 @@ void input_game() {
 }
 
 void game() {
+  if (!reply) {
   stopaudio();
   srand(time(NULL));
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
-  running_game = true ;
   ren_game = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
-  SDL_Rect rect_game ;
   rect_game.x = 0 ;
   rect_game.y = 0 ;
   rect_game.w = 350 ;
   rect_game.h = 600 ;
+  }
+  running_game = true ;
   balla.push_back(Ballb());
   //balla.push_back(Ballb());
   /*
@@ -717,6 +727,36 @@ for(int i=0;i<Addball.size();i++)
 
     SDL_RenderPresent(ren_game);
     input_game();
+    if (reseting) {
+      reseting = false ;
+      reset_game();
+      return ;
+    }
     //cout << 404 << endl ;
   }
+}
+void reset_game () {
+  ifpause = false ;
+  akbar = false ;
+  brick_add=false;
+  downward=false;
+ downnumber=0;
+ count_marhale=1;
+  first_ste=true;
+  cex = 175 ;
+  cey = 465 ;
+  gh = 3 ;
+  shib = -1 ;
+  Unzir1 = false , Unzir2 = false ;
+  dwn = false , amoud = false , shot = false ; bool run_first=true;
+  tedad = 1 ;
+  out = 0 ;
+  running_game = true ;
+  balla.clear();
+  Addball.clear();
+  brick.clear();
+  reply = true ;
+  game();
+  reply = false ;
+  //std::exit(42) ;
 }
