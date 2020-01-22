@@ -56,7 +56,7 @@ double cey = 465 ;
 int gh = 3 ;
 //int aa = 0 ;
 std::vector<int> brick_number;
-double shib ;
+double shib = -1 ;
 //double leftx = 165 ;
 //double centerx = 175 ;
 //double topy = 455 ;
