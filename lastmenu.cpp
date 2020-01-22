@@ -1,4 +1,4 @@
-Obj playagain_lm,highscore_lm,firstmenu_lm ;
+Obj playagain_lm,highscore_lm,firstmenu_lm, saveinfo ;
 SDL_Renderer* ren_lm;
 SDL_Surface* surf_lm ;
 SDL_Texture* text;
@@ -40,6 +40,21 @@ void input_lm() {
       if ((mousex>=highscore_lm.dest.x)&&(mousex<=highscore_lm.dest.x+highscore_lm.dest.w)&&(mousey>=highscore_lm.dest.y)&&(mousey<=highscore_lm.dest.y+highscore_lm.dest.h)) {
       cout<<"Highscore clicked";
       }
+			if ((mousex>=saveinfo.dest.x)&&(mousex<=saveinfo.dest.x+saveinfo.dest.w)&&(mousey>=saveinfo.dest.y)&&(mousey<=saveinfo.dest.y+saveinfo.dest.h)) {
+				if(playername.size() == 0){
+					if(savescore(playerscore,"NONAME")){
+						cout<<"Score Saved";
+					}else{
+						cout<<"SCORE SAVING ERROR";
+					}
+				}else{
+					if(savescore(playerscore,playername)){
+						cout<<"SCORE AND NAME SAVED";
+					}else{
+						cout<<"ERROR SAVING NAME AND SCORE OF PLAYER";
+					}
+				}
+      }
       if ((mousex>=firstmenu_lm.dest.x)&&(mousex<=firstmenu_lm.dest.x+firstmenu_lm.dest.w)&&(mousey>=firstmenu_lm.dest.y)&&(mousey<=firstmenu_lm.dest.y+firstmenu_lm.dest.h)) {
         status = 0;
         SDL_DestroyRenderer(ren_lm);
@@ -58,8 +73,8 @@ if ( playername.size() ) {
 	SDL_Surface* text_surf = TTF_RenderText_Solid(font, playername.c_str(), foreground);
 	text = SDL_CreateTextureFromSurface(ren_lm, text_surf);
 
-	dest.x = 320 - (text_surf->w / 2.0f);
-	dest.y = 240;
+	dest.x = 200 - (text_surf->w / 2.0f);
+	dest.y = 100;
 	dest.w = text_surf->w;
 	dest.h = text_surf->h;
 	SDL_RenderCopy(ren_lm, text, NULL, &dest);
@@ -86,9 +101,13 @@ void lastmenu(){
   rect_fm.w = 350 ;
   rect_fm.h = 600 ;
   // playagain_lm
-  playagain_lm.setDest(100,225,150,150);
+  playagain_lm.setDest(250,380,70,70);
   playagain_lm.setSource(0,0,1500,1500);
   playagain_lm.setImage("data/play.png",ren_lm) ;
+	//savaeinfo
+	saveinfo.setDest(250,250,70,70);
+  saveinfo.setSource(0,0,1500,1500);
+  saveinfo.setImage("data/play.png",ren_lm) ;
   // firstmenu_lm
   highscore_lm.setDest(180,490,70,70);
   highscore_lm.setSource(0,0,1500,1500);
@@ -117,6 +136,7 @@ void lastmenu(){
     SDL_RenderCopyEx(ren_lm,playagain_lm.tex,&playagain_lm.src,&playagain_lm.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,highscore_lm.tex,&highscore_lm.src,&highscore_lm.dest,0+rot,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,firstmenu_lm.tex,&firstmenu_lm.src,&firstmenu_lm.dest,0+rot,NULL,SDL_FLIP_NONE);
+		SDL_RenderCopyEx(ren_lm,saveinfo.tex,&saveinfo.src,&saveinfo.dest,0+rot,NULL,SDL_FLIP_NONE);
 
     rot += 2 ;
 

@@ -91,7 +91,7 @@ bool savescore(int score , string name){
 bool checkscore(){
   returnscore();
   sortscores();
-  if(*playerscore > player[9].score){
+  if(playerscore > player[9].score){
     return true;
   }else{
     return false;

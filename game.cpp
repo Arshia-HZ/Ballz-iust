@@ -419,6 +419,7 @@ while(downnumber<40)
      if(brick[i].ybrick>=470 )
        {
          status=3;
+         SDL_DestroyRenderer(ren_game);
           running_game=false;
          for(int i=0;i<brick.size();i++)
          {

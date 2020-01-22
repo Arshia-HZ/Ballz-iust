@@ -21,7 +21,7 @@ Mix_Music *music;
 SDL_Event e ;
 int mousex,mousey ;
 string playername;
-int *playerscore;
+int playerscore;
 bool windowloop = true;
 #include "audiomanager.cpp"
 #include "about.cpp"
@@ -31,6 +31,7 @@ bool windowloop = true;
 #include "game.cpp"
 #include "ingamemenu.cpp"
 #include "lastmenu.cpp"
+#include "scoreboard.cpp"
 
 int main(int argc, char const *argv[]) {
   srand(time(NULL));
@@ -40,6 +41,8 @@ int main(int argc, char const *argv[]) {
   Music_Init();
   win = SDL_CreateWindow("Ballz", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,350,600,0);
   startaudio();
+  //cin>>status;
+  //cin>>playerscore;
   while(windowloop){
   switch(status){
     case 0: firstmenu();  break;
