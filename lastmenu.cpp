@@ -31,6 +31,7 @@ void input_lm() {
     case SDL_MOUSEBUTTONDOWN:
       if ((mousex>=playagain_lm.dest.x)&&(mousex<=playagain_lm.dest.x+playagain_lm.dest.w)&&(mousey>=playagain_lm.dest.y)&&(mousey<=playagain_lm.dest.y+playagain_lm.dest.h)) {
         status = 2;
+				reset_game();
         SDL_DestroyRenderer(ren_lm);
         running_lm = false;
         SDL_StopTextInput();
