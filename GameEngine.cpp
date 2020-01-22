@@ -3,6 +3,7 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL.h>
 #include <fstream>
+#include <sstream>
 #include <cstdlib>
 #include <ctime>
 #include <string>
