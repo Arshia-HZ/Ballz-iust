@@ -463,6 +463,7 @@ if(downward)
          SDL_DestroyRenderer(ren_game);
          Mix_PlayChannel( -1, gameover, 0 );
           running_game=false;
+          playerscore = count_marhale;
           startaudio();
           break;
           int tedad_br=brick.size();
