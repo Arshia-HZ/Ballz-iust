@@ -31,7 +31,6 @@ void input_lm() {
     case SDL_MOUSEBUTTONDOWN:
       if ((mousex>=playagain_lm.dest.x)&&(mousex<=playagain_lm.dest.x+playagain_lm.dest.w)&&(mousey>=playagain_lm.dest.y)&&(mousey<=playagain_lm.dest.y+playagain_lm.dest.h)) {
         status = 2;
-				reset_game();
         SDL_DestroyRenderer(ren_lm);
         running_lm = false;
         SDL_StopTextInput();
@@ -83,7 +82,7 @@ if ( playername.size() ) {
 	text = SDL_CreateTextureFromSurface(ren_lm, text_surf);
 
 	dest.x = 175 - (text_surf->w / 2.0f);
-	dest.y = 250;
+	dest.y = 260;
 	dest.w = text_surf->w;
 	dest.h = text_surf->h;
 	SDL_RenderCopy(ren_lm, text, NULL, &dest);
@@ -96,7 +95,9 @@ if ( playername.size() ) {
 SDL_RenderPresent( ren_lm );
 }
 void lastmenu(){
-
+	if (ifend) {
+		reset_game(false);
+	}
 	TTF_Init();
 	font = TTF_OpenFont("data/GTA.ttf", 72);
 	if ( !font ) {
@@ -151,6 +152,8 @@ void lastmenu(){
     SDL_RenderCopyEx(ren_lm,playagain_lm.tex,&playagain_lm.src,&playagain_lm.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,highscore_lm.tex,&highscore_lm.src,&highscore_lm.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,firstmenu_lm.tex,&firstmenu_lm.src,&firstmenu_lm.dest,0,NULL,SDL_FLIP_NONE);
+		WriteMessage("Enter your name:" , 30 ,240,  0 , 0 , 0 ,25, ren_lm);
+
 		if(gamesaved==false){
 		SDL_RenderCopyEx(ren_lm,saveinfo.tex,&saveinfo.src,&saveinfo.dest,0,NULL,SDL_FLIP_NONE);
 	}

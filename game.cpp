@@ -11,7 +11,6 @@ int downnumber=0;
 int count_marhale=1;
 double avaliye ;
 bool first_ste=true;
-void reset_game();
 class brick_class{
 public:
   int number_brick;
@@ -166,7 +165,8 @@ void input_game() {
         }
         // backmenu
         if ( (mousex_game>250) && (mousex_game<280) && (mousey_game>75) && (mousey_game<105) ) {
-          reset_game() ;
+          //reset_game() ;
+          ifback = true ;
           status = 0;
           SDL_DestroyRenderer(ren_game);
           running_game = false;
@@ -511,6 +511,10 @@ if(downward)
      if(brick[i].ybrick>=470 )
        {
          status=3;
+<<<<<<< HEAD
+=======
+         ifend = true ;
+>>>>>>> 3f7b1b573d82c25f235aa546a2810cac7810ae82
          SDL_DestroyRenderer(ren_game);
          Mix_PlayChannel( -1, gameover, 0 );
           running_game=false;
@@ -737,13 +741,13 @@ for(int i=0;i<Addball.size();i++)
     input_game();
     if (reseting) {
       reseting = false ;
-      reset_game();
+      reset_game(true);
       return ;
     }
     //cout << 404 << endl ;
   }
 }
-void reset_game () {
+void reset_game (bool ifrun) {
   ifpause = false ;
   akbar = false ;
   brick_add=false;
@@ -763,8 +767,10 @@ void reset_game () {
   balla.clear();
   Addball.clear();
   brick.clear();
-  reply = true ;
-  game();
-  reply = false ;
+  if (ifrun) {
+    reply = true ;
+    game();
+    reply = false ;
+  }
   //std::exit(42) ;
 }

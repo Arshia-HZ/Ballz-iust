@@ -14,6 +14,9 @@
 #include <fstream>
 #include <bits/stdc++.h>
 using namespace std;
+void reset_game(bool ifrun);
+bool ifback = false ;
+bool ifend = false ;
 #include "headers/Object.h"
 SDL_Window* win =NULL;
 SDL_Texture* tex=NULL ;
@@ -43,7 +46,7 @@ int main(int argc, char const *argv[]) {
   Music_Init();
   win = SDL_CreateWindow("Ballz", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,350,600,0);
   startaudio();
-  //cin>>status;
+//  cin>>status;
   //cin>>playerscore;
   TTF_CloseFont(font);
   TTF_Quit();
