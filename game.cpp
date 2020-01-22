@@ -56,7 +56,7 @@ double cey = 465 ;
 int gh = 3 ;
 //int aa = 0 ;
 std::vector<int> brick_number;
-double shib ;
+double shib = -1 ;
 //double leftx = 165 ;
 //double centerx = 175 ;
 //double topy = 455 ;
@@ -486,17 +486,11 @@ if(downward)
                 if(brick[j].number_brick<=0)
                 {
                     brick.erase(brick.begin()+j);
-<<<<<<< HEAD
-                  }
-
-=======
                   //   for(int d=0;d<brick.size();d++)
                   //   {
                   //     SDL_RenderCopyEx(ren_game,brick[d].brick_Obj.tex,&brick[d].brick_Obj.src,&brick[d].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
                   // }
                   }
-                    cout<<"ta inja ok vastesh"<<endl;
->>>>>>> 654d4de53bd97838d7ab3ccb3256260390890c1f
             }
               balla[i].blGame.setDest(balla[i].xnew,balla[i].ynew,20,20);
               for (int j = 0 ; j < Addball.size() ; j++) {
