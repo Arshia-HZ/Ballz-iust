@@ -1,6 +1,12 @@
 Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 bool brick_add=false;
 bool downward=false;
+
+
+
+
+
+
 int downnumber=0;
 int count_marhale=1;
 double avaliye ;
@@ -116,6 +122,10 @@ void input_game() {
         if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
           dwn = true ;
         }
+        if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
+          dwn = true ;
+        }
+
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
       if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false)) {
@@ -131,6 +141,7 @@ void input_game() {
 }
 
 void game() {
+
   srand(time(NULL));
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
