@@ -84,17 +84,17 @@ TTF_Init();
   }
     showingscore=1;
     }
-    SDL_SetRenderDrawColor(ren_sb,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
+    SDL_SetRenderDrawColor(ren_sb,255,255,255,255);
     SDL_RenderFillRect(ren_sb,&rect_sb);
 
-    SDL_RenderCopyEx(ren_sb,back_sm.tex,&back_sm.src,&back_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_sb,clear_sm.tex,&clear_sm.src,&clear_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_sb,back_sm.tex,&back_sm.src,&back_sm.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_sb,clear_sm.tex,&clear_sm.src,&clear_sm.dest,0,NULL,SDL_FLIP_NONE);
 
     rot += 2 ;
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
-    if (timerFPS < (1000/10)) {
-      SDL_Delay((1000/10)-timerFPS);
+    if (timerFPS < (1000/90)) {
+      SDL_Delay((1000/90)-timerFPS);
     }
     register int i = 0;
     while(i<10){
