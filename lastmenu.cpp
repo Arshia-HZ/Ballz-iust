@@ -82,7 +82,7 @@ if ( playername.size() ) {
 	text = SDL_CreateTextureFromSurface(ren_lm, text_surf);
 
 	dest.x = 175 - (text_surf->w / 2.0f);
-	dest.y = 250;
+	dest.y = 260;
 	dest.w = text_surf->w;
 	dest.h = text_surf->h;
 	SDL_RenderCopy(ren_lm, text, NULL, &dest);
@@ -152,6 +152,8 @@ void lastmenu(){
     SDL_RenderCopyEx(ren_lm,playagain_lm.tex,&playagain_lm.src,&playagain_lm.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,highscore_lm.tex,&highscore_lm.src,&highscore_lm.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,firstmenu_lm.tex,&firstmenu_lm.src,&firstmenu_lm.dest,0,NULL,SDL_FLIP_NONE);
+		WriteMessage("Enter your name:" , 30 ,240,  0 , 0 , 0 ,25, ren_lm);
+
 		if(gamesaved==false){
 		SDL_RenderCopyEx(ren_lm,saveinfo.tex,&saveinfo.src,&saveinfo.dest,0,NULL,SDL_FLIP_NONE);
 	}
