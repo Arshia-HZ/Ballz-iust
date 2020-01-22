@@ -1,6 +1,7 @@
 #include <string>
 Obj Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow , reset , backmenu , audioing ;
 bool ifpause = false ;
+bool akbar = false ;
 bool brick_add=false;
 bool downward=false;
 int downnumber=0;
@@ -135,22 +136,30 @@ void input_game() {
       }
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
+      if (!ifpause) {
         if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
           dwn = true ;
         }
+      }
         if ( (mousex_game>170) && (mousex_game<240) && (mousey_game>25) && (mousey_game<95) ) {
           if (!ifpause) {
             ifpause = true ;
+            if (shot)
+              akbar = true ;
             shot = false ;
           } else {
-            shot = true ;
+            if (akbar) {
+              shot = true ;
+              akbar = false ;
+            }
             ifpause = false ;
           }
         }
 
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
-      if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false)) {
+      if (!ifpause) {
+      if ((dwn == true) && (Unzir1 == false) && (Unzir2 == false) ) {
         shot = true ;
         for (int i = 0 ; i<balla.size() ; i++) {
           balla[i].moving = true ;
@@ -159,6 +168,7 @@ void input_game() {
       }
       dwn = false;
     }
+  }
   }
 }
 
@@ -652,6 +662,7 @@ for(int i=0;i<Addball.size();i++)
 
  }
   //cout << 362 << endl ;
+  if (!ifpause) {
     if (dwn == true) {
       if (mousex_game==cex) {
         amoud = true ;
@@ -689,6 +700,7 @@ for(int i=0;i<Addball.size();i++)
         }
     }
     }
+  }
     //cout << 395 << endl ;
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
