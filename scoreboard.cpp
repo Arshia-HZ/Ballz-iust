@@ -79,7 +79,7 @@ void scoreboard(int lastpage = 0){
       for(register int i = 0;i<10;i++){
         cout<<"enter";
         playerinfo[i] = to_string(i+1) + " " + player[i].name + ": " + to_string(player[i].score);
-      WriteMessage(playerinfo[i].c_str(),18,10+i*20,155,0,0,35,ren_sb,surf_sb);
+    //  WriteMessage(playerinfo[i].c_str(),18,10+i*20,155,0,0,35,ren_sb,surf_sb);
     }
     showingscore=true;
     }
