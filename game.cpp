@@ -94,25 +94,6 @@ bool hit(SDL_Rect r1 , SDL_Rect r2) {
   return true ;
 }
 
-void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
-  TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
-  SDL_Color color_fm ;
-  color_fm.r = r ;
-  color_fm.g = g ;
-  color_fm.b = b ;
-  color_fm.a = 255 ;
-  SDL_Rect rect_fm ;
-  surf_fm = TTF_RenderText_Solid(font,msg,color_fm);
-  tex = SDL_CreateTextureFromSurface(ren_fm,surf_fm);
-  rect_fm.x=x;
-  rect_fm.y=y;
-  rect_fm.w=surf_fm->w;
-  rect_fm.h=surf_fm->h;
-  SDL_FreeSurface(surf_fm);
-  SDL_RenderCopy(ren_fm,tex,NULL,&rect_fm);
-  SDL_DestroyTexture(tex);
-}
-
 void input_game() {
   SDL_Event e ;
   while (SDL_PollEvent(&e)) {
@@ -383,7 +364,7 @@ void game() {
       int random_brick;
                 count_marhale++;
                 if(count_marhale>20)
-                random_brick=(rand()%6)+1;
+                random_brick=(rand()%5)+1;
                 else
                 random_brick=(rand()%2)+1;
                 Addball.push_back(Obj());
@@ -411,9 +392,10 @@ void game() {
                   do {
                     xrandom_number_addball=rand()%6;
                     Addball[Addball.size()-1].setDest((xrandom_number_addball*55)+20,141,20,20);
-                    Addball[Addball.size()-1].setSource(0,0,715,715);
-                    Addball[Addball.size()-1].setImage("data/BlueBall.png",ren_game);
+                    Addball[Addball.size()-1].setSource(0,0,640,635);
+                    Addball[Addball.size()-1].setImage("data/pngwave.png",ren_game);
                   } while(!hit_ball((xrandom_number_addball*55)+5 , 135));
+                  cout<<"   "<<brick.size()<<"    "<<balla.size()<<endl;
 
 }
 
@@ -442,12 +424,13 @@ if(downward)
          status=3;
          SDL_DestroyRenderer(ren_game);
           running_game=false;
-         for(int i=0;i<brick.size();i++)
+          break;
+          int tedad_br=brick.size();
+         for(int i=0;i<tedad_br;i++)
          {
                brick.erase(brick.begin()+i);
          }
-         WriteMessage("game over ", 100, 350, 255,255,255, 40, ren_game);
-         brick.erase(brick.begin()+i);
+        // WriteMessage("game over ", 100, 350, 255,255,255, 40, ren_game);
        }
 
    }
@@ -481,6 +464,8 @@ if(downward)
     for (int i = 0 ; i<tedad ; i++) {
 
         if (balla[i].moving) {
+          cout<<"ta inja ok avalesh"<<endl;
+
           for(int j=0;j<brick.size();j++)
           {
           balla[i].blGame.setDest(balla[i].xnew,balla[i].lasty,20,20);
@@ -501,17 +486,27 @@ if(downward)
                 if(brick[j].number_brick<=0)
                 {
                     brick.erase(brick.begin()+j);
+<<<<<<< HEAD
                   }
 
+=======
+                  //   for(int d=0;d<brick.size();d++)
+                  //   {
+                  //     SDL_RenderCopyEx(ren_game,brick[d].brick_Obj.tex,&brick[d].brick_Obj.src,&brick[d].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+                  // }
+                  }
+                    cout<<"ta inja ok vastesh"<<endl;
+>>>>>>> 654d4de53bd97838d7ab3ccb3256260390890c1f
             }
               balla[i].blGame.setDest(balla[i].xnew,balla[i].ynew,20,20);
               for (int j = 0 ; j < Addball.size() ; j++) {
                 if(hit(Addball[j].dest,balla[i].blGame.dest)) {
+                  int xaddball=Addball[j].dest.x;
                   Addball.erase(Addball.begin()+j);
                   balla.push_back(Ballb());
-                  balla[balla.size()-1].blGame.setDest(165,455,20,20);
-                  balla[balla.size()-1].blGame.setSource(0,0,715,715);
-                  balla[balla.size()-1].blGame.setImage("data/BlueBall.png",ren_game) ;
+                  balla[balla.size()-1].blGame.setDest(xaddball,455,20,20);
+                  balla[balla.size()-1].blGame.setSource(0,0,1024,1024);
+                  balla[balla.size()-1].blGame.setImage("data/greencircle4.png",ren_game) ;
                 }
               }
               if ((balla[i].hitx)&&(balla[i].hity)) {
@@ -528,14 +523,15 @@ if(downward)
           balla[i].ynew = 455 ;
           balla[i].xnew = cex-10;
           balla[i].blGame.setDest(balla[i].xnew,455,20,20);
-          if (i == tedad - 1) {
-            for (int s = tedad ; s < balla.size() ; s++) {
+          if (i == avaliye - 1) {
+            for (int s = avaliye ; s < balla.size() ; s++) {
               balla[s].centerx = cex ;
             //  balla[i].topy = 455;
               balla[s].centery = 455+10;
               balla[s].ynew = 455 ;
               balla[s].xnew = cex-10;
               balla[s].blGame.setDest(balla[i].xnew,455,20,20);
+              balla[s].blGame.setImage("data/BlueBall.png",ren_game) ;
             }
           }
           //std::cout << "safe" << xnew << " " << ynew << endl ;
@@ -559,6 +555,7 @@ if(downward)
         yy += coy;
       }
       */
+      cout<<"ta inja ok akhresh"<<endl;
 
   }
 

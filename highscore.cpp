@@ -4,6 +4,7 @@ typedef struct player{
   int score;
 }data;
 data player[10];
+//string playerinfo[10];
 //Opening file
 bool openfile(bool resetscore = false){
   if(resetscore){
@@ -56,17 +57,17 @@ void sortscores(){
   sort(player,player+10,sortchecker);
 }
 //Print game scoreboard
-void scoreboard(){
+/*void scoreinfo(){
   if(openfile()){
     returnscore();
     for(int i = 0; i<10;i++){
-      cout<< i+1 << ". "<<player[i].score<<" "<<player[i].name<<endl;
+      playerinfo[i]= to_string(i+1) + ". " + player[i].name+ " " + to_string(player[i].score);
     }
   }else{
     cout<<"ERROR SHOWING SCOREBOARD";
     return;
   }
-}
+}*/
 //Save scores on file decending order
 bool savescore(int score , string name){
   returnscore();
