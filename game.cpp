@@ -619,8 +619,9 @@ for(int j=0;j<brick.size();j++)
 }
 string stt ;
 stt = to_string(balla.size());
-WriteMessage(stt.c_str() , ballcount.dest.x + 100 ,ballcount.dest.y + 10 , 0 , 0 , 0 ,15, ren_game);
-
+WriteMessage(stt.c_str() , ballcount.dest.x + 100 ,ballcount.dest.y , 0 , 0 , 0 ,35, ren_game);
+stt = to_string(count_marhale);
+WriteMessage(stt.c_str() , Score.dest.x + 70 ,Score.dest.y  , 0 , 0 , 0 ,35, ren_game);
 for(int i=0;i<Addball.size();i++)
  {
    SDL_RenderCopyEx(ren_game,Addball[i].tex,&Addball[i].src,&Addball[i].dest,0,NULL,SDL_FLIP_NONE);
