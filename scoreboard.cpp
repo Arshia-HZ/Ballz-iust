@@ -75,13 +75,14 @@ void scoreboard(int lastpage = 0){
       lasttime = lastframe ;
       framecount = 0 ;
     }
-    if(!showingscore){
+    if(showingscore == 0){
       for(register int i = 0;i<10;i++){
-        cout<<"enter";
-        playerinfo[i] = to_string(i+1) + " " + player[i].name + ": " + to_string(player[i].score);
+        playerinfo[i] = to_string(i+1) + ". " + player[i].name + ": " + to_string(player[i].score);
+        cout<<playerinfo[i]<<endl;
     //  WriteMessage(playerinfo[i].c_str(),18,10+i*20,155,0,0,35,ren_sb,surf_sb);
-    }
-    showingscore=true;
+  }
+    //scoreinfo();
+    showingscore=1;
     }
     SDL_SetRenderDrawColor(ren_sb,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
     SDL_RenderFillRect(ren_sb,&rect_sb);
