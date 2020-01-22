@@ -1,3 +1,4 @@
+#include <string>
 Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 bool brick_add=false;
 bool downward=false;
@@ -18,6 +19,24 @@ public:
   double xbrick;
   double ybrick;
 };
+void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm,SDL_Rect rect) {
+
+  TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
+  SDL_Color color_fm ;
+  color_fm.r = r ;
+  color_fm.g = g ;
+  color_fm.b = b ;
+  color_fm.a = 255 ;
+  surf_fm = TTF_RenderText_Solid(font,msg,color_fm);
+  tex = SDL_CreateTextureFromSurface(ren_fm,surf_fm);
+  rect.x=x;
+  rect.y=y;
+  rect.w=surf_fm->w;
+  rect.h=surf_fm->h;
+  SDL_FreeSurface(surf_fm);
+  SDL_RenderCopy(ren_fm,tex,NULL,&rect);
+  SDL_DestroyTexture(tex);
+}
 vector<Obj> Addball;
 vector <brick_class> brick;
 #include <ctime>
@@ -229,6 +248,9 @@ void game() {
     if(first_ste)
     {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+    string stt ;
+    stt = to_string(46565);
+    WriteMessage_game(stt.c_str() , brick[0].brick_Obj.dest.x + 30 , brick[0].brick_Obj.dest.y + 12 , 0 , 0 , 0 ,15, ren_game , brick[0].brick_Obj.dest);
   //  WriteMessage(brick[0].number_brt.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 
   }
@@ -431,7 +453,6 @@ if(downward)
      brick[i].brick_Obj.setImage("data/brick.png",ren_game);
 
        SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
-      // WriteMessage()
       // WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(rick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
      if(brick[i].ybrick>=470 )
        {
@@ -491,7 +512,7 @@ if(downward)
               brick[j].number_brick--;
             }
               balla[i].blGame.setDest(balla[i].lastx,balla[i].ynew,20,20);
-              if(hit(brick[j].brick_Obj.dest,balla[i].blGame.dest)) {
+              if((hit(brick[j].brick_Obj.dest,balla[i].blGame.dest)) && (!balla[i].hitx)) {
                   //cout<<"hit y"<<lastx<<"   "<<lasty<<"  "<<xnew<<"   "<<ynew<<endl;
                   balla[i].hity=true ;
                   balla[i].coy *= (-1) ;
