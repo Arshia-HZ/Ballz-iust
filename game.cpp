@@ -94,7 +94,6 @@ bool hit(SDL_Rect r1 , SDL_Rect r2) {
 }
 
 void WriteMessage_game(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
-
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color_fm ;
   color_fm.r = r ;
@@ -240,6 +239,8 @@ void game() {
     if(first_ste)
     {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+    WriteMessage(brick[0].number_brick,brick[0].brick_Obj.dest.x+(brick[0].brick_Obj.dest.w)/2,brick[0].brick_Obj.dest.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
+
   }
 
     for (int i = 0 ; i < balla.size() ; i++) {
@@ -433,8 +434,9 @@ while(downnumber<40)
      brick[i].brick_Obj.setDest( brick[i].brick_Obj.dest.x, brick[i].brick_Obj.dest.y+1,52,35);
      brick[i].ybrick= brick[i].brick_Obj.dest.y+40;
      brick[i].brick_Obj.setImage("data/brick.png",ren_game);
-       SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
 
+       SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+       WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
      if(brick[i].ybrick>=470 )
        {
          status=3;
@@ -552,7 +554,9 @@ while(downnumber<40)
 }
 for(int j=0;j<brick.size();j++)
 {
+
   SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+  WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Obj.dest.w)/2,brick[i].brick_Obj.dest.y+(brick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 }
 for(int i=0;i<Addball.size();i++)
  {
