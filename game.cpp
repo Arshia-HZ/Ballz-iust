@@ -1,5 +1,5 @@
 #include <string>
-Obj Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow , reset , backmenu , backgame ;
+Obj Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow , reset , backmenu , audioing ;
 bool ifpause = false ;
 bool brick_add=false;
 bool downward=false;
@@ -141,11 +141,11 @@ void input_game() {
         if ( (mousex_game>170) && (mousex_game<240) && (mousey_game>25) && (mousey_game<95) ) {
           if (!ifpause) {
             ifpause = true ;
+            shot = false ;
           } else {
+            shot = true ;
             ifpause = false ;
           }
-          // pause the game
-
         }
 
     }
@@ -204,10 +204,10 @@ void game() {
   backmenu.setDest(250,75,30,30);
   backmenu.setSource(0,0,1500,1500);
   backmenu.setImage("data/play.png",ren_game) ;
-  //backgame
-  backgame.setDest(290,45,30,30);
-  backgame.setSource(0,0,1500,1500);
-  backgame.setImage("data/play.png",ren_game) ;
+  //audioing
+  audioing.setDest(290,45,30,30);
+  audioing.setSource(0,0,1500,1500);
+  audioing.setImage("data/play.png",ren_game) ;
   // Pause
   Pause.setDest(170,25,70,70);
   Pause.setSource(0,0,980,980);
@@ -258,7 +258,7 @@ void game() {
     SDL_RenderCopyEx(ren_game,UpBar.tex,&UpBar.src,&UpBar.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_game,BtBar.tex,&BtBar.src,&BtBar.dest,0,NULL,SDL_FLIP_NONE);
     if (ifpause) {
-      SDL_RenderCopyEx(ren_game,backgame.tex,&backgame.src,&backgame.dest,0,NULL,SDL_FLIP_NONE);
+      SDL_RenderCopyEx(ren_game,audioing.tex,&audioing.src,&audioing.dest,0,NULL,SDL_FLIP_NONE);
       SDL_RenderCopyEx(ren_game,backmenu.tex,&backmenu.src,&backmenu.dest,0,NULL,SDL_FLIP_NONE);
       SDL_RenderCopyEx(ren_game,reset.tex,&reset.src,&reset.dest,0,NULL,SDL_FLIP_NONE);
     }
@@ -274,7 +274,7 @@ void game() {
     for (int i = 0 ; i < balla.size() ; i++) {
       SDL_RenderCopyEx(ren_game,balla[i].blGame.tex,&balla[i].blGame.src,&balla[i].blGame.dest,0,NULL,SDL_FLIP_NONE);
     }
-
+    if (!ifpause) {
     if (shot) {
       first_ste=false;
     //  cout << 194 << endl ;
@@ -631,6 +631,7 @@ if(downward)
   }
 
 
+}
 }
 for(int j=0;j<brick.size();j++)
 {
