@@ -113,11 +113,11 @@ void lastmenu(){
   // firstmenu_lm
   highscore_lm.setDest(180,490,70,70);
   highscore_lm.setSource(0,0,1500,1500);
-  highscore_lm.setImage("data/play.png",ren_lm) ;
+  highscore_lm.setImage("data/home.png",ren_lm) ;
   // highscore_lms
   firstmenu_lm.setDest(20,415,70,70);
   firstmenu_lm.setSource(0,0,1500,1500);
-  firstmenu_lm.setImage("data/play.png",ren_lm) ;
+  firstmenu_lm.setImage("data/score.png",ren_lm) ;
 
   float hei = 0 ;
   bool down = true ;
