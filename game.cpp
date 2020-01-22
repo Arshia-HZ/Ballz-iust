@@ -90,6 +90,7 @@ SDL_Renderer* ren_game;
 SDL_Surface* surf_game ;
 class Ballb {
   public :
+  bool outing = false ;
   Obj blGame ;
   bool hity,hitx;
   double lasty,lastx ;
@@ -131,9 +132,6 @@ void input_game() {
       }
     }
     if (e.type == SDL_MOUSEBUTTONDOWN) {
-        if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
-          dwn = true ;
-        }
         if ((mousey_game>125) && (mousey_game<475) && (shot == false)) {
           dwn = true ;
         }
@@ -182,7 +180,7 @@ void game() {
 
     brick.push_back(brick_class());
     brick[0].brick_Obj.setDest((rand()%6)*55+5,175,55,35);
-    brick[0].brick_Obj.setSource(0,0,512,512);
+    brick[0].brick_Obj.setSource(0,0,1401,1101);
     brick[0].brick_Obj.setImage("data/brick.png",ren_game);
     brick[0].number_brick=count_marhale;
   }
@@ -243,8 +241,8 @@ void game() {
     {
     SDL_RenderCopyEx(ren_game,brick[0].brick_Obj.tex,&brick[0].brick_Obj.src,&brick[0].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
     string stt ;
-    stt = to_string(46565);
-    WriteMessage_game(stt.c_str() , brick[0].brick_Obj.dest.x + 30 , brick[0].brick_Obj.dest.y + 12 , 0 , 0 , 0 ,15, ren_game , brick[0].brick_Obj.dest);
+    stt = to_string(brick[0].number_brick);
+  //  WriteMessage_game(stt.c_str() , brick[0].brick_Obj.dest.x + 25 , brick[0].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[0].brick_Obj.dest);
   //  WriteMessage(brick[0].number_brt.y+(brick[0].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 
   }
@@ -268,6 +266,7 @@ void game() {
         for (int i = 0 ; i < avaliye ; i++) {
           balla[i].cox=5;
           balla[i].coy=5;
+          balla[i].outing = false ;
         }
       }
     //  cout << 204 << endl ;
@@ -286,29 +285,33 @@ void game() {
     //cout << 214 << endl ;
     //  std::cout << leftx<<" "<<topy << '\n';
     for (int i = 0 ; i<tedad ; i++) {
-      if (balla[i].hitx){
-        balla[i].hitx = false ;
-      } else {
-        balla[i].lastx = balla[i].xnew ;
-      }
-      if (balla[i].hity){
-        balla[i].hity=false;
-      } else {
-        balla[i].lasty = balla[i].ynew ;
+      if (balla[i].outing == false) {
+        if (balla[i].hitx){
+          balla[i].hitx = false ;
+        } else {
+          balla[i].lastx = balla[i].xnew ;
+        }
+        if (balla[i].hity){
+          balla[i].hity=false;
+        } else {
+          balla[i].lasty = balla[i].ynew ;
+        }
       }
     }
   //  cout << 228 << endl ;
       for (int i = 0 ; i<tedad ; i++) {
-        if (amoud) {
-          balla[i].ynew = (double)(balla[i].ynew + balla[i].coy) ;
-        } else {
-        //  cout << (shib*-1) << " " << atan((shib*-1)) << " " << cos(atan((shib*-1))) << " " << sin(atan((shib*-1))) << endl ;
-          if ((shib*-1) > 0) {
-              balla[i].xnew =(double)(balla[i].xnew + (balla[i].cox*cos(atan((shib*-1)))) ) ;
-              balla[i].ynew =(double)(balla[i].ynew + (balla[i].coy*(-1)*(sin(atan((shib*-1))))) ) ;
+        if (balla[i].outing == false) {
+          if (amoud) {
+            balla[i].ynew = (double)(balla[i].ynew + balla[i].coy) ;
           } else {
-              balla[i].xnew =(double)(balla[i].xnew + (balla[i].cox*(-1)*(cos(atan((shib*-1))))) ) ;
-              balla[i].ynew =(double)(balla[i].ynew + (balla[i].coy*sin(atan((shib*-1)))) ) ;
+          //  cout << (shib*-1) << " " << atan((shib*-1)) << " " << cos(atan((shib*-1))) << " " << sin(atan((shib*-1))) << endl ;
+            if ((shib*-1) > 0) {
+                balla[i].xnew =(double)(balla[i].xnew + (balla[i].cox*cos(atan((shib*-1)))) ) ;
+                balla[i].ynew =(double)(balla[i].ynew + (balla[i].coy*(-1)*(sin(atan((shib*-1))))) ) ;
+            } else {
+                balla[i].xnew =(double)(balla[i].xnew + (balla[i].cox*(-1)*(cos(atan((shib*-1))))) ) ;
+                balla[i].ynew =(double)(balla[i].ynew + (balla[i].coy*sin(atan((shib*-1)))) ) ;
+            }
           }
         }
       }
@@ -330,6 +333,7 @@ void game() {
         */
 
       for (int i = 0 ; i<tedad ; i++) {
+      if (balla[i].outing == false) {
       if(balla[i].ynew>455)
       {
       balla[i].moving=false;
@@ -386,6 +390,7 @@ void game() {
       if(ynew < 120 || ynew > 456 )
       coy*=-1;
       */
+    }
     }
     //cout << 309 << endl ;
     if(brick_add)
@@ -444,9 +449,13 @@ if(downward)
    {
      brick[i].brick_Obj.setDest( brick[i].brick_Obj.dest.x, brick[i].brick_Obj.dest.y+40,52,35);
      brick[i].ybrick= brick[i].brick_Obj.dest.y+40;
+     brick[i].brick_Obj.setSource(0,0,1401,1101);
      brick[i].brick_Obj.setImage("data/brick.png",ren_game);
 
        SDL_RenderCopyEx(ren_game,brick[i].brick_Obj.tex,&brick[i].brick_Obj.src,&brick[i].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+       string stt ;
+       stt = to_string(brick[i].number_brick);
+    //   WriteMessage_game(stt.c_str() , brick[i].brick_Obj.dest.x + 25 , brick[i].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[i].brick_Obj.dest);
       // WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(rick[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
      if(brick[i].ybrick>=470 )
        {
@@ -603,6 +612,9 @@ for(int j=0;j<brick.size();j++)
 {
 
   SDL_RenderCopyEx(ren_game,brick[j].brick_Obj.tex,&brick[j].brick_Obj.src,&brick[j].brick_Obj.dest,0,NULL,SDL_FLIP_NONE);
+  string stt ;
+  stt = to_string(brick[j].number_brick);
+  //WriteMessage_game(stt.c_str() , brick[j].brick_Obj.dest.x + 25 , brick[j].brick_Obj.dest.y + 10 , 0 , 0 , 0 ,15, ren_game , brick[j].brick_Obj.dest);
   //WriteMessage(brick[i].number_brick.c_str(),brick[i].brick_Obj.dest.x+(brick[i].brick_Ock[i].brick_Obj.dest.h)/2,255,255,255,12,ren_game);
 }
 for(int i=0;i<Addball.size();i++)

@@ -15,7 +15,7 @@ int ball_image_number=0;
 
 
 void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int size,SDL_Renderer* ren_fm) {
-
+TTF_Init();
   TTF_Font* font = TTF_OpenFont("data/GTA.ttf",size);
   SDL_Color color_fm ;
   color_fm.r = r ;
