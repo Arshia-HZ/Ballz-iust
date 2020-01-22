@@ -511,7 +511,10 @@ if(downward)
      if(brick[i].ybrick>=470 )
        {
          status=3;
+<<<<<<< HEAD
+=======
          ifend = true ;
+>>>>>>> 3f7b1b573d82c25f235aa546a2810cac7810ae82
          SDL_DestroyRenderer(ren_game);
          Mix_PlayChannel( -1, gameover, 0 );
           running_game=false;
