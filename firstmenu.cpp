@@ -34,6 +34,7 @@ void WriteMessage(const char * msg , int x , int y , int r , int g , int b , int
   SDL_DestroyTexture(tex);
 }
 void input_fm() {
+  //  PrintKeyInfo( &e.key );
   while (SDL_PollEvent(&e)) {
     SDL_GetMouseState(&mousex,&mousey) ;
     if (e.type == SDL_QUIT) {

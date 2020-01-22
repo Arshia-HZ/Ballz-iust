@@ -2,12 +2,6 @@
 Obj Speed , Pause , Highscore , Score , UpBar , BtBar , ballcount , arrow ;
 bool brick_add=false;
 bool downward=false;
-
-
-
-
-
-
 int downnumber=0;
 int count_marhale=1;
 double avaliye ;
@@ -188,7 +182,7 @@ void game() {
 
     brick.push_back(brick_class());
     brick[0].brick_Obj.setDest((rand()%6)*55+5,175,55,35);
-    brick[0].brick_Obj.setSource(0,0,600,600);
+    brick[0].brick_Obj.setSource(0,0,512,512);
     brick[0].brick_Obj.setImage("data/brick.png",ren_game);
     brick[0].number_brick=count_marhale;
   }
@@ -235,7 +229,7 @@ void game() {
       lasttime = lastframe ;
       framecount = 0 ;
     }
-    SDL_SetRenderDrawColor(ren_game,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
+    SDL_SetRenderDrawColor(ren_game,255,255,255,255);
     SDL_RenderFillRect(ren_game,&rect_game);
 
     SDL_RenderCopyEx(ren_game,Pause.tex,&Pause.src,&Pause.dest,0,NULL,SDL_FLIP_NONE);
@@ -567,8 +561,8 @@ if(downward)
             balla[i].centerx -= 20 ;
           }
           balla[i].blGame.setDest(balla[i].xnew,455,20,20);
-          if (i == avaliye - 1) {
-            for (int s = avaliye ; s < balla.size() ; s++) {
+          if (i == tedad - 1) {
+            for (int s = tedad ; s < balla.size() ; s++) {
               balla[s].centerx = cex ;
             //  balla[i].topy = 455;
               balla[s].centery = 455+10;
