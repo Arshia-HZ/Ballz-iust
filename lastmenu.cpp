@@ -1,10 +1,11 @@
-Obj playagain_lm,highscore_lm,firstmenu_lm, saveinfo ;
+Obj playagain_lm,highscore_lm,firstmenu_lm, saveinfo,gameover_lm ;
 SDL_Renderer* ren_lm;
 SDL_Surface* surf_lm ;
 SDL_Texture* text;
 SDL_Rect dest;
-SDL_Color foreground = { 0, 0, 0 };
+SDL_Color foreground = { 0, 100, 200};
 bool running_lm = true ;
+bool gamesaved = false;
 void input_lm() {
 	static const unsigned char* keys = SDL_GetKeyboardState( NULL );
   while (SDL_PollEvent(&e) != 0) {
@@ -37,6 +38,7 @@ void input_lm() {
       }
       if ((mousex>=highscore_lm.dest.x)&&(mousex<=highscore_lm.dest.x+highscore_lm.dest.w)&&(mousey>=highscore_lm.dest.y)&&(mousey<=highscore_lm.dest.y+highscore_lm.dest.h)) {
       status = 5;
+			lastpage = 1;
 			SDL_DestroyRenderer(ren_lm);
 			running_lm = false;
 			SDL_StopTextInput();
@@ -46,16 +48,21 @@ void input_lm() {
 				if(playername.size() == 0){
 					if(savescore(playerscore,"NONAME")){
 						cout<<"Score Saved";
+						gamesaved = true;
 					}else{
 						cout<<"SCORE SAVING ERROR";
 					}
 				}else{
 					if(savescore(playerscore,playername)){
 						cout<<"SCORE AND NAME SAVED";
+						gamesaved = true;
 					}else{
 						cout<<"ERROR SAVING NAME AND SCORE OF PLAYER";
 					}
 				}
+				SDL_StopTextInput();
+				TTF_CloseFont(font);
+				TTF_Quit();
       }
       if ((mousex>=firstmenu_lm.dest.x)&&(mousex<=firstmenu_lm.dest.x+firstmenu_lm.dest.w)&&(mousey>=firstmenu_lm.dest.y)&&(mousey<=firstmenu_lm.dest.y+firstmenu_lm.dest.h)) {
         status = 0;
@@ -75,8 +82,8 @@ if ( playername.size() ) {
 	SDL_Surface* text_surf = TTF_RenderText_Solid(font, playername.c_str(), foreground);
 	text = SDL_CreateTextureFromSurface(ren_lm, text_surf);
 
-	dest.x = 200 - (text_surf->w / 2.0f);
-	dest.y = 100;
+	dest.x = 175 - (text_surf->w / 2.0f);
+	dest.y = 250;
 	dest.w = text_surf->w;
 	dest.h = text_surf->h;
 	SDL_RenderCopy(ren_lm, text, NULL, &dest);
@@ -89,7 +96,8 @@ if ( playername.size() ) {
 SDL_RenderPresent( ren_lm );
 }
 void lastmenu(){
-	bool gamedsaved = false;
+
+	TTF_Init();
 	font = TTF_OpenFont("data/GTA.ttf", 72);
 	if ( !font ) {
 		cout << "Error loading font: " << TTF_GetError() << endl;
@@ -104,21 +112,25 @@ void lastmenu(){
   rect_fm.w = 350 ;
   rect_fm.h = 600 ;
   // playagain_lm
-  playagain_lm.setDest(250,380,70,70);
-  playagain_lm.setSource(0,0,1500,1500);
-  playagain_lm.setImage("data/play.png",ren_lm) ;
+  playagain_lm.setDest(0,100,70,70);
+  playagain_lm.setSource(0,0,512,512);
+  playagain_lm.setImage("data/restart.png",ren_lm) ;
+	// gameover_lm
+	playagain_lm.setDest(50,0,250,250);
+	playagain_lm.setSource(0,0,512,512);
+	playagain_lm.setImage("data/gameover.png",ren_lm) ;
 	//savaeinfo
-	saveinfo.setDest(250,250,70,70);
-  saveinfo.setSource(0,0,1500,1500);
-  saveinfo.setImage("data/play.png",ren_lm) ;
+	saveinfo.setDest(100,490,70,70);
+  saveinfo.setSource(0,0,980,980);
+  saveinfo.setImage("data/submit.png",ren_lm) ;
   // firstmenu_lm
-  highscore_lm.setDest(180,490,70,70);
-  highscore_lm.setSource(0,0,1500,1500);
+  highscore_lm.setDest(0,490,70,70);
+  highscore_lm.setSource(0,0,512,512);
   highscore_lm.setImage("data/home.png",ren_lm) ;
   // highscore_lms
-  firstmenu_lm.setDest(20,415,70,70);
-  firstmenu_lm.setSource(0,0,1500,1500);
-  firstmenu_lm.setImage("data/score.png",ren_lm) ;
+  firstmenu_lm.setDest(200,490,70,70);
+  firstmenu_lm.setSource(0,0,980,980);
+  firstmenu_lm.setImage("data/Score.png",ren_lm) ;
 
   float hei = 0 ;
   bool down = true ;
@@ -135,15 +147,13 @@ void lastmenu(){
     }
     SDL_SetRenderDrawColor(ren_lm,255,255,255,255);
     SDL_RenderFillRect(ren_lm,&rect_fm);
-
+		SDL_RenderCopyEx(ren_lm,gameover_lm.tex,&gameover_lm.src,&gameover_lm.dest,0,NULL,SDL_FLIP_NONE);
     SDL_RenderCopyEx(ren_lm,playagain_lm.tex,&playagain_lm.src,&playagain_lm.dest,0,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_lm,highscore_lm.tex,&highscore_lm.src,&highscore_lm.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_lm,firstmenu_lm.tex,&firstmenu_lm.src,&firstmenu_lm.dest,0+rot,NULL,SDL_FLIP_NONE);
-		if(!gamedsaved){
-		SDL_RenderCopyEx(ren_lm,saveinfo.tex,&saveinfo.src,&saveinfo.dest,0+rot,NULL,SDL_FLIP_NONE);
-		gamedsaved = true;
+    SDL_RenderCopyEx(ren_lm,highscore_lm.tex,&highscore_lm.src,&highscore_lm.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_lm,firstmenu_lm.tex,&firstmenu_lm.src,&firstmenu_lm.dest,0,NULL,SDL_FLIP_NONE);
+		if(gamesaved==false){
+		SDL_RenderCopyEx(ren_lm,saveinfo.tex,&saveinfo.src,&saveinfo.dest,0,NULL,SDL_FLIP_NONE);
 	}
-    rot += 2 ;
 
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;

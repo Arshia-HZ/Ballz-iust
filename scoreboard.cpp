@@ -2,7 +2,7 @@ Obj back_sm,clear_sm ;
 SDL_Renderer* ren_sb;
 SDL_Surface* surf_sb ;
 bool running_sb = true ;
-void input_sb(int lastpage = 0) {
+void input_sb() {
   while (SDL_PollEvent(&e)) {
     SDL_GetMouseState(&mousex,&mousey) ;
     if (e.type == SDL_QUIT) {
@@ -33,6 +33,7 @@ void input_sb(int lastpage = 0) {
         // Open The Game Page
       }
       if ((mousex>=clear_sm.dest.x)&&(mousex<=clear_sm.dest.x+clear_sm.dest.w)&&(mousey>=clear_sm.dest.y)&&(mousey<=clear_sm.dest.y+clear_sm.dest.h)) {
+
       if(openfile(true)){
         Mix_PlayChannel( -1, clearscore_sound, 0 );
       }else{
@@ -43,7 +44,7 @@ void input_sb(int lastpage = 0) {
   }
 }
 // 0 = firstmenu | 1 = lastmenu
-void scoreboard(int lastpage = 0){
+void scoreboard(){
   running_sb = true ;
   bool showingscore = false;
   returnscore();
@@ -54,14 +55,14 @@ void scoreboard(int lastpage = 0){
   rect_sb.y = 0 ;
   rect_sb.w = 350 ;
   rect_sb.h = 600 ;
-  // play
+  // back
   back_sm.setDest(100,500,85,85);
-  back_sm.setSource(0,0,1500,1500);
-  back_sm.setImage("data/play.png",ren_sb) ;
-  // settings
+  back_sm.setSource(0,0,512,512);
+  back_sm.setImage("data/back.png",ren_sb) ;
+  // clearscore
   clear_sm.setDest(200,500,70,70);
-  clear_sm.setSource(0,0,1500,1500);
-  clear_sm.setImage("data/play.png",ren_sb) ;
+  clear_sm.setSource(0,0,500,500);
+  clear_sm.setImage("data/highscore_setting.png",ren_sb) ;
 TTF_Init();
   float hei = 0 ;
   bool down = true ;
@@ -83,17 +84,17 @@ TTF_Init();
   }
     showingscore=1;
     }
-    SDL_SetRenderDrawColor(ren_sb,255-(hei/2.7),148-(hei/2.7),194-(hei/2.7),255);
+    SDL_SetRenderDrawColor(ren_sb,255,255,255,255);
     SDL_RenderFillRect(ren_sb,&rect_sb);
 
-    SDL_RenderCopyEx(ren_sb,back_sm.tex,&back_sm.src,&back_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
-    SDL_RenderCopyEx(ren_sb,clear_sm.tex,&clear_sm.src,&clear_sm.dest,0+rot,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_sb,back_sm.tex,&back_sm.src,&back_sm.dest,0,NULL,SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren_sb,clear_sm.tex,&clear_sm.src,&clear_sm.dest,0,NULL,SDL_FLIP_NONE);
 
     rot += 2 ;
     framecount++ ;
     int timerFPS = SDL_GetTicks() - lastframe ;
-    if (timerFPS < (1000/10)) {
-      SDL_Delay((1000/10)-timerFPS);
+    if (timerFPS < (1000/90)) {
+      SDL_Delay((1000/90)-timerFPS);
     }
     register int i = 0;
     while(i<10){
@@ -101,6 +102,6 @@ TTF_Init();
     i++;
 }
     SDL_RenderPresent(ren_sb);
-    input_sb(lastpage);
+    input_sb();
   }
 }
