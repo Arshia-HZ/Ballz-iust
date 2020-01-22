@@ -37,7 +37,7 @@ bool hit_ball(int x,int y)
 {
   for(int i=0;i<brick.size();i++)
   {
-  if(brick[i].xbrick==x && brick[i].ybrick==y )
+  if(brick[i].xbrick==x && brick[i].ybrick==y)
   {
     return false;
   }
