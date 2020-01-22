@@ -34,6 +34,7 @@ TTF_Init();
   SDL_DestroyTexture(tex);
 }
 void input_fm() {
+  //  PrintKeyInfo( &e.key );
   while (SDL_PollEvent(&e)) {
     SDL_GetMouseState(&mousex,&mousey) ;
     if (e.type == SDL_QUIT) {
