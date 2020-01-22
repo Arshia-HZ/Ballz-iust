@@ -480,7 +480,6 @@ if(downward)
     for (int i = 0 ; i<tedad ; i++) {
 
         if (balla[i].moving) {
-          cout<<"ta inja ok avalesh"<<endl;
 
           for(int j=0;j<brick.size();j++)
           {
@@ -580,7 +579,6 @@ if(downward)
         yy += coy;
       }
       */
-      cout<<"ta inja ok akhresh"<<endl;
 
   }
 
