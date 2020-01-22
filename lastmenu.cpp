@@ -112,19 +112,19 @@ void lastmenu(){
   rect_fm.w = 350 ;
   rect_fm.h = 600 ;
   // playagain_lm
-  playagain_lm.setDest(0,100,70,70);
+  playagain_lm.setDest(260,490,70,70);
   playagain_lm.setSource(0,0,512,512);
   playagain_lm.setImage("data/restart.png",ren_lm) ;
 	// gameover_lm
-	playagain_lm.setDest(50,0,250,250);
-	playagain_lm.setSource(0,0,512,512);
-	playagain_lm.setImage("data/gameover.png",ren_lm) ;
+	gameover_lm.setDest(50,0,250,250);
+	gameover_lm.setSource(0,0,512,512);
+	gameover_lm.setImage("data/gameover.png",ren_lm) ;
 	//savaeinfo
-	saveinfo.setDest(100,490,70,70);
+	saveinfo.setDest(80,490,70,70);
   saveinfo.setSource(0,0,980,980);
   saveinfo.setImage("data/submit.png",ren_lm) ;
   // firstmenu_lm
-  highscore_lm.setDest(200,490,70,70);
+  highscore_lm.setDest(170,490,70,70);
   highscore_lm.setSource(0,0,980,980);
   highscore_lm.setImage("data/Score.png",ren_lm) ;
   // highscore_lms
