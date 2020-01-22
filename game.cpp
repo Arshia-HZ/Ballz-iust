@@ -457,7 +457,7 @@ for(int i=0;i<Addball.size();i++)
    Addball[i].setDest( Addball[i].dest.x, Addball[i].dest.y+40,15,15);
    if( Addball[i].dest.y+40>475)
    {
-     Addball.erase(Addball+i);
+     Addball.erase(Addball.begin()+i);
    }
 
  }
