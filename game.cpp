@@ -5,6 +5,7 @@ bool reseting = false ;
 bool reply = false ;
 bool ifpause = false ;
 bool akbar = false ;
+bool audplaying = false ;
 bool brick_add=false;
 bool downward=false;
 int downnumber=0;
@@ -172,6 +173,15 @@ void input_game() {
           running_game = false;
 
           return ;
+        }
+        if ( (mousex_game>290) && (mousex_game<320) && (mousey_game>45) && (mousey_game<75) ) {
+          if (audplaying) {
+            // ghate shavad
+            audplaying = false ;
+          } else {
+            // vasl shavad
+            audplaying = true ;
+          }
         }
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
