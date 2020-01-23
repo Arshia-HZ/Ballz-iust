@@ -56,7 +56,7 @@ int main(int argc, char const *argv[]) {
     case 1: settingsmenu(); break;
     case 2: game(); break;
     case 3: lastmenu(); break;
-    case 4: about_us(); break;
+    case 4: about_us();  break;
     case 5: scoreboard(); break;
   // case 6:
     default: SDL_Quit();

@@ -38,13 +38,13 @@ void input_fm() {
   //  PrintKeyInfo( &e.key );
   while (SDL_PollEvent(&e)==true && status != 4) {
     SDL_GetMouseState(&mousex,&mousey) ;
-    if (e.type == SDL_QUIT) {
+    if (e.type == SDL_QUIT && status != 4) {
       running_fm = false ;
       windowloop = false;
       SDL_Quit();
       return;
     }
-    if (e.type == SDL_KEYDOWN) {
+    if (e.type == SDL_KEYDOWN && status != 4) {
       if(e.key.keysym.sym == SDLK_ESCAPE) {
         running_fm = false;
         windowloop = false;
