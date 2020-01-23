@@ -98,6 +98,7 @@ SDL_Renderer* ren_game;
 SDL_Surface* surf_game ;
 class Ballb {
   public :
+  bool ifset = false ;
   bool outing = false ;
   Obj blGame ;
   bool hity,hitx;
@@ -331,6 +332,7 @@ void game() {
           balla[i].cox=5;
           balla[i].coy=5;
           balla[i].outing = false ;
+          balla[i].ifset = false ;
         }
       }
     //  cout << 204 << endl ;
@@ -401,13 +403,14 @@ void game() {
       if(balla[i].ynew>455)
       {
       balla[i].moving=false;
+      balla[i].outing=true;
       out += 1 ;
       if (out == 1) {
         cex = balla[i].xnew + 10 ;
         cey = balla[i].ynew + 10 ;
         omg = i ;
       }
-      if(out ==avaliye && shot)
+      if(out == avaliye && shot)
       {
         brick_add=true;
       }
@@ -620,6 +623,7 @@ if(downward)
 
         } else if (!balla[i].moving) {
         //  balla[i].leftx = balla[omg].xnew;
+        if (!balla[i].ifset) {
           balla[i].centerx = cex ;
         //  balla[i].topy = 455;
           balla[i].centery = 455+10;
@@ -635,16 +639,21 @@ if(downward)
             balla[i].centerx -= 20 ;
           }
           balla[i].blGame.setDest(balla[i].xnew,455,20,20);
+          balla[i].ifset=true ;
+        }
           if (i == tedad - 1) {
             for (int s = tedad ; s < balla.size() ; s++) {
-              balla[s].centerx = cex ;
-            //  balla[i].topy = 455;
-              balla[s].centery = 455+10;
-              balla[s].ynew = 455 ;
-              balla[s].xnew = cex-10;
-              balla[s].blGame.setDest(balla[i].xnew,455,20,20);
-              balla[s].blGame.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
-              balla[s].blGame.setImage(ball_image[ball_image_number].ball_image_path,ren_game) ;
+              if (!balla[s].ifset) {
+                balla[s].centerx = cex ;
+              //  balla[i].topy = 455;
+                balla[s].centery = 455+10;
+                balla[s].ynew = 455 ;
+                balla[s].xnew = cex-10;
+                balla[s].blGame.setDest(cex-10,455,20,20);
+                balla[s].blGame.setSource(0,0,ball_image[ball_image_number].source_w,ball_image[ball_image_number].source_h);
+                balla[s].blGame.setImage(ball_image[ball_image_number].ball_image_path,ren_game) ;
+                balla[s].ifset = true ;
+              }
             }
           }
           //std::cout << "safe" << xnew << " " << ynew << endl ;
