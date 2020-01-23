@@ -18,7 +18,6 @@ void input_about() {
       SDL_DestroyWindow(win_he);
       //status = 0;
       //SDL_Quit();
-      return;
     }
     if (about_event.type == SDL_KEYDOWN) {
       if(about_event.key.keysym.sym == SDLK_ESCAPE) {
@@ -30,7 +29,6 @@ void input_about() {
         SDL_DestroyWindow(win_he);
     //    status = 0;
         //SDL_Quit();
-        return;
       }
     }
   }
