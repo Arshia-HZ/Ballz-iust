@@ -12,10 +12,11 @@ void input_about() {
     if (about_event.type == SDL_QUIT) {
       running_about = false ;
       //windowloop = false;
-      SDL_DestroyRenderer(ren_about);
-      SDL_DestroyWindow(win_us);
       SDL_DestroyRenderer(ren_about_he);
       SDL_DestroyWindow(win_he);
+      SDL_DestroyRenderer(ren_about);
+      SDL_DestroyWindow(win_us);
+
       //status = 0;
       //SDL_Quit();
     }
@@ -23,10 +24,11 @@ void input_about() {
       if(about_event.key.keysym.sym == SDLK_ESCAPE) {
         running_about = false;
         //windowloop = false;
-        SDL_DestroyRenderer(ren_about);
-        SDL_DestroyWindow(win_us);
         SDL_DestroyRenderer(ren_about_he);
         SDL_DestroyWindow(win_he);
+        SDL_DestroyRenderer(ren_about);
+        SDL_DestroyWindow(win_us);
+
     //    status = 0;
         //SDL_Quit();
       }
@@ -36,8 +38,8 @@ void input_about() {
 void about_us(){
 
   running_about = true ;
+  SDL_CreateWindowAndRenderer(750,1000,0,&win_he,&ren_about_he);
 SDL_CreateWindowAndRenderer(970,1296,0,&win_us,&ren_about);
-SDL_CreateWindowAndRenderer(750,1000,0,&win_he,&ren_about_he);
 
 
   SDL_Rect rect_about ;
