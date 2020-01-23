@@ -61,8 +61,8 @@ void input_lm() {
 					}
 				}
 				SDL_StopTextInput();
-				TTF_CloseFont(font);
-				TTF_Quit();
+			//	TTF_CloseFont(font);
+			//	TTF_Quit();
       }
       if ((mousex>=firstmenu_lm.dest.x)&&(mousex<=firstmenu_lm.dest.x+firstmenu_lm.dest.w)&&(mousey>=firstmenu_lm.dest.y)&&(mousey<=firstmenu_lm.dest.y+firstmenu_lm.dest.h)) {
         status = 0;
