@@ -36,7 +36,7 @@ TTF_Init();
 }
 void input_fm() {
   //  PrintKeyInfo( &e.key );
-  while (SDL_PollEvent(&e)) {
+  while (SDL_PollEvent(&e)==true && status != 4) {
     SDL_GetMouseState(&mousex,&mousey) ;
     if (e.type == SDL_QUIT) {
       running_fm = false ;
@@ -72,7 +72,11 @@ void input_fm() {
         // Open The settings Page
       }
       if ((mousex>=about.dest.x)&&(mousex<=about.dest.x+about.dest.w)&&(mousey>=about.dest.y)&&(mousey<=about.dest.y+about.dest.h)) {
-        cout << "about Clicked" << endl ;
+        status = 4;
+      //  SDL_DestroyTexture(tex);
+        SDL_DestroyRenderer(ren_fm);
+        running_fm = false;
+        return;
         // Open The aboutUs Page
       }
       if ((mousex>=ball.dest.x)&&(mousex<=ball.dest.x+ball.dest.w)&&(mousey>=ball.dest.y)&&(mousey<=ball.dest.y+ball.dest.h)) {
