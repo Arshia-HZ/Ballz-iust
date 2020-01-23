@@ -177,9 +177,11 @@ void input_game() {
         if ( (mousex_game>290) && (mousex_game<320) && (mousey_game>45) && (mousey_game<75) ) {
           if (audplaying) {
             // ghate shavad
+            stopaudio();
             audplaying = false ;
           } else {
             // vasl shavad
+            startaudio();
             audplaying = true ;
           }
         }
