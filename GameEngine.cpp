@@ -61,6 +61,7 @@ int main(int argc, char const *argv[]) {
   // case 6:
     default: SDL_Quit();
   }
+  
 }
   return 0;
 }
