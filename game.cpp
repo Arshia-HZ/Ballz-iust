@@ -5,6 +5,7 @@ bool reseting = false ;
 bool reply = false ;
 bool ifpause = false ;
 bool akbar = false ;
+bool audplaying = false ;
 bool brick_add=false;
 bool downward=false;
 int downnumber=0;
@@ -173,6 +174,17 @@ void input_game() {
 
           return ;
         }
+        if ( (mousex_game>290) && (mousex_game<320) && (mousey_game>45) && (mousey_game<75) ) {
+          if (audplaying) {
+            // ghate shavad
+            stopaudio();
+            audplaying = false ;
+          } else {
+            // vasl shavad
+            startaudio();
+            audplaying = true ;
+          }
+        }
     }
     if (e.type == SDL_MOUSEBUTTONUP) {
       if (!ifpause) {
@@ -227,15 +239,15 @@ void game() {
   //reset
   reset.setDest(250,15,30,30);
   reset.setSource(0,0,1500,1500);
-  reset.setImage("data/play.png",ren_game) ;
+  reset.setImage("data/HarReset.png",ren_game) ;
   //backmenu
   backmenu.setDest(250,75,30,30);
   backmenu.setSource(0,0,1500,1500);
-  backmenu.setImage("data/play.png",ren_game) ;
+  backmenu.setImage("data/HarBack.png",ren_game) ;
   //audioing
   audioing.setDest(290,45,30,30);
   audioing.setSource(0,0,1500,1500);
-  audioing.setImage("data/play.png",ren_game) ;
+  audioing.setImage("data/HarAudio.png",ren_game) ;
   // Pause
   Pause.setDest(170,25,70,70);
   Pause.setSource(0,0,980,980);
