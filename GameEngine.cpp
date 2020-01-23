@@ -46,7 +46,7 @@ int main(int argc, char const *argv[]) {
   Music_Init();
   win = SDL_CreateWindow("Ballz", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,350,600,0);
   startaudio();
-  cin>>status;
+//  cin>>status;
   //cin>>playerscore;
   TTF_CloseFont(font);
   TTF_Quit();
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[]) {
     case 1: settingsmenu(); break;
     case 2: game(); break;
     case 3: lastmenu(); break;
-    case 4: about_us();  break;
+    case 4: about_us(); break;
     case 5: scoreboard(); break;
   // case 6:
     default: SDL_Quit();
