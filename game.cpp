@@ -496,7 +496,6 @@ void game() {
                     Addball[Addball.size()-1].setSource(0,0,640,635);
                     Addball[Addball.size()-1].setImage("data/pngwave.png",ren_game);
                   } while(!hit_ball((xrandom_number_addball*55)+5 , 135));
-                  cout<<"   "<<brick.size()<<"    "<<balla.size()<<endl;
 
 }
 
