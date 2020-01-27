@@ -1,3 +1,6 @@
 This open-source project is made by four students at Iran university of science and technology (IUST).
 We are Trying to develop this project by C++ and SDL2 library and also using Git for first time :D
 Enjoy it! :)
+
+Compile it using:
+g++ -w -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer
