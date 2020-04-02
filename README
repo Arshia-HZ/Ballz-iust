@@ -8,5 +8,5 @@ made by <3 :
 @Hossein Naserizade = https://github.com/shnaseri
 @Amirmahdi Ikani = https://github.com/AmirMahdi80
 
-Compile it using:
+Compile it using (SDL2 needed):
 g++ -w -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer
